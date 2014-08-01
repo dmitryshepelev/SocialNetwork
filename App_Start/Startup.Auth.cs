@@ -7,6 +7,7 @@ using Microsoft.Owin.Security.DataProtection;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using System;
+using Owin.Security.Providers.GitHub;
 using SocialNetwork.Models;
 
 namespace SocialNetwork
@@ -37,6 +38,9 @@ namespace SocialNetwork
             
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
+            app.UseGitHubAuthentication(
+                clientId: "66a323fb91216d555d93",
+                clientSecret: "99495c07d95804d00748b0752979da6136fafe53");
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(
             //    clientId: "",
