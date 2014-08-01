@@ -33,6 +33,15 @@
         @RenderBody()
         <hr />
         <footer>
+            @using (Html.BeginForm("ChangeCulture", "Localization"))
+            {
+                <select class="form-control" id="select" name="language">
+                    <option disabled selected>@Resources.Resource.ChooseLang</option>
+                    <option>English</option>
+                    <option>Русский</option>
+                </select>
+                <input type="submit" name="submit" value=@Resources.Resource.ChooseLang />
+            }
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>

@@ -31,7 +31,7 @@ namespace SocialNetwork.Filters
 
         public string CheckCurrentCulture(string cultureLanguage)
         {
-            if (!this.cultures.Contains(cultureLanguage))
+            if (!cultures.Contains(cultureLanguage))
             {
                 return "en";
             }
@@ -44,7 +44,7 @@ namespace SocialNetwork.Filters
         public void OnActionExecuted(ActionExecutedContext filterContext)
         {
             string cultureName = null;
-            HttpCookie cultureCookie = filterContext.HttpContext.Request.Cookies["lang"];
+            HttpCookie cultureCookie = filterContext.HttpContext.Request.Cookies["language"];
             if (cultureCookie != null)
             {
                 cultureName = cultureCookie.Value;

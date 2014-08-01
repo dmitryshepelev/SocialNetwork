@@ -123,4 +123,13 @@
   <data name="Country" xml:space="preserve">
     <value>Country</value>
   </data>
+  <data name="NavBarLogin" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="NavBarLogoff" xml:space="preserve">
+    <value>Log off</value>
+  </data>
+  <data name="NavBarRegister" xml:space="preserve">
+    <value>Register</value>
+  </data>
 </root>
