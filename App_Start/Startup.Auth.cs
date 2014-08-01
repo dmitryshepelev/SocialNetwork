@@ -50,9 +50,9 @@ namespace SocialNetwork
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "1463703120555962",
+               appSecret: "8fe0d20ff5772395894afaf4a0a5e5c9");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
