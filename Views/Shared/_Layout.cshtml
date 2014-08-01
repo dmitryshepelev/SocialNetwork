@@ -5,16 +5,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    
-    @if (Request.Cookies["theme"].Value == "Dark")
-    {
-    <link rel="stylesheet" type="text/css" href="~/Content/bootstrapDark.css">
-    }
-    else
+    @if (Request.Cookies["theme"] == null || Request.Cookies["theme"].Value == "Light")
     {
         <link rel="stylesheet" type="text/css" href="~/Content/bootstrapLight.css">
     }
-
+    else
+    {
+        <link rel="stylesheet" type="text/css" href="~/Content/bootstrapDark.css">
+    }
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
@@ -43,36 +41,20 @@
         @RenderBody()
         <hr />
         <footer>
-            @using (Html.BeginForm("ChangeCulture", "Localization"))
-            {
-                <select class="form-control" id="select" name="language">
-                    <option disabled selected>@SocialNetwork.Resources.Resource.ChooseLang</option>
-                    <option>en</option>
-                    <option>ru</option>
-                </select>
-                <input type="submit" name="submit" value=@SocialNetwork.Resources.Resource.ChooseLang/>
-            }
-            @using (Html.BeginForm("ChangeTheme", "Theme"))
-            {
-                <select class="form-control" id="select" name="theme">
-                    <option disabled selected>Choose theme</option>
-                    <option>Dark</option>
-                    <option>Light</option>
-                </select>
-                <input type="submit" name="submit" value=@SocialNetwork.Resources.Resource.ChooseLang />
-            }
-            <p>&copy; @DateTime.Now.Year - @SocialNetwork.Resources.Resource.Country</p>
+            <div class="btn-toolbar">
+                <a href="~/Localization/ChangeCulture?language=en" class="btn btn-primary btn-xs">English</a>
+                <a href="~/Localization/ChangeCulture?language=ru" class="btn btn-primary btn-xs">Русский</a>
+            </div>
+            <div class="btn-group dropup">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="~/Style/ChangeTheme?theme=Dark">Dark</a></li>
+                    <li><a href="~/Style/ChangeTheme?theme=Light">Lignt</a></li>
+                </ul>
+            </div>
+            <p>&copy; @DateTime.Now.Year</p>
         </footer>
-        <div class="btn-group dropup">
-            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">Theme <span class="caret"></span></button>
-            <ul class="dropdown-menu" role="menu">
-                <li><a href="~/Theme/ChangeTheme?Dark">Black</a></li>
-                <li><a href="~/Theme/ChangeTheme?Light">White</a></li>
-
-            </ul>
-        </div>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

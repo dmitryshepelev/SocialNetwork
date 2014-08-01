@@ -165,9 +165,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocalizationController.cs" />
-    <Compile Include="Controllers\ThemeController.cs" />
+    <Compile Include="Controllers\StyleController.cs" />
     <Compile Include="Filters\CultureAttribute.cs" />
-    <Compile Include="Filters\ThemesAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -235,6 +234,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Localization\" />
+    <Folder Include="Views\Style\" />
     <Folder Include="Views\Theme\" />
   </ItemGroup>
   <ItemGroup>

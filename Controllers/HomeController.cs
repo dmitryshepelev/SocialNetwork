@@ -7,7 +7,7 @@ using SocialNetwork.Filters;
 
 namespace SocialNetwork.Controllers
 {
-    [Culture][Themes]
+    [Culture]
     public class HomeController : Controller
     {
         public ActionResult Index()

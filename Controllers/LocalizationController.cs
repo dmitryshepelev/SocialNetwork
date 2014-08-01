@@ -11,6 +11,10 @@ namespace SocialNetwork.Controllers
         // GET: Localization
         public ActionResult ChangeCulture(string language)
         {
+            if (Request.UrlReferrer == null)
+            {
+                return HttpNotFound();
+            }
             string returnUrl = Request.UrlReferrer.AbsolutePath;
             var culture = new CulturesList();
             language = culture.CheckCurrentCulture(language);

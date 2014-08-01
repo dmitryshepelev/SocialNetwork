@@ -8,7 +8,7 @@ namespace SocialNetwork.Filters
 {
     public class CulturesList
     {
-        private List<string> cultures = new List<string>
+        private readonly List<string> cultures = new List<string>
         {
             "en",
             "ru"
@@ -51,7 +51,7 @@ namespace SocialNetwork.Filters
             {
                 cultureName = "en";
             }
-            CulturesList culture = new CulturesList();
+            var culture = new CulturesList();
             cultureName = culture.CheckCurrentCulture(cultureName);
             Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(cultureName);
             Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture(cultureName);
