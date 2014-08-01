@@ -19,7 +19,7 @@ namespace SocialNetwork.Filters
             return this.cultures;
         }
 
-        public void AddCulturesToList(string[] cultures)
+        public void AddCulturesToList(List<string> cultures)
         {
             foreach (string culture in cultures)
             {
@@ -29,7 +29,7 @@ namespace SocialNetwork.Filters
 
         public string CheckCurrentCulture(string cultureLanguage)
         {
-            if (!cultures.Contains(cultureLanguage))
+            if( !cultures.Contains(cultureLanguage) )
             {
                 return "en";
             }
