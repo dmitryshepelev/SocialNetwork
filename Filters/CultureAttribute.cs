@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
@@ -53,15 +51,15 @@ namespace SocialNetwork.Filters
             {
                 cultureName = "en";
             }
-            CulturesList cultures = new CulturesList();
-            cultureName = cultures.CheckCurrentCulture(cultureName);
+            CulturesList culture = new CulturesList();
+            cultureName = culture.CheckCurrentCulture(cultureName);
             Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(cultureName);
             Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture(cultureName);
         }
 
         public void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            // empty
+
         }
     }
 }

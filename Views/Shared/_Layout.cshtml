@@ -36,13 +36,13 @@
             @using (Html.BeginForm("ChangeCulture", "Localization"))
             {
                 <select class="form-control" id="select" name="language">
-                    <option disabled selected>@Resources.Resource.ChooseLang</option>
-                    <option>English</option>
-                    <option>Русский</option>
+                    <option disabled selected>@SocialNetwork.Resources.Resource.ChooseLang</option>
+                    <option>en</option>
+                    <option>ru</option>
                 </select>
-                <input type="submit" name="submit" value=@Resources.Resource.ChooseLang />
+                <input type="submit" name="submit" value=@SocialNetwork.Resources.Resource.ChooseLang/>
             }
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - @SocialNetwork.Resources.Resource.Country</p>
         </footer>
     </div>
 

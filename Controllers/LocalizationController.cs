@@ -13,8 +13,8 @@ namespace SocialNetwork.Controllers
         public ActionResult ChangeCulture(string language)
         {
             string returnUrl = Request.UrlReferrer.AbsolutePath;
-            CulturesList cultures = new CulturesList();
-            language = cultures.CheckCurrentCulture(language);
+            CulturesList culture = new CulturesList();
+            language = culture.CheckCurrentCulture(language);
             HttpCookie cookie = Request.Cookies["language"];
             if (cookie != null)
             {
@@ -22,6 +22,7 @@ namespace SocialNetwork.Controllers
             }
             else
             {
+
                 cookie = new HttpCookie("language");
                 cookie.HttpOnly = false;
                 cookie.Value = language;

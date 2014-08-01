@@ -118,18 +118,18 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ChooseLang" xml:space="preserve">
-    <value>Выберете язык</value>
+    <value>Choose the Language</value>
   </data>
   <data name="Country" xml:space="preserve">
-    <value>Страна</value>
+    <value>Country</value>
   </data>
   <data name="NavBarLogin" xml:space="preserve">
-    <value>Войти</value>
+    <value>Log in</value>
   </data>
   <data name="NavBarLogoff" xml:space="preserve">
-    <value>Выйти</value>
+    <value>Log off</value>
   </data>
   <data name="NavBarRegister" xml:space="preserve">
-    <value>Регистрация</value>
+    <value>Register</value>
   </data>
 </root>
