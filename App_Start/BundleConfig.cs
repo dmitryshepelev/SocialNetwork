@@ -23,8 +23,12 @@ namespace SocialNetwork
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+            bundles.Add(new StyleBundle("~/Content/cssDark").Include(
+                      "~/Content/bootstrapDark.css",
+                      "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/cssLight").Include(
+                      "~/Content/bootstrapLight.css",
                       "~/Content/site.css"));
 
             // Set EnableOptimizations to false for debugging. For more information,

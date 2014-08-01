@@ -5,26 +5,25 @@ using SocialNetwork.Filters;
 
 namespace SocialNetwork.Controllers
 {
-    [Culture]
-    public class LocalizationController : Controller
+    public class ThemeController : Controller
     {
-        // GET: Localization
-        public ActionResult ChangeCulture(string language)
+        // GET: Theme
+        public ActionResult ChangeTheme(string theme)
         {
             string returnUrl = Request.UrlReferrer.AbsolutePath;
-            var culture = new CulturesList();
-            language = culture.CheckCurrentCulture(language);
-            HttpCookie cookie = Request.Cookies["language"];
+            ThemesList themeList = new ThemesList();
+            theme = themeList.CheckCurrentTheme(theme);
+            HttpCookie cookie = Request.Cookies["theme"];
             if (cookie != null)
             {
-                cookie.Value = language;
+                cookie.Value = theme;
             }
             else
             {
-                cookie = new HttpCookie("language")
+                cookie = new HttpCookie("theme")
                 {
                     HttpOnly = false,
-                    Value = language,
+                    Value = theme,
                     Expires = DateTime.Now.AddYears(1)
                 };
             }

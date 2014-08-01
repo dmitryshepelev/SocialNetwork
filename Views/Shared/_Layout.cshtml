@@ -1,10 +1,20 @@
-﻿<!DOCTYPE html>
+﻿@using System.Web.UI.WebControls
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
+    
+    @if (Request.Cookies["theme"].Value == "Dark")
+    {
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrapDark.css">
+    }
+    else
+    {
+        <link rel="stylesheet" type="text/css" href="~/Content/bootstrapLight.css">
+    }
+
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
@@ -42,8 +52,25 @@
                 </select>
                 <input type="submit" name="submit" value=@SocialNetwork.Resources.Resource.ChooseLang/>
             }
+            @using (Html.BeginForm("ChangeTheme", "Theme"))
+            {
+                <select class="form-control" id="select" name="theme">
+                    <option disabled selected>Choose theme</option>
+                    <option>Dark</option>
+                    <option>Light</option>
+                </select>
+                <input type="submit" name="submit" value=@SocialNetwork.Resources.Resource.ChooseLang />
+            }
             <p>&copy; @DateTime.Now.Year - @SocialNetwork.Resources.Resource.Country</p>
         </footer>
+        <div class="btn-group dropup">
+            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">Theme <span class="caret"></span></button>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="~/Theme/ChangeTheme?Dark">Black</a></li>
+                <li><a href="~/Theme/ChangeTheme?Light">White</a></li>
+
+            </ul>
+        </div>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
