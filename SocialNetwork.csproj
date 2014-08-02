@@ -171,7 +171,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AnswerModels.cs" />
+    <Compile Include="Models\CategoryModels.cs" />
+    <Compile Include="Models\CommentModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\LikeModels.cs" />
+    <Compile Include="Models\SolvedTaskModels.cs" />
+    <Compile Include="Models\TagModels.cs" />
+    <Compile Include="Models\TaskModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.Designer.cs">
       <AutoGen>True</AutoGen>
