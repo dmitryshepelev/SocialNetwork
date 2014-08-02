@@ -53,6 +53,9 @@ namespace SocialNetwork.Models
 
     public class RegisterViewModel
     {
+        [Display(Name = "User name")]
+        public string UserName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
