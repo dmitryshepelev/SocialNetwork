@@ -1,5 +1,4 @@
-﻿@using System.Web.UI.WebControls
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -41,18 +40,22 @@
         @RenderBody()
         <hr />
         <footer>
-            <div class="btn-toolbar">
-                <a href="~/Localization/ChangeCulture?language=en" class="btn btn-primary btn-xs">English</a>
-                <a href="~/Localization/ChangeCulture?language=ru" class="btn btn-primary btn-xs">Русский</a>
-            </div>
+            &copy; @DateTime.Now.Year
             <div class="btn-group dropup">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                <button type="button" class="btn btn-default dropdown-toggle btn-primary btn-xs" data-toggle="dropdown">@SocialNetwork.Resources.Resource.FooterThemeChooser  <span class="caret"></span></button>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="~/Style/ChangeTheme?theme=Dark">Dark</a></li>
-                    <li><a href="~/Style/ChangeTheme?theme=Light">Lignt</a></li>
+                    <li><a href="~/Style/ChangeTheme?theme=Dark"><img src="~/Content/images/theme-dark-col-thumb.png" width="12" />&emsp;@SocialNetwork.Resources.Resource.FooterThemeDark</a></li>
+                    <li><a href="~/Style/ChangeTheme?theme=Light"><img src="~/Content/images/theme-lignt-col-thumb.png" width="12" />&emsp;@SocialNetwork.Resources.Resource.FooterThemeLight</a></li>
                 </ul>
             </div>
-            <p>&copy; @DateTime.Now.Year</p>
+            <div class="btn-toolbar navbar-right">
+                <a href="~/Localization/ChangeCulture?language=en" class="text-muted">
+                    <img src="~/Content/images/flag-eng-32.png" width="14" />&ensp;English
+                </a>&ensp;
+                <a href="~/Localization/ChangeCulture?language=ru" class="text-muted">
+                    <img src="~/Content/images/flag-rus-32.png" width="14" />&ensp;Русский
+                </a>
+            </div>
         </footer>
     </div>
     @Scripts.Render("~/bundles/jquery")

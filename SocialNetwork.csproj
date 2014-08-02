@@ -183,6 +183,10 @@
   <ItemGroup>
     <Content Include="Content\bootstrapDark.css" />
     <Content Include="Content\bootstrapLight.css" />
+    <Content Include="Content\images\flag-eng-32.png" />
+    <Content Include="Content\images\flag-rus-32.png" />
+    <Content Include="Content\images\theme-dark-col-thumb.png" />
+    <Content Include="Content\images\theme-lignt-col-thumb.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

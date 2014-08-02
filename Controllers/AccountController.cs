@@ -10,11 +10,12 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Owin;
+using SocialNetwork.Filters;
 using SocialNetwork.Models;
 
 namespace SocialNetwork.Controllers
 {
-    [Authorize]
+    [Authorize][Culture]
     public class AccountController : Controller
     {
         private ApplicationUserManager _userManager;
