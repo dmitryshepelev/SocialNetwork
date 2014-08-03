@@ -170,14 +170,23 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201408011409107_InitialCreate.cs" />
+    <Compile Include="Migrations\201408011409107_InitialCreate.Designer.cs">
+      <DependentUpon>201408011409107_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408031347146_ApplicationDb.cs" />
+    <Compile Include="Migrations\201408031347146_ApplicationDb.Designer.cs">
+      <DependentUpon>201408031347146_ApplicationDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\AnswerModels.cs" />
     <Compile Include="Models\CategoryModels.cs" />
     <Compile Include="Models\CommentModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LikeModels.cs" />
-    <Compile Include="Models\SolvedTaskModels.cs" />
+    <Compile Include="Models\SolutionModels.cs" />
     <Compile Include="Models\TagModels.cs" />
+    <Compile Include="Models\UserProposedSolutionModels.cs" />
     <Compile Include="Models\UserTaskModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.Designer.cs">
@@ -256,6 +265,12 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\201408011409107_InitialCreate.resx">
+      <DependentUpon>201408011409107_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408031347146_ApplicationDb.resx">
+      <DependentUpon>201408031347146_ApplicationDb.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Resource.en.resx" />
     <EmbeddedResource Include="Resources\Resource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
