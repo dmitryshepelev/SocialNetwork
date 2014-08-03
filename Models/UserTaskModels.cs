@@ -19,8 +19,8 @@ namespace SocialNetwork.Models
         [Display(Name = "UserTaskStatus", ResourceType = typeof(Resources.Resource))]
         public bool UserTaskStatus { get; set; }
         public DateTime DateAdded { get; set; }
-        public int ApplicationUserId { get; set; }
-        public virtual ApplicationUser ApplicationUser { get; set; }
+        public int UserId { get; set; }
+        public virtual ApplicationUser User { get; set; }
         public virtual ICollection<LikeModel> Likes { get; set; }
         public virtual ICollection<UserProposedSolutionModel> SolvedTasks { get; set; }
         public virtual ICollection<SolutionModel> Answers { get; set; }

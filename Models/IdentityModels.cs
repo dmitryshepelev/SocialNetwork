@@ -13,7 +13,7 @@ namespace SocialNetwork.Models
         public virtual ICollection<CommentModel> Comments { get; set; }
         public virtual ICollection<LikeModel> Likes { get; set; }
         public virtual ICollection<UserTaskModel> UserTasks { get; set; }
-        public virtual ICollection<UserProposedSolutionModel> SolvedTasks { get; set; }
+        public virtual ICollection<UserProposedSolutionModel> UserProposedSolution { get; set; }
         public int UserRate { get; set; }
         public int AttemptAmount { get; set; }
         public int SolutionAmount { get; set; }
@@ -41,11 +41,9 @@ namespace SocialNetwork.Models
         public DbSet<LikeModel> Likes { get; set; }
         public DbSet<CommentModel> Comments { get; set; }
         public DbSet<UserProposedSolutionModel> SolvedTasks { get; set; }
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
-
-        //public static ApplicationDbContext Create()
-        //{
-        //    return new ApplicationDbContext();
-        //}
+        public static ApplicationDbContext Create()
+        {
+            return new ApplicationDbContext();
+        }
     }
 }
