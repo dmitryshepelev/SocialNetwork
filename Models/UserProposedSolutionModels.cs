@@ -6,12 +6,11 @@ using System.Web;
 
 namespace SocialNetwork.Models
 {
-    public class CommentModel
+    public class UserProposedSolutionModel
     {
         public int Id { get; set; }
-        [Display(Name = "CommentContent", ResourceType = typeof (Resources.Resource))]
-        public string CommentContent { get; set; }
-        public DateTime DateAdded { get; set; }
+        [Display(Name = "UserProposedSolution", ResourceType = typeof(Resources.Resource))]
+        public string ProposedSolution { get; set; }
         public int ApplicationUserId { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
         public int UserTaskId { get; set; }

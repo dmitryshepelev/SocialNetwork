@@ -61,15 +61,6 @@ namespace SocialNetwork.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ответы.
-        /// </summary>
-        public static string Answers {
-            get {
-                return ResourceManager.GetString("Answers", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Категория.
         /// </summary>
         public static string CategoryName {
@@ -142,6 +133,15 @@ namespace SocialNetwork.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Решение.
+        /// </summary>
+        public static string Solution {
+            get {
+                return ResourceManager.GetString("Solution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Теги.
         /// </summary>
         public static string TagsName {
@@ -151,29 +151,38 @@ namespace SocialNetwork.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Предложенные решения.
+        /// </summary>
+        public static string UserProposedSolution {
+            get {
+                return ResourceManager.GetString("UserProposedSolution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Условие.
         /// </summary>
-        public static string TaskContent {
+        public static string UserTaskContent {
             get {
-                return ResourceManager.GetString("TaskContent", resourceCulture);
+                return ResourceManager.GetString("UserTaskContent", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Статус.
         /// </summary>
-        public static string TaskStatus {
+        public static string UserTaskStatus {
             get {
-                return ResourceManager.GetString("TaskStatus", resourceCulture);
+                return ResourceManager.GetString("UserTaskStatus", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Название.
         /// </summary>
-        public static string TaskTitle {
+        public static string UserTaskTitle {
             get {
-                return ResourceManager.GetString("TaskTitle", resourceCulture);
+                return ResourceManager.GetString("UserTaskTitle", resourceCulture);
             }
         }
     }

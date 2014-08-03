@@ -11,5 +11,6 @@ namespace SocialNetwork.Models
         public int Id { get; set; }
         [Display(Name = "TagsName", ResourceType = typeof(Resources.Resource))]
         public string TagName { get; set; }
+        public virtual ICollection<UserTaskModel> UserTasks { get; set; }
     }
 }

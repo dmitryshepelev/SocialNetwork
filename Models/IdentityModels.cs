@@ -1,4 +1,6 @@
-﻿using System.Security.Claims;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -8,6 +10,14 @@ namespace SocialNetwork.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+        public virtual ICollection<CommentModel> Comments { get; set; }
+        public virtual ICollection<LikeModel> Likes { get; set; }
+        public virtual ICollection<UserTaskModel> UserTasks { get; set; }
+        public virtual ICollection<UserProposedSolutionModel> SolvedTasks { get; set; }
+        public int UserRate { get; set; }
+        public int AttemptAmount { get; set; }
+        public int SolutionAmount { get; set; }
+        public int TaskAmount { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -24,9 +34,18 @@ namespace SocialNetwork.Models
         {
         }
 
-        public static ApplicationDbContext Create()
-        {
-            return new ApplicationDbContext();
-        }
+        public DbSet<UserTaskModel> UserTasks { get; set; }
+        public DbSet<SolutionModel> Solutions { get; set; }
+        public DbSet<TagModel> Tags { get; set; }
+        public DbSet<CategoryModel> Categories { get; set; }
+        public DbSet<LikeModel> Likes { get; set; }
+        public DbSet<CommentModel> Comments { get; set; }
+        public DbSet<UserProposedSolutionModel> SolvedTasks { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
+        //public static ApplicationDbContext Create()
+        //{
+        //    return new ApplicationDbContext();
+        //}
     }
 }
