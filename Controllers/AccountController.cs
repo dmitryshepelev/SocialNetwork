@@ -83,6 +83,17 @@ namespace SocialNetwork.Controllers
         }
 
         //
+        // Add "user" role to the new user by default
+        private async Task AddUserToRoleAsync(ApplicationUser user, string role)
+        {
+            using (ApplicationDbContext dbContext = new ApplicationDbContext())
+            {
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(dbContext));
+                await userManager.AddToRoleAsync(user.Id, role);
+            }
+        }
+
+        //
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
@@ -95,6 +106,7 @@ namespace SocialNetwork.Controllers
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    await AddUserToRoleAsync(user, "user");
                     await SignInAsync(user, isPersistent: false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
