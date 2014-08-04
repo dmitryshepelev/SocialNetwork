@@ -7,12 +7,12 @@ using SocialNetwork.Models;
 
 namespace SocialNetwork.Repository
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class GenericRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         internal ApplicationDbContext dbContext;
         internal DbSet<TEntity> dbSet;
-
-        public Repository(ApplicationDbContext dbContext)
+        
+        public GenericRepository(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
             this.dbSet = dbContext.Set<TEntity>();
@@ -66,31 +66,6 @@ namespace SocialNetwork.Repository
         {
             dbSet.Attach(entity);
             dbContext.Entry(entity).State = EntityState.Modified;
-        }
-
-        public void Save()
-        {
-            dbContext.SaveChanges();
-        }
-
-        private bool disposed = false;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    dbContext.Dispose();
-                }
-            }
-            this.disposed = true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
         }
     }
 }
