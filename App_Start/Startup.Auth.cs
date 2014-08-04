@@ -41,24 +41,10 @@ namespace SocialNetwork
             app.UseGitHubAuthentication(
                 clientId: "66a323fb91216d555d93",
                 clientSecret: "99495c07d95804d00748b0752979da6136fafe53");
-            // Uncomment the following lines to enable logging in with third party login providers
-            //app.UseMicrosoftAccountAuthentication(
-            //    clientId: "",
-            //    clientSecret: "");
-
-            //app.UseTwitterAuthentication(
-            //   consumerKey: "",
-            //   consumerSecret: "");
 
             app.UseFacebookAuthentication(
                appId: "649867848436213",
                appSecret: "fc9461e8c31369d118849d396ce1b838");
-
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
         }
     }
 }
