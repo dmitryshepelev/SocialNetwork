@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Manage Account";
 }
+
 <div class="jumbotron">
     <div class="row">
         <div class="col-md-8">
@@ -42,6 +43,22 @@
                     <b>@Resource.UserRate</b>
                 </li>
             </ul>
+            @if (User.IsInRole("admin"))
+            {
+                <ul class="list-group panel-warning">
+                    <li class="list-group-item panel-heading">
+                        Administrator's control panel
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge">@Model.UsersListForAdmin.Count()</span>
+                        Users
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge">@Model.UserTasksListForAdmin.Count()</span>
+                        Tasks
+                    </li>
+                </ul>
+            }
         </div>
     </div>
 </div>

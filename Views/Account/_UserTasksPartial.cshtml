@@ -1,6 +1,6 @@
 ﻿@using SocialNetwork.Models
 @using SocialNetwork.Resources
-@model SocialNetwork.Models.ManageAccountViewModel
+@model ManageAccountViewModel
 
 <div class="row">
     <div class="col-md-6">
@@ -12,13 +12,13 @@
         else
         {
             <table class="table table-striped table-hover">
-                <tbody>
+                <tbody id="tableBody">
                     @foreach (UserTaskModel userTask in Model.UserTasks)
                     {
                         <tr>
-                            <td>@Html.ActionLink(userTask.UserTaskTitle, "ViewTask", "Task", new { id = userTask.Id })</td>
-                            <td>@Html.ActionLink("Change", "ChangeTask", "Task", new { id = userTask.Id })</td>
-                            <td>@Html.ActionLink("Block", "BlockTask", "Task", new { id = userTask.Id })</td>
+                            <td width="70%">@Html.ActionLink(userTask.UserTaskTitle, "ViewTask", "Task", new { id = userTask.Id })</td>
+                            <td width="15%">@Html.ActionLink("Change", "ChangeTask", "Task", new { id = userTask.Id })</td>
+                            <td width="15%">@Html.ActionLink("Block", "BlockTask", "Task", new { id = userTask.Id })</td>
                         </tr>
                     }
                 </tbody>
