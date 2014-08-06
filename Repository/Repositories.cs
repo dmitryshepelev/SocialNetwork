@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Web;
 using SocialNetwork.Models;
@@ -10,12 +11,12 @@ namespace SocialNetwork.Repository
     {
         private ApplicationDbContext dbContext = new ApplicationDbContext();
         private GenericRepository<UserTaskModel> userTaskRepository;
-        private GenericRepository<SolutionModel> solutionRepository;
+        private GenericRepository<TaskSolutionModel> taskSolutionRepository;
         private GenericRepository<TagModel> tagRepository;
         private GenericRepository<CategoryModel> categoryRepository;
         private GenericRepository<LikeModel> likeRepository;
         private GenericRepository<CommentModel> commentRepository;
-        private GenericRepository<UserProposedSolutionModel> userProposedSolutionRepository;
+        private GenericRepository<UserSolvedTaskModel> userSolvedTaskRepository;
 
         public GenericRepository<UserTaskModel> UserTaskRepository
         {
@@ -29,15 +30,15 @@ namespace SocialNetwork.Repository
             }
         }
 
-        public GenericRepository<SolutionModel> SolutionRepository
+        public GenericRepository<TaskSolutionModel> TaskSolutionRepository
         {
             get
             {
-                if (this.solutionRepository == null)
+                if (this.taskSolutionRepository == null)
                 {
-                    this.solutionRepository = new GenericRepository<SolutionModel>(dbContext);
+                    this.taskSolutionRepository = new GenericRepository<TaskSolutionModel>(dbContext);
                 }
-                return solutionRepository;
+                return taskSolutionRepository;
             }
         }
 
@@ -89,16 +90,27 @@ namespace SocialNetwork.Repository
             }
         }
 
-        public GenericRepository<UserProposedSolutionModel> UserProposedSolutionRepository
+        public GenericRepository<UserSolvedTaskModel> UserSolvedTaskRepository
         {
             get
             {
-                if (this.userProposedSolutionRepository == null)
+                if (this.userSolvedTaskRepository == null)
                 {
-                    this.userProposedSolutionRepository = new GenericRepository<UserProposedSolutionModel>(dbContext);
+                    this.userSolvedTaskRepository = new GenericRepository<UserSolvedTaskModel>(dbContext);
                 }
-                return userProposedSolutionRepository;
+                return userSolvedTaskRepository;
             }
+        }
+
+        public Collection<UserTaskModel> GetUserSolvedTasks(string id)
+        {
+            var userSolvedTasks = userSolvedTaskRepository.Get().Where(x => x.UserId == id);
+            Collection<UserTaskModel> solvedTasks = new Collection<UserTaskModel>();
+            foreach (var userSolvedTask in userSolvedTasks)
+            {
+                solvedTasks.Add(userTaskRepository.GetById(userSolvedTask.Id));
+            }
+            return solvedTasks;
         }
 
         public void Save()

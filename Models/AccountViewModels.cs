@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace SocialNetwork.Models
 {
@@ -14,6 +16,19 @@ namespace SocialNetwork.Models
     {
         public string Action { get; set; }
         public string ReturnUrl { get; set; }
+    }
+
+    public class ManageAccountViewModel
+    {
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public double UserRate { get; set; }
+        public int TaskAmount { get; set; }
+        public int AttemptAmount { get; set; }
+        public int SolutionAmount { get; set; }
+        public string UserPhotoUrl { get; set; }
+        public IEnumerable<UserTaskModel> UserTasks { get; set; }
+        public IEnumerable<UserTaskModel> UserSolvedTasks { get; set; }
     }
 
     public class ManageUserViewModel
@@ -38,9 +53,8 @@ namespace SocialNetwork.Models
     public class LoginViewModel
     {
         [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

@@ -39,6 +39,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Cloudinary">
+      <HintPath>..\packages\Cloudinary.0.0.5\lib\Cloudinary.dll</HintPath>
+    </Reference>
+    <Reference Include="CloudinaryDotNet">
+      <HintPath>..\packages\CloudinaryDotNet.1.0.17\lib\net40\CloudinaryDotNet.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -172,13 +178,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\UploadImage.cs" />
     <Compile Include="Migrations\201408011409107_InitialCreate.cs" />
     <Compile Include="Migrations\201408011409107_InitialCreate.Designer.cs">
       <DependentUpon>201408011409107_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201408031347146_ApplicationDb.cs" />
-    <Compile Include="Migrations\201408031347146_ApplicationDb.Designer.cs">
-      <DependentUpon>201408031347146_ApplicationDb.cs</DependentUpon>
+    <Compile Include="Migrations\201408051729556_ApplicationDb.cs" />
+    <Compile Include="Migrations\201408051729556_ApplicationDb.Designer.cs">
+      <DependentUpon>201408051729556_ApplicationDb.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -186,9 +193,9 @@
     <Compile Include="Models\CommentModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LikeModels.cs" />
-    <Compile Include="Models\SolutionModels.cs" />
+    <Compile Include="Models\TaskSolutionModels.cs" />
     <Compile Include="Models\TagModels.cs" />
-    <Compile Include="Models\UserProposedSolutionModels.cs" />
+    <Compile Include="Models\UserSolvedTaskModels.cs" />
     <Compile Include="Models\UserTaskModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\GenericRepository.cs" />
@@ -204,6 +211,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrapDark.css" />
     <Content Include="Content\bootstrapLight.css" />
+    <Content Include="Content\images\default-user-image.png" />
     <Content Include="Content\images\flag-eng-32.png" />
     <Content Include="Content\images\flag-rus-32.png" />
     <Content Include="Content\images\theme-dark-col-thumb.png" />
@@ -225,7 +233,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -250,11 +260,13 @@
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Manage.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Account\ViewAccount.cshtml" />
+    <Content Include="Views\Account\_UserTasksPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -274,8 +286,8 @@
     <EmbeddedResource Include="Migrations\201408011409107_InitialCreate.resx">
       <DependentUpon>201408011409107_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201408031347146_ApplicationDb.resx">
-      <DependentUpon>201408031347146_ApplicationDb.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201408051729556_ApplicationDb.resx">
+      <DependentUpon>201408051729556_ApplicationDb.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Resource.en.resx" />
     <EmbeddedResource Include="Resources\Resource.resx">

@@ -4331,7 +4331,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-radius: 10px;
 }
 .badge:empty {
-  display: none;
+    display: none;
 }
 .btn .badge {
   position: relative;

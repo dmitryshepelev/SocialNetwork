@@ -1,0 +1,61 @@
+﻿@using SocialNetwork.Resources
+@model SocialNetwork.Models.ManageAccountViewModel
+@{
+    ViewBag.Title = "Manage Account";
+}
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="@Model.UserPhotoUrl" width="200" height="200" alt="@Model.UserName"/>
+                </div>
+                <div class="col-md-8">
+                    <text style="font-size: xx-large">@Model.UserName</text>
+                    <br />
+                    @Model.Email
+                    <br /><br />
+                    @Html.ActionLink(Resource.UserEditAccountInfo, "EditAccount", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+                    <br />
+                    @Html.ActionLink(Resource.UserChangePassword, "ChangePassword", "Account", routeValues: null, htmlAttributes: new { title = "ChangePassword" })
+                    <text class="text-success">@ViewBag.StatusMessage</text>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <span class="badge">@Model.TaskAmount</span>
+                    @Resource.UserTaskAmount
+                </li>
+                <li class="list-group-item">
+                    <span class="badge">@Model.AttemptAmount</span>
+                    @Resource.UserAttemptAmount
+                </li>
+                <li class="list-group-item">
+                    <span class="badge">@Model.SolutionAmount</span>
+                    @Resource.UserSolutionAmount
+                </li>
+                <li class="list-group-item">
+                    <span class="badge" style="background-color: #62c462"><b>@Model.UserRate</b></span>
+                    <b>@Resource.UserRate</b>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+@if (User.IsInRole("admin"))
+{
+    
+}
+else
+{
+    @Html.Partial("_UserTasksPartial")
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

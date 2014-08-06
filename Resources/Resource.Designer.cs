@@ -151,11 +151,92 @@ namespace SocialNetwork.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Предложенные решения.
+        ///   Looks up a localized string similar to Попытки решений.
         /// </summary>
-        public static string UserProposedSolution {
+        public static string UserAttemptAmount {
             get {
-                return ResourceManager.GetString("UserProposedSolution", resourceCulture);
+                return ResourceManager.GetString("UserAttemptAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сменить пароль.
+        /// </summary>
+        public static string UserChangePassword {
+            get {
+                return ResourceManager.GetString("UserChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Изменить данные профиля.
+        /// </summary>
+        public static string UserEditAccountInfo {
+            get {
+                return ResourceManager.GetString("UserEditAccountInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вы еще не решили ни одной задачи.
+        /// </summary>
+        public static string UserEmplySolutionList {
+            get {
+                return ResourceManager.GetString("UserEmplySolutionList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вы не опубликовали ни одной задачи.
+        /// </summary>
+        public static string UserEmptyTaskList {
+            get {
+                return ResourceManager.GetString("UserEmptyTaskList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Мои решения.
+        /// </summary>
+        public static string UserMySolutions {
+            get {
+                return ResourceManager.GetString("UserMySolutions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Мои задачи.
+        /// </summary>
+        public static string UserMyTasks {
+            get {
+                return ResourceManager.GetString("UserMyTasks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Рейтинг.
+        /// </summary>
+        public static string UserRate {
+            get {
+                return ResourceManager.GetString("UserRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Решенные задачи.
+        /// </summary>
+        public static string UserSolutionAmount {
+            get {
+                return ResourceManager.GetString("UserSolutionAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Предложенные задачи.
+        /// </summary>
+        public static string UserTaskAmount {
+            get {
+                return ResourceManager.GetString("UserTaskAmount", resourceCulture);
             }
         }
         

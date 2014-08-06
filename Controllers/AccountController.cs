@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -9,9 +6,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using Owin;
 using SocialNetwork.Filters;
 using SocialNetwork.Models;
+using SocialNetwork.Repository;
 
 namespace SocialNetwork.Controllers
 {
@@ -19,6 +16,7 @@ namespace SocialNetwork.Controllers
     public class AccountController : Controller
     {
         private ApplicationUserManager _userManager;
+        private Repositories repository = new Repositories();
 
         public AccountController()
         {
@@ -58,15 +56,15 @@ namespace SocialNetwork.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindAsync(model.Email, model.Password);
-                if (user != null)
+                var user = await UserManager.FindAsync(model.UserName, model.Password);
+                if (user == null)
                 {
-                    await SignInAsync(user, model.RememberMe);
-                    return RedirectToLocal(returnUrl);
+                    ModelState.AddModelError("", "Invalid username or password.");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Invalid username or password.");
+                    await SignInAsync(user, model.RememberMe);
+                    return RedirectToLocal(returnUrl);
                 }
             }
 
@@ -102,11 +100,13 @@ namespace SocialNetwork.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.UserName, Email = model.Email };
+                string defaultUserImage = "/Content/images/default-user-image.png";
+                var user = new ApplicationUser() { UserName = model.UserName, Email = model.Email, UserPhotoUrl = defaultUserImage };
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+                await AddUserToRoleAsync(user, "user");
                 if (result.Succeeded)
                 {
-                    await AddUserToRoleAsync(user, "user");
+                    //await AddUserToRoleAsync(user, "user");
                     await SignInAsync(user, isPersistent: false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -266,8 +266,8 @@ namespace SocialNetwork.Controllers
         }
 
         //
-        // GET: /Account/Manage
-        public ActionResult Manage(ManageMessageId? message)
+        // GET: /Account/ViewAccount
+        public ActionResult ViewAccount(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
@@ -275,8 +275,28 @@ namespace SocialNetwork.Controllers
                 : message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : "";
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            ManageAccountViewModel userAccount = new ManageAccountViewModel()
+            {
+                UserName = user.UserName,
+                Email = user.Email,
+                UserPhotoUrl = user.UserPhotoUrl,
+                TaskAmount = repository.UserTaskRepository.Get().Count(x => x.UserId == user.Id),
+                AttemptAmount = user.AttemptAmount,
+                SolutionAmount = repository.UserSolvedTaskRepository.Get().Count(x => x.UserId == user.Id),
+                UserRate = user.UserRate,
+                UserTasks = repository.UserTaskRepository.Get().Where(x => x.UserId == user.Id).OrderByDescending(o => o.DateAdded),
+                UserSolvedTasks = repository.GetUserSolvedTasks(user.Id)
+            };
+            return View(userAccount);
+        }
+
+        //
+        // GET: /Account/ChangePassword
+        public ActionResult ChangePassword()
+        {
             ViewBag.HasLocalPassword = HasPassword();
-            ViewBag.ReturnUrl = Url.Action("Manage");
+            ViewBag.ReturnUrl = Url.Action("ViewAccount");
             return View();
         }
 
@@ -284,11 +304,11 @@ namespace SocialNetwork.Controllers
         // POST: /Account/Manage
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Manage(ManageUserViewModel model)
+        public async Task<ActionResult> ChangePassword(ManageUserViewModel model)
         {
             bool hasPassword = HasPassword();
             ViewBag.HasLocalPassword = hasPassword;
-            ViewBag.ReturnUrl = Url.Action("Manage");
+            ViewBag.ReturnUrl = Url.Action("ViewAccount");
             if (hasPassword)
             {
                 if (ModelState.IsValid)
@@ -298,7 +318,7 @@ namespace SocialNetwork.Controllers
                     {
                         var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
                         await SignInAsync(user, isPersistent: false);
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
+                        return RedirectToAction("ViewAccount", new { Message = ManageMessageId.ChangePasswordSuccess });
                     }
                     else
                     {
@@ -320,7 +340,7 @@ namespace SocialNetwork.Controllers
                     IdentityResult result = await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
+                        return RedirectToAction("ViewAccount", new { Message = ManageMessageId.SetPasswordSuccess });
                     }
                     else
                     {

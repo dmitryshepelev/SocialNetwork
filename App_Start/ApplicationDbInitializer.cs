@@ -15,7 +15,7 @@ namespace SocialNetwork
             roleManager.Create(new IdentityRole { Name = "user" });
 
             var admin = new ApplicationUser { UserName = "admin", Email = "admin@admin.com" };
-            var result = userManager.Create(admin, "admin");
+            var result = userManager.Create(admin, "admin1");
             if (result.Succeeded)
             {
                 userManager.AddToRole(admin.Id, "admin");

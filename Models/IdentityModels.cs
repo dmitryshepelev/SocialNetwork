@@ -13,11 +13,10 @@ namespace SocialNetwork.Models
         public virtual ICollection<CommentModel> Comments { get; set; }
         public virtual ICollection<LikeModel> Likes { get; set; }
         public virtual ICollection<UserTaskModel> UserTasks { get; set; }
-        public virtual ICollection<UserProposedSolutionModel> UserProposedSolution { get; set; }
-        public int UserRate { get; set; }
+        public virtual ICollection<UserSolvedTaskModel> UserSolvedTask { get; set; }
+        public double UserRate { get; set; }
         public int AttemptAmount { get; set; }
-        public int SolutionAmount { get; set; }
-        public int TaskAmount { get; set; }
+        public string UserPhotoUrl { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -35,12 +34,12 @@ namespace SocialNetwork.Models
         }
 
         public DbSet<UserTaskModel> UserTasks { get; set; }
-        public DbSet<SolutionModel> Solutions { get; set; }
+        public DbSet<TaskSolutionModel> Solutions { get; set; }
         public DbSet<TagModel> Tags { get; set; }
         public DbSet<CategoryModel> Categories { get; set; }
         public DbSet<LikeModel> Likes { get; set; }
         public DbSet<CommentModel> Comments { get; set; }
-        public DbSet<UserProposedSolutionModel> SolvedTasks { get; set; }
+        public DbSet<UserSolvedTaskModel> SolvedTasks { get; set; }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

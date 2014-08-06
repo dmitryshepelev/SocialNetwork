@@ -147,8 +147,35 @@
   <data name="TagsName" xml:space="preserve">
     <value>Теги</value>
   </data>
-  <data name="UserProposedSolution" xml:space="preserve">
-    <value>Предложенные решения</value>
+  <data name="UserAttemptAmount" xml:space="preserve">
+    <value>Попытки решений</value>
+  </data>
+  <data name="UserChangePassword" xml:space="preserve">
+    <value>Сменить пароль</value>
+  </data>
+  <data name="UserEditAccountInfo" xml:space="preserve">
+    <value>Изменить данные профиля</value>
+  </data>
+  <data name="UserEmplySolutionList" xml:space="preserve">
+    <value>Вы еще не решили ни одной задачи</value>
+  </data>
+  <data name="UserEmptyTaskList" xml:space="preserve">
+    <value>Вы не опубликовали ни одной задачи</value>
+  </data>
+  <data name="UserMySolutions" xml:space="preserve">
+    <value>Мои решения</value>
+  </data>
+  <data name="UserMyTasks" xml:space="preserve">
+    <value>Мои задачи</value>
+  </data>
+  <data name="UserRate" xml:space="preserve">
+    <value>Рейтинг</value>
+  </data>
+  <data name="UserSolutionAmount" xml:space="preserve">
+    <value>Решенные задачи</value>
+  </data>
+  <data name="UserTaskAmount" xml:space="preserve">
+    <value>Предложенные задачи</value>
   </data>
   <data name="UserTaskContent" xml:space="preserve">
     <value>Условие</value>

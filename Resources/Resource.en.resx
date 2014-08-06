@@ -147,8 +147,35 @@
   <data name="TagsName" xml:space="preserve">
     <value>Tags</value>
   </data>
-  <data name="UserProposedSolution" xml:space="preserve">
-    <value>Proposed solutions</value>
+  <data name="UserAttemptAmount" xml:space="preserve">
+    <value>Solutions attempts</value>
+  </data>
+  <data name="UserChangePassword" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="UserEditAccountInfo" xml:space="preserve">
+    <value>Edit account info</value>
+  </data>
+  <data name="UserEmplySolutionList" xml:space="preserve">
+    <value>You haven't proposed any solution yet</value>
+  </data>
+  <data name="UserEmptyTaskList" xml:space="preserve">
+    <value>You haven't published any tasks</value>
+  </data>
+  <data name="UserMySolutions" xml:space="preserve">
+    <value>My solutions</value>
+  </data>
+  <data name="UserMyTasks" xml:space="preserve">
+    <value>My tasks</value>
+  </data>
+  <data name="UserRate" xml:space="preserve">
+    <value>Rating</value>
+  </data>
+  <data name="UserSolutionAmount" xml:space="preserve">
+    <value>Solved tasks</value>
+  </data>
+  <data name="UserTaskAmount" xml:space="preserve">
+    <value>Proposed tasks</value>
   </data>
   <data name="UserTaskContent" xml:space="preserve">
     <value>Content</value>
