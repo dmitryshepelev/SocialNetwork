@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SocialNetwork.Filters;
+using SocialNetwork.Helpers;
 using SocialNetwork.Models;
 using SocialNetwork.Repository;
 
@@ -17,6 +18,7 @@ namespace SocialNetwork.Controllers
     {
         private ApplicationUserManager _userManager;
         private Repositories repository = new Repositories();
+        private const string defaultUserImage = "/Content/images/default-user-image.png";
 
         public AccountController()
         {
@@ -73,14 +75,6 @@ namespace SocialNetwork.Controllers
         }
 
         //
-        // GET: /Account/Register
-        [AllowAnonymous]
-        public ActionResult Register()
-        {
-            return View();
-        }
-
-        //
         // Add "user" role to the new user by default
         private async Task AddUserToRoleAsync(ApplicationUser user, string role)
         {
@@ -92,6 +86,14 @@ namespace SocialNetwork.Controllers
         }
 
         //
+        // GET: /Account/Register
+        [AllowAnonymous]
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        //
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
@@ -100,13 +102,10 @@ namespace SocialNetwork.Controllers
         {
             if (ModelState.IsValid)
             {
-                string defaultUserImage = "/Content/images/default-user-image.png";
                 var user = new ApplicationUser() { UserName = model.UserName, Email = model.Email, UserPhotoUrl = defaultUserImage };
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-                await AddUserToRoleAsync(user, "user");
                 if (result.Succeeded)
                 {
-                    //await AddUserToRoleAsync(user, "user");
                     await SignInAsync(user, isPersistent: false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -166,8 +165,8 @@ namespace SocialNetwork.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                var user = await UserManager.FindByEmailAsync(model.Email);
+                if (user == null) //|| !(await UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
                     ModelState.AddModelError("", "The user either does not exist or is not confirmed.");
                     return View();
@@ -175,10 +174,10 @@ namespace SocialNetwork.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                //string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                //var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                //await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                //return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form
@@ -214,7 +213,7 @@ namespace SocialNetwork.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
+                var user = await UserManager.FindByEmailAsync(model.Email);
                 if (user == null)
                 {
                     ModelState.AddModelError("", "No user found.");
@@ -262,18 +261,60 @@ namespace SocialNetwork.Controllers
             {
                 message = ManageMessageId.Error;
             }
-            return RedirectToAction("Manage", new { Message = message });
+            return RedirectToAction("ViewAccount", new { Message = message });
+        }
+
+        //
+        // GET: /Account/EditAccount
+        public ActionResult EditAccount()
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            EditAccountViewModel userAccount = new EditAccountViewModel()
+            {
+                UserName = user.UserName,
+                Email = user.Email
+            };
+            return View(userAccount);
+        }
+
+        //
+        // POST: /Account/EditAccount
+        [HttpPost]
+        public async Task<ActionResult> EditAccount(EditAccountViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = UserManager.FindById(User.Identity.GetUserId());
+                user.UserName = model.UserName;
+                user.Email = model.Email;
+                if (model.UserPhoto != null)
+                { 
+                    user.UserPhotoUrl = UploadImage.Upload(model.UserPhoto);
+                }
+                IdentityResult result = await UserManager.UpdateAsync(user);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ViewAccount", new { Message = ManageMessageId.UpdateDataSuccess });
+                }
+                else
+                {
+                    AddErrors(result);
+                }
+            }
+            return View(model);
         }
 
         //
         // GET: /Account/ViewAccount
+        [Authorize]
         public ActionResult ViewAccount(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
-                : message == ManageMessageId.Error ? "An error has occurred."
+                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed"
+                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set"
+                : message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed"
+                : message == ManageMessageId.Error ? "An error has occurred"
+                : message == ManageMessageId.UpdateDataSuccess ? "Your profile has been updated"
                 : "";
             var user = UserManager.FindById(User.Identity.GetUserId());
             ManageAccountViewModel userAccount = new ManageAccountViewModel()
@@ -288,6 +329,11 @@ namespace SocialNetwork.Controllers
                 UserTasks = repository.UserTaskRepository.Get().Where(x => x.UserId == user.Id).OrderByDescending(o => o.DateAdded),
                 UserSolvedTasks = repository.GetUserSolvedTasks(user.Id)
             };
+            if (User.IsInRole("admin"))
+            {
+                userAccount.UserTasksListForAdmin = repository.UserTaskRepository.Get();
+                userAccount.UsersListForAdmin = UserManager.Users;
+            }
             return View(userAccount);
         }
 
@@ -301,10 +347,10 @@ namespace SocialNetwork.Controllers
         }
 
         //
-        // POST: /Account/Manage
+        // POST: /Account/ChangePassword
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ChangePassword(ManageUserViewModel model)
+        public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
         {
             bool hasPassword = HasPassword();
             ViewBag.HasLocalPassword = hasPassword;
@@ -408,14 +454,14 @@ namespace SocialNetwork.Controllers
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());
             if (loginInfo == null)
             {
-                return RedirectToAction("Manage", new { Message = ManageMessageId.Error });
+                return RedirectToAction("ViewAccount", new { Message = ManageMessageId.Error });
             }
             IdentityResult result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
             if (result.Succeeded)
             {
-                return RedirectToAction("Manage");
+                return RedirectToAction("ViewAccount");
             }
-            return RedirectToAction("Manage", new { Message = ManageMessageId.Error });
+            return RedirectToAction("ViewAccount", new { Message = ManageMessageId.Error });
         }
 
         //
@@ -427,7 +473,7 @@ namespace SocialNetwork.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Manage");
+                return RedirectToAction("ViewAccount");
             }
 
             if (ModelState.IsValid)
@@ -438,7 +484,7 @@ namespace SocialNetwork.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser() { UserName = info.DefaultUserName, Email = model.Email };
+                var user = new ApplicationUser() { UserName = info.DefaultUserName, Email = model.Email, UserPhotoUrl = defaultUserImage };
                 IdentityResult result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
@@ -545,6 +591,7 @@ namespace SocialNetwork.Controllers
             ChangePasswordSuccess,
             SetPasswordSuccess,
             RemoveLoginSuccess,
+            UpdateDataSuccess,
             Error
         }
 

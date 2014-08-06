@@ -8,16 +8,17 @@
         <div class="col-md-8">
             <div class="row">
                 <div class="col-md-4">
-                    <img src="@Model.UserPhotoUrl" width="200" height="200" alt="@Model.UserName"/>
+                    <img src="@Model.UserPhotoUrl" width="200" height="200" alt="@Model.UserName" />
                 </div>
                 <div class="col-md-8">
                     <text style="font-size: xx-large">@Model.UserName</text>
                     <br />
                     @Model.Email
                     <br /><br />
-                    @Html.ActionLink(Resource.UserEditAccountInfo, "EditAccount", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+                    @Html.ActionLink(Resource.UserEditAccountInfo, "EditAccount", "Account", routeValues: null, htmlAttributes: new { title = Resource.UserEditAccountInfo })
                     <br />
-                    @Html.ActionLink(Resource.UserChangePassword, "ChangePassword", "Account", routeValues: null, htmlAttributes: new { title = "ChangePassword" })
+                    @Html.ActionLink(Resource.UserChangePassword, "ChangePassword", "Account", routeValues: null, htmlAttributes: new { title = Resource.UserChangePassword })
+                    <br />
                     <text class="text-success">@ViewBag.StatusMessage</text>
                 </div>
             </div>
@@ -45,16 +46,7 @@
     </div>
 </div>
 
-
-
-@if (User.IsInRole("admin"))
-{
-    
-}
-else
-{
-    @Html.Partial("_UserTasksPartial")
-}
+@Html.Partial("_UserTasksPartial")
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

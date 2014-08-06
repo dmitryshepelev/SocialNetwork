@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
 
 namespace SocialNetwork.Models
 {
@@ -18,6 +20,13 @@ namespace SocialNetwork.Models
         public string ReturnUrl { get; set; }
     }
 
+    public class EditAccountViewModel
+    {
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public HttpPostedFileBase UserPhoto { get; set; }
+    }
+
     public class ManageAccountViewModel
     {
         public string UserName { get; set; }
@@ -29,9 +38,11 @@ namespace SocialNetwork.Models
         public string UserPhotoUrl { get; set; }
         public IEnumerable<UserTaskModel> UserTasks { get; set; }
         public IEnumerable<UserTaskModel> UserSolvedTasks { get; set; }
+        public IEnumerable<UserTaskModel> UserTasksListForAdmin { get; set; }
+        public IEnumerable<ApplicationUser> UsersListForAdmin { get; set; }
     }
 
-    public class ManageUserViewModel
+    public class ChangePasswordViewModel
     {
         [Required]
         [DataType(DataType.Password)]

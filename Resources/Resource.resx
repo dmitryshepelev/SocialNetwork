@@ -156,6 +156,9 @@
   <data name="UserEditAccountInfo" xml:space="preserve">
     <value>Изменить данные профиля</value>
   </data>
+  <data name="UserEditAccountUserNameError" xml:space="preserve">
+    <value>Поле должно быть заполнено</value>
+  </data>
   <data name="UserEmplySolutionList" xml:space="preserve">
     <value>Вы еще не решили ни одной задачи</value>
   </data>
@@ -167,6 +170,12 @@
   </data>
   <data name="UserMyTasks" xml:space="preserve">
     <value>Мои задачи</value>
+  </data>
+  <data name="UserNameLabel" xml:space="preserve">
+    <value>Имя пользователя</value>
+  </data>
+  <data name="UserNameLenghtError" xml:space="preserve">
+    <value>Имя должно содержать от 3 до 30 символов</value>
   </data>
   <data name="UserRate" xml:space="preserve">
     <value>Рейтинг</value>

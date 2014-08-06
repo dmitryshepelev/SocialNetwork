@@ -1,0 +1,36 @@
+﻿@model SocialNetwork.Models.EditAccountViewModel
+@{
+    ViewBag.Title = "EditAccount";
+}
+
+@using (Html.BeginForm("EditAccount", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Edit your account</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.UserName, new { @class = "col-md-1 control-label" })
+        <div class="col-md-6">
+            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "col-md-1 control-label" })
+        <div class="col-md-6">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.UserPhoto, new { @class = "col-md-1 control-label" })
+        <div class="col-md-6">
+            <input type="file" name="UserPhoto" accept="image/*" class="btn btn-default" title="Choose image" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-1 col-md-10">
+            <input type="submit" value="Confirm" class="btn btn-default" />&nbsp;&nbsp;
+            @Html.ActionLink("Cancel", "ViewAccount")
+        </div>
+    </div>
+}

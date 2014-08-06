@@ -156,6 +156,9 @@
   <data name="UserEditAccountInfo" xml:space="preserve">
     <value>Edit account info</value>
   </data>
+  <data name="UserEditAccountUserNameError" xml:space="preserve">
+    <value>The field must be set</value>
+  </data>
   <data name="UserEmplySolutionList" xml:space="preserve">
     <value>You haven't proposed any solution yet</value>
   </data>
@@ -167,6 +170,12 @@
   </data>
   <data name="UserMyTasks" xml:space="preserve">
     <value>My tasks</value>
+  </data>
+  <data name="UserNameLabel" xml:space="preserve">
+    <value>User name</value>
+  </data>
+  <data name="UserNameLenghtError" xml:space="preserve">
+    <value>User name must contain 3-30 symbols</value>
   </data>
   <data name="UserRate" xml:space="preserve">
     <value>Rating</value>

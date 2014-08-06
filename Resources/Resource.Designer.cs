@@ -178,6 +178,15 @@ namespace SocialNetwork.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Поле должно быть заполнено.
+        /// </summary>
+        public static string UserEditAccountUserNameError {
+            get {
+                return ResourceManager.GetString("UserEditAccountUserNameError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Вы еще не решили ни одной задачи.
         /// </summary>
         public static string UserEmplySolutionList {
@@ -210,6 +219,24 @@ namespace SocialNetwork.Resources {
         public static string UserMyTasks {
             get {
                 return ResourceManager.GetString("UserMyTasks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Имя пользователя.
+        /// </summary>
+        public static string UserNameLabel {
+            get {
+                return ResourceManager.GetString("UserNameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Имя должно содержать от 3 до 30 символов.
+        /// </summary>
+        public static string UserNameLenghtError {
+            get {
+                return ResourceManager.GetString("UserNameLenghtError", resourceCulture);
             }
         }
         
