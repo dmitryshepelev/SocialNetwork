@@ -1,0 +1,34 @@
+﻿@model IEnumerable<SocialNetwork.Models.AdminControlPanelTasksViewModel>
+@{
+    ViewBag.Title = "AdminControlPanelTasks";
+}
+
+<h2>AdminControlPanelTasks</h2>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Date added</th>
+            <th align="center">Comments</th>
+            <th>Solutions</th>
+            <th>Likes</th>
+            <th>Status</th>
+            <th>Manage</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var task in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(task.TaskTitle, "ViewTask", "UserTask", new { id = task.Id }, null)</td>
+                <td>@task.DateAdded</td>
+                <td align="center">@task.CommentAmount</td>
+                <td align="center">@task.SolutionAmount</td>
+                <td align="center">@task.LikeAmount</td>
+                <td align="center">@task.TaskStatus</td>
+                <td>@Html.ActionLink("Delete", "TasktDelete", "UserTask", new { id = task.Id }, htmlAttributes: null)</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
 
@@ -27,7 +26,7 @@ namespace SocialNetwork.Models
         public HttpPostedFileBase UserPhoto { get; set; }
     }
 
-    public class ManageAccountViewModel
+    public class ViewAccountViewModel
     {
         public string UserName { get; set; }
         public string Email { get; set; }
@@ -38,8 +37,6 @@ namespace SocialNetwork.Models
         public string UserPhotoUrl { get; set; }
         public IEnumerable<UserTaskModel> UserTasks { get; set; }
         public IEnumerable<UserTaskModel> UserSolvedTasks { get; set; }
-        public IEnumerable<UserTaskModel> UserTasksListForAdmin { get; set; }
-        public IEnumerable<ApplicationUser> UsersListForAdmin { get; set; }
     }
 
     public class ChangePasswordViewModel
@@ -115,7 +112,6 @@ namespace SocialNetwork.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-
         public string Code { get; set; }
     }
 

@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls.WebParts;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -10,18 +12,26 @@ using SocialNetwork.Filters;
 using SocialNetwork.Helpers;
 using SocialNetwork.Models;
 using SocialNetwork.Repository;
+using SocialNetwork.Repository.Interfaces;
 
 namespace SocialNetwork.Controllers
 {
     [Authorize][Culture]
     public class AccountController : Controller
     {
-        private ApplicationUserManager _userManager;
-        private Repositories repository = new Repositories();
+        private ApplicationUserManager userManager;
         private const string defaultUserImage = "/Content/images/default-user-image.png";
+        private IUserTaskRepository userTaskRepository;
+        private IUserSolvedTaskRepository userSolvedTaskRepository;
 
         public AccountController()
         {
+        }
+
+        public AccountController(IUserTaskRepository userTaskRepository, IUserSolvedTaskRepository userSolvedTaskRepository)
+        {
+            this.userTaskRepository = userTaskRepository;
+            this.userSolvedTaskRepository = userSolvedTaskRepository;
         }
 
         public AccountController(ApplicationUserManager userManager)
@@ -32,11 +42,11 @@ namespace SocialNetwork.Controllers
         public ApplicationUserManager UserManager {
             get
             {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                return userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
             private set
             {
-                _userManager = value;
+                userManager = value;
             }
         }
 
@@ -266,6 +276,7 @@ namespace SocialNetwork.Controllers
 
         //
         // GET: /Account/EditAccount
+        [Authorize]
         public ActionResult EditAccount()
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
@@ -280,6 +291,7 @@ namespace SocialNetwork.Controllers
         //
         // POST: /Account/EditAccount
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult> EditAccount(EditAccountViewModel model)
         {
             if (ModelState.IsValid)
@@ -307,7 +319,7 @@ namespace SocialNetwork.Controllers
         //
         // GET: /Account/ViewAccount
         [Authorize]
-        public ActionResult ViewAccount(ManageMessageId? message)
+        public ActionResult ViewAccount(ManageMessageId? message, string id)
         {
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed"
@@ -316,24 +328,21 @@ namespace SocialNetwork.Controllers
                 : message == ManageMessageId.Error ? "An error has occurred"
                 : message == ManageMessageId.UpdateDataSuccess ? "Your profile has been updated"
                 : "";
-            var user = UserManager.FindById(User.Identity.GetUserId());
-            ManageAccountViewModel userAccount = new ManageAccountViewModel()
+            var user = id == null ? UserManager.FindById(User.Identity.GetUserId()) : UserManager.FindById(id);
+            var userAccount = new ViewAccountViewModel()
             {
                 UserName = user.UserName,
                 Email = user.Email,
                 UserPhotoUrl = user.UserPhotoUrl,
-                TaskAmount = repository.UserTaskRepository.Get().Count(x => x.UserId == user.Id),
+                TaskAmount = userTaskRepository.GetUserTasksAmountById(user.Id),
                 AttemptAmount = user.AttemptAmount,
-                SolutionAmount = repository.UserSolvedTaskRepository.Get().Count(x => x.UserId == user.Id),
+                SolutionAmount = userSolvedTaskRepository.GetUserSolvedTasksAmount(user.Id),
                 UserRate = user.UserRate,
-                UserTasks = repository.UserTaskRepository.Get().Where(x => x.UserId == user.Id).OrderByDescending(o => o.DateAdded),
-                UserSolvedTasks = repository.GetUserSolvedTasks(user.Id)
+                UserTasks = userTaskRepository.GetUserTasks(user.Id).OrderByDescending(x => x.DateAdded),
+                UserSolvedTasks = (from i in userSolvedTaskRepository.GetAll() where i.UserId == user.Id from j in userTaskRepository.GetAll() where j.Id == i.UserTaskId select j)
             };
-            if (User.IsInRole("admin"))
-            {
-                userAccount.UserTasksListForAdmin = repository.UserTaskRepository.Get();
-                userAccount.UsersListForAdmin = UserManager.Users;
-            }
+            ViewBag.TotalUsers = UserManager.Users.Count();
+            ViewBag.TotalTasks = userTaskRepository.GetAll().Count;
             return View(userAccount);
         }
 

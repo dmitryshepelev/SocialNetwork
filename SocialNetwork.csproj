@@ -50,6 +50,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Common">
+      <HintPath>..\packages\Ninject.Web.Common.3.2.0.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Mvc">
+      <HintPath>..\packages\Ninject.MVC5.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Owin.Security.Providers">
       <HintPath>..\packages\Owin.Security.Providers.1.7.0\lib\net45\Owin.Security.Providers.dll</HintPath>
     </Reference>
@@ -105,6 +114,9 @@
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx">
+      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
@@ -167,9 +179,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocalizationController.cs" />
     <Compile Include="Controllers\StyleController.cs" />
@@ -187,8 +201,17 @@
     <Compile Include="Migrations\201408051729556_ApplicationDb.Designer.cs">
       <DependentUpon>201408051729556_ApplicationDb.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201408091144170_ApplicationDb1.cs" />
+    <Compile Include="Migrations\201408091144170_ApplicationDb1.Designer.cs">
+      <DependentUpon>201408091144170_ApplicationDb1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408091148254_ApplicationDb2.cs" />
+    <Compile Include="Migrations\201408091148254_ApplicationDb2.Designer.cs">
+      <DependentUpon>201408091148254_ApplicationDb2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AdminViewModels.cs" />
     <Compile Include="Models\CategoryModels.cs" />
     <Compile Include="Models\CommentModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -199,8 +222,21 @@
     <Compile Include="Models\UserTaskModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\GenericRepository.cs" />
+    <Compile Include="Repository\Implementations\CategoryRepository.cs" />
+    <Compile Include="Repository\Implementations\CommentRepository.cs" />
+    <Compile Include="Repository\Implementations\LikeRepository.cs" />
+    <Compile Include="Repository\Implementations\TagRepository.cs" />
+    <Compile Include="Repository\Implementations\TaskSolutionRepository.cs" />
+    <Compile Include="Repository\Implementations\UserSolvedTaskRepository.cs" />
+    <Compile Include="Repository\Interfaces\ICategoryRepository.cs" />
+    <Compile Include="Repository\Interfaces\ICommentRepository.cs" />
+    <Compile Include="Repository\Interfaces\ILikeRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
-    <Compile Include="Repository\Repositories.cs" />
+    <Compile Include="Repository\Interfaces\ITagRepository.cs" />
+    <Compile Include="Repository\Interfaces\ITaskSolutionRepository.cs" />
+    <Compile Include="Repository\Interfaces\IUserTaskRepository.cs" />
+    <Compile Include="Repository\Interfaces\IUserSolvedTaskRepository.cs" />
+    <Compile Include="Repository\Implementations\UserTaskRepository.cs" />
     <Compile Include="Resources\Resource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -212,6 +248,7 @@
     <Content Include="Content\bootstrapDark.css" />
     <Content Include="Content\bootstrapLight.css" />
     <Content Include="Content\images\default-user-image.png" />
+    <Content Include="Content\images\edit-icon-16.png" />
     <Content Include="Content\images\facebook-logo.png" />
     <Content Include="Content\images\flag-eng-32.png" />
     <Content Include="Content\images\flag-rus-32.png" />
@@ -228,6 +265,9 @@
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.dataTables.js" />
+    <Content Include="Scripts\jquery.tablesorter.js" />
+    <Content Include="Scripts\jquery.tablesorter.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -270,6 +310,8 @@
     <Content Include="Views\Account\ViewAccount.cshtml" />
     <Content Include="Views\Account\_UserTasksPartial.cshtml" />
     <Content Include="Views\Account\EditAccount.cshtml" />
+    <Content Include="Views\Admin\AdminControlPanelUsers.cshtml" />
+    <Content Include="Views\Admin\AdminControlPanelTasks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -291,6 +333,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201408051729556_ApplicationDb.resx">
       <DependentUpon>201408051729556_ApplicationDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408091144170_ApplicationDb1.resx">
+      <DependentUpon>201408091144170_ApplicationDb1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408091148254_ApplicationDb2.resx">
+      <DependentUpon>201408091148254_ApplicationDb2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Resource.en.resx" />
     <EmbeddedResource Include="Resources\Resource.resx">

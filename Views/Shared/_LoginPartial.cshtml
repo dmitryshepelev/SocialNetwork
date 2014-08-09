@@ -5,12 +5,14 @@
     {
     @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink(User.Identity.GetUserName(), "ViewAccount", "Account", routeValues: null, htmlAttributes: new { title = "ViewAccount" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">@SocialNetwork.Resources.Resource.NavBarLogoff</a></li>
-    </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink(User.Identity.GetUserName(), "ViewAccount", "Account", routeValues: new { id = User.Identity.GetUserId() }, htmlAttributes: new { title = "View account" })
+            </li>
+            <li>
+                <a href="javascript:document.getElementById('logoutForm').submit()">@SocialNetwork.Resources.Resource.NavBarLogoff</a>
+            </li>
+        </ul>
     }
 }
 else

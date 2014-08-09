@@ -1,24 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
+using System.Data.Entity;
 using System.Linq.Expressions;
 using SocialNetwork.Models;
 
 namespace SocialNetwork.Repository
 {
-    public class GenericRepository<TEntity> : IRepository<TEntity> where TEntity : class
+    public abstract class GenericRepository<TEntity> where TEntity : class
     {
         internal ApplicationDbContext dbContext;
         internal DbSet<TEntity> dbSet;
-        
-        public GenericRepository(ApplicationDbContext dbContext)
+
+        protected GenericRepository(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
             this.dbSet = dbContext.Set<TEntity>();
         }
 
-        public virtual IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null,
+        public virtual IList<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "")
         {
             IQueryable<TEntity> query = dbSet;
@@ -66,6 +66,11 @@ namespace SocialNetwork.Repository
         {
             dbSet.Attach(entity);
             dbContext.Entry(entity).State = EntityState.Modified;
+        }
+
+        public void Save()
+        {
+            dbContext.SaveChanges();
         }
     }
 }

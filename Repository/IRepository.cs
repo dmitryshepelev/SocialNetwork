@@ -5,9 +5,9 @@ using System.Linq.Expressions;
 
 namespace SocialNetwork.Repository
 {
-    public interface IRepository<TEntity> where TEntity : class
+    public interface IEnumerable<TEntity> where TEntity : class
     {
-        IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null,
+        IList<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "");
         TEntity GetById(object id);
         void Add(TEntity entity);
