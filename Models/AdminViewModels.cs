@@ -28,5 +28,7 @@ namespace SocialNetwork.Models
         public int SolutionAmount { get; set; }
         public int LikeAmount { get; set; }
         public bool Delete { get; set; }
+        public string UserId { get; set; }
+        public string UserName { get; set; }
     }
 }

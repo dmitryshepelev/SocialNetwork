@@ -58,7 +58,6 @@ namespace SocialNetwork.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
-
         //
         // POST: /Account/Login
         [HttpPost]
@@ -72,6 +71,10 @@ namespace SocialNetwork.Controllers
                 if (user == null)
                 {
                     ModelState.AddModelError("", "Invalid username or password.");
+                }
+                else if (user.LockoutEnabled)
+                {
+                    return View("BlockAccountError");
                 }
                 else
                 {
@@ -341,7 +344,8 @@ namespace SocialNetwork.Controllers
                 LockoutEnabled = user.LockoutEnabled,
                 LockoutDateEndUtc = user.LockoutEndDateUtc,
                 UserTasks = userTaskRepository.GetUserTasks(user.Id).OrderByDescending(x => x.DateAdded),
-                UserSolvedTasks = (from i in userSolvedTaskRepository.GetAll() where i.UserId == user.Id from j in userTaskRepository.GetAll() where j.Id == i.UserTaskId select j)
+                UserSolvedTasks = (from i in userSolvedTaskRepository.GetAll() where i.UserId == user.Id from j in userTaskRepository.GetAll() where j.Id == i.UserTaskId select j).OrderBy(x => x.DateAdded),
+                IsAdmin = UserManager.IsInRole(user.Id, "admin")
             };
             ViewBag.TotalUsers = UserManager.Users.Count();
             ViewBag.TotalTasks = userTaskRepository.GetAll().Count;
@@ -434,18 +438,12 @@ namespace SocialNetwork.Controllers
 
             // Sign in the user with this external login provider if the user already has a login
             var user = await UserManager.FindAsync(loginInfo.Login);
-            if (user != null)
+            if (user.LockoutEnabled)
             {
-                await SignInAsync(user, isPersistent: false);
-                return RedirectToLocal(returnUrl);
+                return View("BlockAccountError");
             }
-            else
-            {
-                // If the user does not have an account, then prompt the user to create an account
-                ViewBag.ReturnUrl = returnUrl;
-                ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
-            }
+            await SignInAsync(user, isPersistent: false);
+            return RedirectToLocal(returnUrl);
         }
 
         //
@@ -603,7 +601,8 @@ namespace SocialNetwork.Controllers
             SetPasswordSuccess,
             RemoveLoginSuccess,
             UpdateDataSuccess,
-            Error
+            Error,
+            AccountIsBlocked
         }
 
         private ActionResult RedirectToLocal(string returnUrl)

@@ -3,58 +3,60 @@
     ViewBag.Title = "AdminControlPanelTasks";
 }
 
-@using (Html.BeginForm("AdminControlPanelTasks", "Admin", FormMethod.Post, new {role = "form", enctype = "multipart/form-data"}))
+@using (Html.BeginForm("AdminControlPanelTasks", "Admin", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
 {
+    <h3>
+        Tasks list
+        @if (ViewBag.UserId != null)
+        {
+            <a href="~/Account/ViewAccount?id=@ViewBag.UserId">@ViewBag.UserName</a>
+            <input type="hidden" value="@ViewBag.UserId" />
+        }
+    </h3>
+    <hr />
     <div class="row">
-        <div class="col-sm-8">
-            <h3>
-                Tasks list
-                @if (ViewBag.UserId != null)
-                {
-                    <a href="~/Account/ViewAccount?id=@ViewBag.UserId">@ViewBag.UserName</a>
-                    <input type="hidden" value="@ViewBag.UserId" />
-                }
-            </h3>
-        </div>
-        <div class="col-sm-4">
-            <ul class="list-group">
+        <div class="col-md-2" style="align-content: stretch">
+            <ul class="list-group" style="margin-bottom: 5px">
                 <li class="list-group-item">
                     <span class="badge">@ViewBag.TotalTasks</span>
                     Total tasks
                 </li>
             </ul>
-            <input type="submit" class="btn btn-default" value="Confirm" />
+            <input type="submit" style="margin-top: 4px; height: 35px; width: 164px" class="btn btn-warning" value="Confirm changes" />
+        </div>
+        <div class="col-md-10">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th width="20%">@Html.ActionLink("Title", "AdminControlPanelTasks", "Admin", new { userId = ViewBag.UserId, sortParam = "TaskTitle", sortOrder = ViewBag.SortOrder }, null)</th>
+                        <th width="15%">@Html.ActionLink("Category", "AdminControlPanelTasks", "Admin", new { userId = ViewBag.UserId, sortParam = "Category", sortOrder = ViewBag.SortOrder }, null)</th>
+                        <th width="15%">@Html.ActionLink("Date added", "AdminControlPanelTasks", "Admin", new { userId = ViewBag.UserId, sortParam = "DateAdded", sortOrder = ViewBag.SortOrder }, null)</th>
+                        <th width="15%">@Html.ActionLink("User", "AdminControlPanelTasks", "Admin", new { userId = ViewBag.UserId, sortParam = "UserName", sortOrder = ViewBag.SortOrder }, null)</th>
+                        <th>@Html.ActionLink("Comments", "AdminControlPanelTasks", "Admin", new { userId = ViewBag.UserId, sortParam = "CommentAmount", sortOrder = ViewBag.SortOrder }, null)</th>
+                        <th>@Html.ActionLink("Solutions", "AdminControlPanelTasks", "Admin", new { userId = ViewBag.UserId, sortParam = "SolutionAmount", sortOrder = ViewBag.SortOrder }, null)</th>
+                        <th>@Html.ActionLink("Likes", "AdminControlPanelTasks", "Admin", new { userId = ViewBag.UserId, sortParam = "LikeAmount", sortOrder = ViewBag.SortOrder }, null)</th>
+                        <th>@Html.ActionLink("Block", "AdminControlPanelTasks", "Admin", new { userId = ViewBag.UserId, sortParam = "TaskStatus", sortOrder = ViewBag.SortOrder }, null)</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        <tr id="row-@i">
+                            @Html.HiddenFor(x => x[i].Id)
+                            <td>@Html.ActionLink(Model[i].TaskTitle, "ViewTask", "UserTask", new { id = Model[i].Id }, null)</td>
+                            <td>@Html.DisplayFor(x => x[i].Category)</td>
+                            <td>@Html.DisplayFor(x => x[i].DateAdded)</td>
+                            <td>@Html.ActionLink(Model[i].UserName, "ViewAccount", "Account", new { id = Model[i].UserId }, null )</td>
+                            <td>@Html.DisplayFor(x => x[i].CommentAmount)</td>
+                            <td>@Html.DisplayFor(x => x[i].SolutionAmount)</td>
+                            <td>@Html.DisplayFor(x => x[i].LikeAmount)</td>
+                            <td>@Html.CheckBoxFor(x => x[i].TaskStatus, new { @class = "checkbox" })</td>
+                            <td>@Html.CheckBoxFor(x => x[i].Delete, new { @class = "checkbox" })</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
     </div>
-
-    <table class="table table-striped table-hover">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Category</th>
-                <th>Date added</th>
-                <th>Comments</th>
-                <th>Solutions</th>
-                <th>Likes</th>
-                <th>Block</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            @for (int i = 0; i < Model.Count; i++)
-            {
-                <tr id="row-@i">
-                    @Html.HiddenFor(x => x[i].Id)
-                    <td>@Html.ActionLink(Model[i].TaskTitle, "ViewTask", "UserTask", new {id = Model[i].Id}, null)</td>
-                    <td>@Html.DisplayFor(x => x[i].Category)</td>
-                    <td>@Html.DisplayFor(x => x[i].DateAdded)</td>
-                    <td>@Html.DisplayFor(x => x[i].CommentAmount)</td>
-                    <td>@Html.DisplayFor(x => x[i].SolutionAmount)</td>
-                    <td>@Html.DisplayFor(x => x[i].LikeAmount)</td>
-                    <td>@Html.CheckBoxFor(x => x[i].TaskStatus, new {@class = "checkbox"})</td>
-                    <td>@Html.CheckBoxFor(x => x[i].Delete, new {@class = "checkbox"})</td>
-                </tr>
-            }
-        </tbody>
-    </table>
 }

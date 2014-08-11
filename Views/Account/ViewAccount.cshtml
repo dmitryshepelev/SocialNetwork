@@ -4,15 +4,6 @@
 @{
     ViewBag.Title = "View account";
 }
-<script src="~/Scripts/jquery-2.1.1.js"></script>
-
-<script type="text/javascript">
-    $(function(){
-        setInterval(function(){
-            $('#timeA').load('div#locked')},
-            5000)
-    });
-</script> 
 
 <div class="jumbotron">
     <div class="row">
@@ -26,12 +17,23 @@
                     <br />
                     @Model.Email
                     <br /><br />
-                    @Html.ActionLink(Resource.UserEditAccountInfo, "EditAccount", "Account", routeValues: null, htmlAttributes: new { title = Resource.UserEditAccountInfo })
-                    <img src="~/Content/images/edit-icon-16.png" id="edit-icon" width="16px" height="16px" />
-                    <br />
-                    @Html.ActionLink(Resource.UserChangePassword, "ChangePassword", "Account", routeValues: null, htmlAttributes: new { title = Resource.UserChangePassword })
-                    <br />
-                    <text class="text-success">@ViewBag.StatusMessage</text>
+                    @if (Model.IsAdmin)
+                    {
+                        <span class="label label-warning">Administrator</span>
+                    }
+                    else
+                    {
+                        <span class="label label-default">User</span>
+                    }
+                    <br /><br />
+                    @if (User.Identity.Name == Model.UserName)
+                    {
+                        @Html.ActionLink(Resource.UserEditAccountInfo, "EditAccount", "Account", routeValues: null, htmlAttributes: new { title = Resource.UserEditAccountInfo, id = "editAccount" })
+                        <br />
+                        @Html.ActionLink(Resource.UserChangePassword, "ChangePassword", "Account", routeValues: null, htmlAttributes: new { title = Resource.UserChangePassword })
+                        <br />
+                    }
+                    <p class="text-success">@ViewBag.StatusMessage<p>
                 </div>
             </div>
         </div>
@@ -54,31 +56,8 @@
                     <b>@Resource.UserRate</b>
                 </li>
             </ul>
-            @if (User.IsInRole("admin") && Model.UserName == User.Identity.Name)
-            {
-                <ul class="list-group panel-warning">
-                    <li class="list-group-item panel-heading">
-                        Administrator's control panel
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge">@ViewBag.TotalUsers</span>
-                        @Html.ActionLink("Users", "AdminControlPanelUsers", "Admin")
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge">@ViewBag.TotalTasks</span>
-                        @Html.ActionLink("Tasks", "AdminControlPanelTasks", "Admin")
-                    </li>
-                </ul>
-            }
-            @if (Model.LockoutEnabled)
-            {
-                TimeSpan? ts = new TimeSpan();
-                ts = Model.LockoutDateEndUtc - DateTime.Now;
-                <div id="locked" class="alert alert-dismissable alert-danger">
-                    <strong id="update">Account is blocked.</strong>
-                    @ts
-                </div>
-            }
+            @Html.Partial("_AdminControlPanelPartial")
+            @Html.Partial("_LockoutPanelPartial")
         </div>
     </div>
 </div>

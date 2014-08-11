@@ -1,4 +1,5 @@
-﻿@using SocialNetwork.Models
+﻿@using System.Globalization
+@using SocialNetwork.Models
 @using SocialNetwork.Resources
 @model ViewAccountViewModel
 
@@ -16,9 +17,13 @@
                     @foreach (UserTaskModel userTask in Model.UserTasks)
                     {
                         <tr>
-                            <td width="70%">@Html.ActionLink(userTask.UserTaskTitle, "ViewTask", "Task", new { id = userTask.Id })</td>
-                            <td width="15%">@Html.ActionLink("Change", "ChangeTask", "Task", new { id = userTask.Id })</td>
-                            <td width="15%">@Html.ActionLink("Block", "BlockTask", "Task", new { id = userTask.Id })</td>
+                            <td width="80%">@Html.ActionLink(userTask.UserTaskTitle, "ViewTask", "UserTask", new { id = userTask.Id })</td>
+                            <td width="10%">@userTask.DateAdded.ToString("d", CultureInfo.CreateSpecificCulture("en-US"))</td>
+                            @if (User.Identity.Name == Model.UserName)
+                            {
+                                <td width="5%"><a href="~/UserTask/ChangeTask?id=@userTask.Id"><img src="~/Content/images/edit-icon-16.png" /></a></td>
+                                <td width="5%"><a href="~/UserTask/BlockTask?id=@userTask.Id"><img src="~/Content/images/block-icon-16.png" /></a></td>
+                            }
                         </tr>
                     }
                 </tbody>

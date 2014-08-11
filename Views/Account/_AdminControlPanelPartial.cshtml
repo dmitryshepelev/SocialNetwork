@@ -1,0 +1,16 @@
+﻿@if (User.IsInRole("admin") && Model.UserName == User.Identity.Name)
+{
+    <ul class="list-group panel-warning">
+        <li class="list-group-item panel-heading">
+            Administrator's control panel
+        </li>
+        <li class="list-group-item">
+            <span class="badge">@ViewBag.TotalUsers</span>
+            @Html.ActionLink("Users", "AdminControlPanelUsers", "Admin")
+        </li>
+        <li class="list-group-item">
+            <span class="badge">@ViewBag.TotalTasks</span>
+            @Html.ActionLink("Tasks", "AdminControlPanelTasks", "Admin")
+        </li>
+    </ul>
+}

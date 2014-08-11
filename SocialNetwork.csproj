@@ -249,6 +249,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrapDark.css" />
     <Content Include="Content\bootstrapLight.css" />
+    <Content Include="Content\images\block-icon-16.png" />
     <Content Include="Content\images\default-user-image.png" />
     <Content Include="Content\images\edit-icon-16.png" />
     <Content Include="Content\images\facebook-logo.png" />
@@ -375,6 +376,9 @@
     <Content Include="Views\Account\EditAccount.cshtml" />
     <Content Include="Views\Admin\AdminControlPanelUsers.cshtml" />
     <Content Include="Views\Admin\AdminControlPanelTasks.cshtml" />
+    <Content Include="Views\Account\_LockoutPanelPartial.cshtml" />
+    <Content Include="Views\Account\_AdminControlPanelPartial.cshtml" />
+    <Content Include="Views\Account\BlockAccountError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

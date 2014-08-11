@@ -39,6 +39,7 @@ namespace SocialNetwork.Models
         public DateTime? LockoutDateEndUtc { get; set; }
         public IEnumerable<UserTaskModel> UserTasks { get; set; }
         public IEnumerable<UserTaskModel> UserSolvedTasks { get; set; }
+        public bool IsAdmin { get; set; }
     }
 
     public class ChangePasswordViewModel

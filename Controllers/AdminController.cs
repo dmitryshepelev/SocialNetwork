@@ -57,10 +57,11 @@ namespace SocialNetwork.Controllers
 
         // GET: Admin
         [Authorize(Roles = "admin")]
-        public ActionResult AdminControlPanelUsers()
+        public ActionResult AdminControlPanelUsers(string sortParam, bool? sortOrder = true)
         {
-            var users = new Collection<AdminControlPanelUsersViewModel>();
-            foreach (var applicationUser in UserManager.Users)
+            var users = new List<AdminControlPanelUsersViewModel>();
+            var applicationUsers = UserManager.Users.ToList();
+            foreach (var applicationUser in applicationUsers)
             {
                 var user = new AdminControlPanelUsersViewModel()
                 {
@@ -78,7 +79,8 @@ namespace SocialNetwork.Controllers
                 users.Add(user);
             }
             ViewBag.TotalUsers = UserManager.Users.Count();
-            return View(users);
+            ViewBag.SortOrder = !sortOrder;
+            return View(AdminManagement.UsersSort(users, sortParam, sortOrder));
         }
 
         [Authorize(Roles = "admin")]
@@ -121,7 +123,7 @@ namespace SocialNetwork.Controllers
         }
 
         [Authorize(Roles = "admin")]
-        public ActionResult AdminControlPanelTasks(string userId)
+        public ActionResult AdminControlPanelTasks(string userId, string sortParam, bool? sortOrder = true)
         {
             var userTasks = userTaskRepository.GetAll();
             if (userId != null)
@@ -132,7 +134,7 @@ namespace SocialNetwork.Controllers
                 ViewBag.UserId = applicationUser.Id;
 
             }
-            var tasks = new Collection<AdminControlPanelTasksViewModel>();
+            var tasks = new List<AdminControlPanelTasksViewModel>();
             foreach (var userTask in userTasks)
             {
                 var task = new AdminControlPanelTasksViewModel()
@@ -145,12 +147,15 @@ namespace SocialNetwork.Controllers
                     LikeAmount = likeRepository.GetAll(x => x.UserTaskId == userTask.Id).Count,
                     DateAdded = userTask.DateAdded.ToString("d", CultureInfo.CreateSpecificCulture("en-US")),
                     TaskStatus = userTask.UserTaskStatus,
-                    Delete = false
+                    Delete = false,
+                    UserId = userTask.UserId,
+                    UserName = UserManager.FindById(userTask.UserId).UserName
                 };
                 tasks.Add(task);
             }
             ViewBag.TotalTasks = userTasks.Count;
-            return View(tasks.OrderByDescending(x => x.DateAdded).ToList());
+            ViewBag.SortOrder = !sortOrder;
+            return View(AdminManagement.TasksSort(tasks, sortParam, sortOrder));
         }
 
         [Authorize(Roles = "admin")]
