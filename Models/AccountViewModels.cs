@@ -35,6 +35,8 @@ namespace SocialNetwork.Models
         public int AttemptAmount { get; set; }
         public int SolutionAmount { get; set; }
         public string UserPhotoUrl { get; set; }
+        public bool LockoutEnabled { get; set; }
+        public DateTime? LockoutDateEndUtc { get; set; }
         public IEnumerable<UserTaskModel> UserTasks { get; set; }
         public IEnumerable<UserTaskModel> UserSolvedTasks { get; set; }
     }

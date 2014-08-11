@@ -45,12 +45,14 @@ namespace SocialNetwork.Repository
         public virtual void Add(TEntity entity)
         {
             dbSet.Add(entity);
+            this.Save();
         }
 
         public virtual void Delete(object id)
         {
             TEntity entity = dbSet.Find(id);
             Delete(entity);
+            this.Save();
         }
 
         public virtual void Delete(TEntity entity)
@@ -60,15 +62,17 @@ namespace SocialNetwork.Repository
                 dbSet.Attach(entity);
             }
             dbSet.Remove(entity);
+            this.Save();
         }
 
         public virtual void Update(TEntity entity)
         {
             dbSet.Attach(entity);
             dbContext.Entry(entity).State = EntityState.Modified;
+            this.Save();
         }
 
-        public void Save()
+        public virtual void Save()
         {
             dbContext.SaveChanges();
         }

@@ -338,6 +338,8 @@ namespace SocialNetwork.Controllers
                 AttemptAmount = user.AttemptAmount,
                 SolutionAmount = userSolvedTaskRepository.GetUserSolvedTasksAmount(user.Id),
                 UserRate = user.UserRate,
+                LockoutEnabled = user.LockoutEnabled,
+                LockoutDateEndUtc = user.LockoutEndDateUtc,
                 UserTasks = userTaskRepository.GetUserTasks(user.Id).OrderByDescending(x => x.DateAdded),
                 UserSolvedTasks = (from i in userSolvedTaskRepository.GetAll() where i.UserId == user.Id from j in userTaskRepository.GetAll() where j.Id == i.UserTaskId select j)
             };
