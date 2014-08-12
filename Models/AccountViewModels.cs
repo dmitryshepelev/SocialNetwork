@@ -37,8 +37,8 @@ namespace SocialNetwork.Models
         public string UserPhotoUrl { get; set; }
         public bool LockoutEnabled { get; set; }
         public DateTime? LockoutDateEndUtc { get; set; }
-        public IEnumerable<UserTaskModel> UserTasks { get; set; }
-        public IEnumerable<UserTaskModel> UserSolvedTasks { get; set; }
+        public List<UserTaskModel> UserTasks { get; set; }
+        public List<UserTaskModel> UserSolvedTasks { get; set; }
         public bool IsAdmin { get; set; }
     }
 

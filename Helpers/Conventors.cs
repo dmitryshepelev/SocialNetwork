@@ -2,7 +2,7 @@
 
 namespace SocialNetwork.Helpers
 {
-    public static class DateConventor
+    public static class Conventors
     {
         public static DateTime? ConvertFromString(string str)
         {
@@ -14,6 +14,11 @@ namespace SocialNetwork.Helpers
                 result = DateTime.Parse(newDateString);
             }
             return result;
+        }
+
+        public static string StringConventor(string str)
+        {
+            return String.Format("{0}...", str.Substring(0, Math.Min(str.Length, 200)));
         }
     }
 }

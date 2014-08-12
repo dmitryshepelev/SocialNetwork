@@ -337,14 +337,14 @@ namespace SocialNetwork.Controllers
                 UserName = user.UserName,
                 Email = user.Email,
                 UserPhotoUrl = user.UserPhotoUrl,
-                TaskAmount = userTaskRepository.GetUserTasksAmountById(user.Id),
+                TaskAmount = user.UserTasks.Count,
                 AttemptAmount = user.AttemptAmount,
-                SolutionAmount = userSolvedTaskRepository.GetUserSolvedTasksAmount(user.Id),
+                SolutionAmount = user.UserSolvedTask.Count,
                 UserRate = user.UserRate,
                 LockoutEnabled = user.LockoutEnabled,
                 LockoutDateEndUtc = user.LockoutEndDateUtc,
-                UserTasks = userTaskRepository.GetUserTasks(user.Id).OrderByDescending(x => x.DateAdded),
-                UserSolvedTasks = (from i in userSolvedTaskRepository.GetAll() where i.UserId == user.Id from j in userTaskRepository.GetAll() where j.Id == i.UserTaskId select j).OrderBy(x => x.DateAdded),
+                UserTasks = userTaskRepository.GetUserTasks(user.Id).OrderByDescending(x => x.DateAdded).ToList(),
+                UserSolvedTasks = (from i in userSolvedTaskRepository.GetAll() where i.UserId == user.Id from j in userTaskRepository.GetAll() where j.Id == i.UserTaskId select j).OrderBy(x => x.DateAdded).ToList(),
                 IsAdmin = UserManager.IsInRole(user.Id, "admin")
             };
             ViewBag.TotalUsers = UserManager.Users.Count();

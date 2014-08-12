@@ -12,7 +12,7 @@ namespace SocialNetwork.Helpers
         public static bool UserLockoutChange(IdentityUser applicationUser, string lockoutEndDateString)
         {
             bool isLockoutEndDateChanged = false;
-            DateTime? lockoutEndDate = DateConventor.ConvertFromString(lockoutEndDateString);
+            DateTime? lockoutEndDate = Conventors.ConvertFromString(lockoutEndDateString);
             if (applicationUser.LockoutEndDateUtc != lockoutEndDate)
             {
                 if (lockoutEndDate == null)
