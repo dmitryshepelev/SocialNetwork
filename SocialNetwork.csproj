@@ -398,6 +398,7 @@
     <Content Include="Views\Account\_AdminControlPanelPartial.cshtml" />
     <Content Include="Views\Account\BlockAccountError.cshtml" />
     <Content Include="Views\UserTask\ViewAllTasks.cshtml" />
+    <Content Include="Views\Account\DisplayEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
