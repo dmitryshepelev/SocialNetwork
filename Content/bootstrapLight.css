@@ -5779,3 +5779,57 @@ button.close {
 .tienne {
   font-family: 'Tienne', cursive;
 }
+
+.tasks-menu {
+    top: 50px;
+    padding-top: 10px;
+    padding-bottom: 0;
+    bottom: 0;
+    height: 55px;
+    z-index: 1000;
+    height: 60px;
+    position: fixed;
+    background-color: #ffffff;
+    box-shadow: 0px 10px 13px -15px #000;
+}
+
+.block-width {
+    
+}
+
+@media (min-width: 768px) {
+  .block-width {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .block-width {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .block-width {
+    width: 1170px;
+  }
+}
+
+.tag-label {
+    margin: 0 2px 0 2px;
+}
+
+.tag-link {
+    color: white;
+}
+
+.tag-link:hover {
+    color: white;
+}
+
+.tag-link:active {
+    color: white;
+}
+
+.tag-link:visited {
+    color: white;
+}
+

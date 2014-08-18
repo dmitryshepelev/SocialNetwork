@@ -3,9 +3,8 @@ using SocialNetwork.Models;
 
 namespace SocialNetwork.Repository.Interfaces
 {
-    public interface IUserTaskRepository : IEnumerable<UserTaskModel>
+    public interface IUserTaskRepository : IRepository<UserTaskModel>
     {
         IList<UserTaskModel> GetUserTasks(string id);
-        int GetUserTasksAmountById(string id);
     }
 }

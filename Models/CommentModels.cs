@@ -19,4 +19,15 @@ namespace SocialNetwork.Models
         public int UserTaskId { get; set; }
         public virtual UserTaskModel UserTask { get; set; }
     }
+
+    public class CommentsViewModel
+    {
+        public int Id { get; set; }
+        public string Content { get; set; }
+        public DateTime DateAdded { get; set; }
+        public string UserId { get; set; }
+        public string UserName { get; set; }
+        public string UserImageUrl { get; set; }
+
+    }
 }

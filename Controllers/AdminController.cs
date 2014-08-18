@@ -19,22 +19,15 @@ namespace SocialNetwork.Controllers
     {
         private ApplicationUserManager userManager;
         private IUserTaskRepository userTaskRepository;
-        private ICommentRepository commentRepository;
-        private ILikeRepository likeRepository;
-        private IUserSolvedTaskRepository userSolvedTaskRepository;
         private ICategoryRepository categoryRepository;
 
         public AdminController()
         {
         }
 
-        public AdminController(IUserTaskRepository userTaskRepository, IUserSolvedTaskRepository userSolvedTaskRepository,
-            ICommentRepository commentRepository, ILikeRepository likeRepository, ICategoryRepository categoryRepository)
+        public AdminController(IUserTaskRepository userTaskRepository, ICategoryRepository categoryRepository)
         {
             this.userTaskRepository = userTaskRepository;
-            this.userSolvedTaskRepository = userSolvedTaskRepository;
-            this.commentRepository = commentRepository;
-            this.likeRepository = likeRepository;
             this.categoryRepository = categoryRepository;
         }
 
@@ -68,9 +61,9 @@ namespace SocialNetwork.Controllers
                     Id = applicationUser.Id,
                     UserName = applicationUser.UserName,
                     Email = applicationUser.Email,
-                    TaskAmount = userTaskRepository.GetUserTasksAmountById(applicationUser.Id),
+                    TaskAmount = applicationUser.UserTasks.Count,
                     AttemptAmount = applicationUser.AttemptAmount,
-                    SolutionAmount = userSolvedTaskRepository.GetUserSolvedTasksAmount(applicationUser.Id),
+                    SolutionAmount = applicationUser.UserSolvedTask.Count,
                     UserRate = applicationUser.UserRate,
                     Delete = false,
                     IsAdmin = UserManager.IsInRole(applicationUser.Id, "admin"),
@@ -80,7 +73,7 @@ namespace SocialNetwork.Controllers
             }
             ViewBag.TotalUsers = UserManager.Users.Count();
             ViewBag.SortOrder = !sortOrder;
-            return View(AdminManagement.UsersSort(users, sortParam, sortOrder));
+            return View(Helpers.Helpers.UsersSort(users, sortParam, sortOrder));
         }
 
         [Authorize(Roles = "admin")]
@@ -97,7 +90,7 @@ namespace SocialNetwork.Controllers
                 }
                 else
                 {
-                    if (AdminManagement.UserLockoutChange(applicationUser, user.LockoutEndDateUtc))
+                    if (Helpers.Helpers.UserLockoutChange(applicationUser, user.LockoutEndDateUtc))
                     {
                         isUserChanged = true;
                     };
@@ -142,20 +135,20 @@ namespace SocialNetwork.Controllers
                     Id = userTask.Id,
                     TaskTitle = userTask.UserTaskTitle,
                     Category = categoryRepository.GetById(userTask.CategoryId).CategoryName,
-                    CommentAmount = commentRepository.GetAll(x => x.UserTaskId == userTask.Id).Count,
-                    SolutionAmount = userSolvedTaskRepository.GetAll(x => x.UserTaskId == userTask.Id).Count,
-                    LikeAmount = likeRepository.GetAll(x => x.UserTaskId == userTask.Id).Count,
+                    CommentAmount = userTask.Comments.Count,
+                    SolutionAmount = userTask.SolvedTasks.Count,
+                    LikeAmount = userTask.Likes.Count,
                     DateAdded = userTask.DateAdded.ToString("d", CultureInfo.CreateSpecificCulture("en-US")),
                     TaskStatus = userTask.UserTaskStatus,
                     Delete = false,
-                    UserId = userTask.UserId,
-                    UserName = UserManager.FindById(userTask.UserId).UserName
+                    UserId = userTask.User.Id,
+                    UserName = UserManager.FindById(userTask.User.Id).UserName
                 };
                 tasks.Add(task);
             }
             ViewBag.TotalTasks = userTasks.Count;
             ViewBag.SortOrder = !sortOrder;
-            return View(AdminManagement.TasksSort(tasks, sortParam, sortOrder));
+            return View(Helpers.Helpers.TasksSort(tasks, sortParam, sortOrder));
         }
 
         [Authorize(Roles = "admin")]

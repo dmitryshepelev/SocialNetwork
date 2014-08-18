@@ -7,7 +7,7 @@ using SocialNetwork.Models;
 
 namespace SocialNetwork.Repository
 {
-    public abstract class GenericRepository<TEntity> where TEntity : class
+    public abstract class GenericRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         internal ApplicationDbContext dbContext;
         internal DbSet<TEntity> dbSet;
@@ -26,7 +26,7 @@ namespace SocialNetwork.Repository
             {
                 query = query.Where(filter);
             }
-            foreach (var includeProperty in includeProperties.Split(new char[] {','}, StringSplitOptions.RemoveEmptyEntries))
+            foreach (var includeProperty in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
             {
                 query = query.Include(includeProperty);
             }
@@ -42,10 +42,12 @@ namespace SocialNetwork.Repository
             return dbSet.Find(id);
         }
 
-        public virtual void Add(TEntity entity)
+        public virtual TEntity Add(TEntity entity)
         {
-            dbSet.Add(entity);
+            dbSet.Attach(entity);
+            TEntity newEntity = dbSet.Add(entity);
             this.Save();
+            return newEntity;
         }
 
         public virtual void Delete(object id)

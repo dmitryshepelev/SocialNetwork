@@ -1,0 +1,8 @@
+﻿<div>
+    @foreach (var tag in Model.Tags)
+    {
+        <span class="label label-info tag-label">
+            @LinkExtensions.ActionLink(Html, tag.TagName, "ViewAllTasks", "UserTask", new { filterParam = "Tag", filterName = tag.TagName }, new { @class = "tag-link" })
+        </span>
+    }
+</div>

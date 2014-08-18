@@ -2,7 +2,8 @@
 
 namespace SocialNetwork.Repository.Interfaces
 {
-    public interface ICategoryRepository : IEnumerable<CategoryModel>
+    public interface ICategoryRepository : IRepository<CategoryModel>
     {
+        int GetId(string categoryName);
     }
 }

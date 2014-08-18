@@ -11,7 +11,7 @@ namespace SocialNetwork.Repository.Implementations
 
         public int GetUserSolvedTasksAmount(string id)
         {
-            return GetAll(x => x.UserId == id).Count;
+            return GetAll(x => x.User.Id == id).Count;
         }
     }
 }

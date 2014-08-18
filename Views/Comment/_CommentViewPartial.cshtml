@@ -1,0 +1,23 @@
+﻿@model List<SocialNetwork.Models.CommentsViewModel>
+
+@foreach (var comment in Model)
+{
+    <div class="col-lg-3" style="padding-top: 10px; padding-bottom: 10px; font-size: 12px;">
+        <div class="row">
+            <div class="col-lg-9" align="right" style="padding: 4px 0 0 10px">
+                by <br />
+                @Html.ActionLink(comment.UserName, "ViewAccount", "Account", new { id = comment.UserId }, null)                
+            </div>
+            <div class="col-lg-3" align="right" style="padding-right: 0; padding-left: 0;">
+                <a href="~/Account/ViewAccount?id=@comment.UserId"><img src="@comment.UserImageUrl" /></a>
+            </div>            
+        </div>
+    </div>
+    <div class="col-lg-9">
+        <blockquote style="font-size: 12px">
+            <p>@comment.Content</p>
+            <small>@comment.DateAdded</small>
+        </blockquote>
+    </div>
+    <hr />
+}

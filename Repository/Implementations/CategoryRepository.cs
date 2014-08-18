@@ -1,4 +1,5 @@
-﻿using SocialNetwork.Models;
+﻿using System.Linq;
+using SocialNetwork.Models;
 using SocialNetwork.Repository.Interfaces;
 
 namespace SocialNetwork.Repository.Implementations
@@ -7,6 +8,11 @@ namespace SocialNetwork.Repository.Implementations
     {
         public CategoryRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
+        }
+
+        public int GetId(string categoryName)
+        {
+            return (from category in dbSet where categoryName == category.CategoryName select category.Id).FirstOrDefault();
         }
     }
 }

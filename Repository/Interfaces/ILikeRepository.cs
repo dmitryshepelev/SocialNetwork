@@ -2,7 +2,7 @@
 
 namespace SocialNetwork.Repository.Interfaces
 {
-    public interface ILikeRepository : IEnumerable<LikeModel>
+    public interface ILikeRepository : IRepository<LikeModel>
     {
     }
 }

@@ -1,0 +1,126 @@
+﻿@using Newtonsoft.Json
+@using Microsoft.AspNet.Identity
+@model SocialNetwork.Models.UserTasksViewModel
+@{
+    ViewBag.Title = "ViewTask";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/jquery-2.1.1.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/jquery-manage.js"></script>
+<script src="~/Scripts/jquery.jscroll.js"></script>
+
+<style>
+    .div-margin {
+        margin: 20px;
+    }
+
+    .div-main {
+        margin: 0 150px 0 150px;
+        padding: 20px;
+    }
+</style>
+
+<div align="center" style="margin: 35px 0 40px 0">
+    <h2>Propose your f...ing solution</h2>
+    <br />
+    <div class="input-group" style="width: 264px">
+        <input type="text" class="form-control" placeholder="Your solution" style="width: 200px" />
+        <span class="input-group-btn">
+            <button id="check" class="btn btn-primary" type="button">Check</button>
+        </span>
+    </div>
+</div>
+<div class="div-main" style="border: 1px solid #dddddd; border-radius: 5px">
+    <div class="row">
+        <div class="col-lg-8">
+            <div>
+                <h3 style="margin: 0 0 20px 0">@Model.UserTaskTitle</h3>
+            </div>
+            @Html.Partial("_ViewTags")
+        </div>
+        <div class="col-lg-4">
+            <div class="pull-right" style="padding-left: 10px">
+                by @Html.ActionLink(Model.UserName, "ViewAccount", "Account", new { id = Model.UserId }, null)
+                <br />
+                @Model.DateAdded
+                <br />
+                @Html.ActionLink("view profile", "ViewAccount", "Account", new { id = Model.UserId }, new { @class = "btn btn-primary btn-xs" })
+            </div>
+            <div class="pull-right">
+                <a href="~/Account/ViewAccount?id=@Model.UserId"><img src="@Model.UserImage" /></a>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="pull-left">
+                @Html.Markdown(Model.Content)
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="" align="center">
+                <h3 style="margin: 10px 0 0 0">@Html.ActionLink(Model.Category, "ViewAllTasks", "UserTask", new { filterParam = "Category", filterName = Model.Category }, null)</h3>
+                <div class="row">
+                    <div class="col-md-4 task-stat" align="center">
+                        <h3>@Html.DisplayFor(x => Model.LikesAmount)</h3>
+                        <h6>Likes</h6>
+                    </div>
+                    <div class="col-md-4 task-stat" align="center">
+                        <h3>@Html.DisplayFor(x => Model.SolutionsAmount)</h3>
+                        <h6>Solutions</h6>
+                    </div>
+                    <div class="col-md-4 task-stat" align="center">
+                        <h3>@Html.DisplayFor(x => Model.CommentsAmount)</h3>
+                        <h6>Comments</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="div-main">
+    <div class="row" align="center">
+        <div class="pull-left">
+            <a href="~/Account/ViewAccount?id=@User.Identity.GetUserId()"><img src="@ViewBag.UserPhoto" /></a>
+        </div>
+        <div class="pull-left" style="padding-left: 10px; width: 95%">
+            @using (Ajax.BeginForm("AddComment", "Comment", new AjaxOptions
+            {
+                Url = Url.Action("AddComment", "Comment"),
+                HttpMethod = "POST",
+                InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace,
+                UpdateTargetId = "comments",
+                OnSuccess = "addedCommentSuccess"
+            }))
+            {
+                <div class="input-group">
+                    <input id="taskId" name="taskId" type="hidden" value="@User.Identity.GetUserId()" />
+                    <input class="form-control" id="comment" name="comment" placeholder="Write a comment..." type="text">
+                    <span class="input-group-btn">
+                        <input id="addComment" class="btn btn-primary" type="submit" value="Comment" />
+                    </span>
+                </div>
+            }
+        </div>
+    </div>
+    <div id="comments" class="row" style="margin: 20px 0 20px 0">
+        <div id="scrollContent" style="margin: 0">@Html.Action("ViewComment", "Comment", new { taskId = Model.Id })</div>
+    </div>
+</div>
+
+<script>
+    function addedCommentSuccess() {
+        $("#comment").val("");
+    }
+
+    //$("#scrollContent").jscroll();
+    //$(window).scroll(function() {
+    //    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+    //        loadComments();
+    //    }
+    //})
+</script>

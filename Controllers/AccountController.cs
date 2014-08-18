@@ -20,7 +20,7 @@ namespace SocialNetwork.Controllers
     public class AccountController : Controller
     {
         private ApplicationUserManager userManager;
-        private const string defaultUserImage = "/Content/images/default-user-image.png";
+        private const string defaultUserImage = "http://res.cloudinary.com/slideshowapp/image/upload/v1408274660/default-user-image_nbfyrg.png";
         private IUserTaskRepository userTaskRepository;
         private IUserSolvedTaskRepository userSolvedTaskRepository;
 
@@ -304,7 +304,7 @@ namespace SocialNetwork.Controllers
                 user.Email = model.Email;
                 if (model.UserPhoto != null)
                 { 
-                    user.UserPhotoUrl = UploadImage.Upload(model.UserPhoto);
+                    user.UserPhotoUrl = Helpers.Helpers.UploadImage(model.UserPhoto);
                 }
                 IdentityResult result = await UserManager.UpdateAsync(user);
                 if (result.Succeeded)
@@ -336,17 +336,19 @@ namespace SocialNetwork.Controllers
             {
                 UserName = user.UserName,
                 Email = user.Email,
-                UserPhotoUrl = user.UserPhotoUrl,
-                TaskAmount = userTaskRepository.GetUserTasksAmountById(user.Id),
+                UserPhotoUrl = Helpers.Helpers.TransformImage(user.UserPhotoUrl, 200),
+                TaskAmount = user.UserTasks.Count,
                 AttemptAmount = user.AttemptAmount,
-                SolutionAmount = userSolvedTaskRepository.GetUserSolvedTasksAmount(user.Id),
+                SolutionAmount = user.UserSolvedTask.Count,
                 UserRate = user.UserRate,
                 LockoutEnabled = user.LockoutEnabled,
                 LockoutDateEndUtc = user.LockoutEndDateUtc,
-                UserTasks = userTaskRepository.GetUserTasks(user.Id).OrderByDescending(x => x.DateAdded),
-                UserSolvedTasks = (from i in userSolvedTaskRepository.GetAll() where i.UserId == user.Id from j in userTaskRepository.GetAll() where j.Id == i.UserTaskId select j).OrderBy(x => x.DateAdded),
+                UserTasks = userTaskRepository.GetUserTasks(user.Id).OrderByDescending(x => x.DateAdded).ToList(),
+                UserSolvedTasks = (from i in userSolvedTaskRepository.GetAll() where i.User.Id == user.Id
+                                   from j in userTaskRepository.GetAll() where j.Id == i.UserTask.Id select j).OrderBy(x => x.DateAdded).ToList(),
                 IsAdmin = UserManager.IsInRole(user.Id, "admin")
             };
+
             ViewBag.TotalUsers = UserManager.Users.Count();
             ViewBag.TotalTasks = userTaskRepository.GetAll().Count;
             return View(userAccount);

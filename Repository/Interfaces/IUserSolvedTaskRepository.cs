@@ -3,7 +3,7 @@ using SocialNetwork.Models;
 
 namespace SocialNetwork.Repository.Interfaces
 {
-    public interface IUserSolvedTaskRepository : IEnumerable<UserSolvedTaskModel>
+    public interface IUserSolvedTaskRepository : IRepository<UserSolvedTaskModel>
     {
         int GetUserSolvedTasksAmount(string id);
     }

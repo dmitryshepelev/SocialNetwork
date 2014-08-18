@@ -13,7 +13,6 @@ namespace SocialNetwork.Models
         [Key]
         public int Id { get; set; }
         public string TagName { get; set; }
-        public int TagFrequency { get; set; }
-        public virtual ICollection<UserTaskModel> UserTasks { get; set; }
+        public virtual ICollection<UserTaskTagModel> Tasks { get; set; }
     }
 }

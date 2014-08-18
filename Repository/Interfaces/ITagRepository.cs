@@ -2,7 +2,7 @@
 
 namespace SocialNetwork.Repository.Interfaces
 {
-    public interface ITagRepository : IEnumerable<TagModel>
+    public interface ITagRepository : IRepository<TagModel>
     {
     }
 }

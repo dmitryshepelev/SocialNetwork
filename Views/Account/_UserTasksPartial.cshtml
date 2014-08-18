@@ -6,7 +6,7 @@
 <div class="row">
     <div class="col-md-6">
         <h4>@Resource.UserMyTasks</h4>
-        @if (Model.UserTasks.Count() == 0)
+        @if (!Model.UserTasks.Any() || Model.UserTasks == null)
         {
             <p class="text-muted">@Resource.UserEmptyTaskList</p>
         }
@@ -17,7 +17,7 @@
                     @foreach (UserTaskModel userTask in Model.UserTasks)
                     {
                         <tr>
-                            <td width="80%">@Html.ActionLink(userTask.UserTaskTitle, "ViewTask", "UserTask", new { id = userTask.Id })</td>
+                            <td width="80%">@Html.ActionLink(userTask.UserTaskTitle, "ViewTask", "UserTask", new { id = userTask.Id }, null)</td>
                             <td width="10%">@userTask.DateAdded.ToString("d", CultureInfo.CreateSpecificCulture("en-US"))</td>
                             @if (User.Identity.Name == Model.UserName)
                             {
@@ -32,7 +32,7 @@
     </div>
     <div class="col-md-6">
         <h4>@Resource.UserMySolutions</h4>
-        @if (Model.UserSolvedTasks.Count() == 0)
+        @if (!Model.UserSolvedTasks.Any())
         {
             <p class="text-muted">@Resource.UserEmplySolutionList</p>
         }

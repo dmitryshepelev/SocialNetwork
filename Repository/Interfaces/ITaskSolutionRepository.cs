@@ -2,7 +2,7 @@
 
 namespace SocialNetwork.Repository.Interfaces
 {
-    public interface ITaskSolutionRepository : IEnumerable<TaskSolutionModel>
+    public interface ITaskSolutionRepository : IRepository<TaskSolutionModel>
     {
     }
 }

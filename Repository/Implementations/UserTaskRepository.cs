@@ -12,12 +12,7 @@ namespace SocialNetwork.Repository.Implementations
 
         public IList<UserTaskModel> GetUserTasks(string id)
         {
-            return GetAll(x => x.UserId == id);
-        }
-
-        public int GetUserTasksAmountById(string id)
-        {
-            return GetAll(x => x.UserId == id).Count;
+            return GetAll(x => x.User.Id == id);
         }
     }
 }

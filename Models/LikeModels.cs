@@ -12,6 +12,6 @@ namespace SocialNetwork.Models
         public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
         public int UserTaskId { get; set; }
-        public virtual UserTaskModel UserTask { get; set; }
+        public UserTaskModel UserTask { get; set; }
     }
 }
