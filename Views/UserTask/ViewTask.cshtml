@@ -98,7 +98,7 @@
             }))
             {
                 <div class="input-group">
-                    <input id="taskId" name="taskId" type="hidden" value="@User.Identity.GetUserId()" />
+                    <input id="taskId" name="taskId" type="hidden" value="@Model.Id" />
                     <input class="form-control" id="comment" name="comment" placeholder="Write a comment..." type="text">
                     <span class="input-group-btn">
                         <input id="addComment" class="btn btn-primary" type="submit" value="Comment" />
@@ -116,11 +116,4 @@
     function addedCommentSuccess() {
         $("#comment").val("");
     }
-
-    //$("#scrollContent").jscroll();
-    //$(window).scroll(function() {
-    //    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-    //        loadComments();
-    //    }
-    //})
 </script>

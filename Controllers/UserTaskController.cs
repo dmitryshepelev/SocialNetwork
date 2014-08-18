@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Collections.Generic;
+﻿using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using JetBrains.Annotations;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using Newtonsoft.Json;
-using SocialNetwork.Filters;
+﻿using SocialNetwork.Filters;
+﻿using SocialNetwork.Helpers;
 using SocialNetwork.Models;
 using SocialNetwork.Repository.Interfaces;
 

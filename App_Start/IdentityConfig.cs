@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Net.Mail;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
+using Microsoft.Owin.Security;
 using SocialNetwork.Models;
 
 namespace SocialNetwork
@@ -59,8 +62,19 @@ namespace SocialNetwork
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            // Create the mail message
+            var mailMessage = new MailMessage(
+                "SocialNetwork@gmail.com",
+                message.Destination,
+                message.Subject,
+                message.Body
+                );
+
+            // Send the message
+            SmtpClient client = new SmtpClient();
+            client.SendAsync(mailMessage, null);
+
+            return Task.FromResult(true);
         }
     }
 
@@ -70,6 +84,21 @@ namespace SocialNetwork
         {
             // Plug in your sms service here to send a text message.
             return Task.FromResult(0);
+        }
+    }
+    public class ApplicationSignInManager : SignInManager<ApplicationUser, string>
+    {
+        public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager) :
+            base(userManager, authenticationManager) { }
+
+        public override Task<ClaimsIdentity> CreateUserIdentityAsync(ApplicationUser user)
+        {
+            return user.GenerateUserIdentityAsync((ApplicationUserManager)UserManager);
+        }
+
+        public static ApplicationSignInManager Create(IdentityFactoryOptions<ApplicationSignInManager> options, IOwinContext context)
+        {
+            return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
         }
     }
 }

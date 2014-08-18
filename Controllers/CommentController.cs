@@ -57,7 +57,7 @@ namespace SocialNetwork.Controllers
                 DateAdded = DateTime.Now
             };
             commentRepository.Add(newComment);
-            return PartialView("_CommentViewPartial", GetTasksComments(taskId));
+            return PartialView("_CommentViewPartial", GetTasksComments(taskId).Take(5).ToList());
         }
 
         [HttpGet]
