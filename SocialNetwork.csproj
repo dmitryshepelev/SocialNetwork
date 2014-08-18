@@ -56,12 +56,6 @@
     <Reference Include="CoffeeSharp">
       <HintPath>..\packages\CoffeeSharp.0.5\lib\CoffeeSharp.dll</HintPath>
     </Reference>
-    <Reference Include="Jurassic">
-      <HintPath>..\packages\CoffeeSharp.0.5\lib\Jurassic.dll</HintPath>
-    </Reference>
-    <Reference Include="MarkdownDeep">
-      <HintPath>..\packages\MarkdownDeep.NET.1.4\lib\.NetFramework 3.5\MarkdownDeep.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
@@ -69,6 +63,12 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Jurassic">
+      <HintPath>..\packages\CoffeeSharp.0.5\lib\Jurassic.dll</HintPath>
+    </Reference>
+    <Reference Include="MarkdownDeep">
+      <HintPath>..\packages\MarkdownDeep.NET.1.4\lib\.NetFramework 3.5\MarkdownDeep.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -295,6 +295,10 @@
     <Compile Include="Migrations\201408162228378_ApplicationDb17.Designer.cs">
       <DependentUpon>201408162228378_ApplicationDb17.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201408182317369_ApplicationDb18.cs" />
+    <Compile Include="Migrations\201408182317369_ApplicationDb18.Designer.cs">
+      <DependentUpon>201408182317369_ApplicationDb18.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModels.cs" />
@@ -345,6 +349,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrapDark.css" />
     <Content Include="Content\bootstrapLight.css" />
+    <Content Include="Content\images\ajax-loader.gif" />
     <Content Include="Content\images\block-icon-16.png" />
     <Content Include="Content\images\edit-icon-16.png" />
     <Content Include="Content\images\facebook-logo.png" />
@@ -569,6 +574,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201408162228378_ApplicationDb17.resx">
       <DependentUpon>201408162228378_ApplicationDb17.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408182317369_ApplicationDb18.resx">
+      <DependentUpon>201408182317369_ApplicationDb18.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Resource.en.resx" />
     <EmbeddedResource Include="Resources\Resource.resx">

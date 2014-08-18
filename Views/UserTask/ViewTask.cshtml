@@ -25,12 +25,35 @@
 <div align="center" style="margin: 35px 0 40px 0">
     <h2>Propose your f...ing solution</h2>
     <br />
-    <div class="input-group" style="width: 264px">
-        <input type="text" class="form-control" placeholder="Your solution" style="width: 200px" />
-        <span class="input-group-btn">
-            <button id="check" class="btn btn-primary" type="button">Check</button>
-        </span>
-    </div>
+    @if (Model.IsSolved)
+    {
+        <div class="alert alert-dismissable alert-success" style="width: 264px">
+            You have already solved this task
+        </div>
+    }
+    else if (Model.UserId == User.Identity.GetUserId())
+    {
+        <div class="alert alert-dismissable alert-warning" style="width: 264px">
+            You cannot solve your own task
+        </div>
+    }
+    else
+    {
+        using (Ajax.BeginForm("CheckSolution", "UserTask", new AjaxOptions
+        {
+            Url = Url.Action("CheckSolution", "UserTask"),
+            HttpMethod = "POST"
+        }))
+        {
+            <div id="checkSolution" class="input-group" style="width: 264px">
+                <input id="taskId" name="taskId" type="hidden" value="@Model.Id" />
+                <input type="text" class="form-control" id="solutions" name="solutions" placeholder="Your solution" style="width: 200px" />
+                <span class="input-group-btn">
+                    <input id="check" class="btn btn-primary" type="submit" value="Check" />
+                </span>
+            </div>
+        }
+    }
 </div>
 <div class="div-main" style="border: 1px solid #dddddd; border-radius: 5px">
     <div class="row">
@@ -99,7 +122,7 @@
             {
                 <div class="input-group">
                     <input id="taskId" name="taskId" type="hidden" value="@Model.Id" />
-                    <input class="form-control" id="comment" name="comment" placeholder="Write a comment..." type="text">
+                    <input class="form-control" id="comment" name="comment" placeholder="Write a comment..." type="text" />
                     <span class="input-group-btn">
                         <input id="addComment" class="btn btn-primary" type="submit" value="Comment" />
                     </span>
@@ -109,11 +132,34 @@
     </div>
     <div id="comments" class="row" style="margin: 20px 0 20px 0">
         <div id="scrollContent" style="margin: 0">@Html.Action("ViewComment", "Comment", new { taskId = Model.Id })</div>
+        <div id="loadingDiv" style="text-align: center; display: none; margin-bottom: 20px">
+            <img alt="Loading" src="@Url.Content("~/Content/images/ajax-loader.gif")" />
+        </div>
     </div>
 </div>
 
 <script>
-    function addedCommentSuccess() {
+    function addedCommentSuccess(data) {
         $("#comment").val("");
     }
+</script>
+
+<script type="text/javascript">
+    var blockNumber = 2;
+    var noMoreData = false;
+    var inProgress = false;
+
+    $(window).scroll(function () {
+        if ($(window).scrollTop() == $(document).height() - $(window).height() && !noMoreData && !inProgress) {
+            inProgress = true;
+            $("#loadingDiv").show();
+            $.post("@Url.Action("InfiniteScroll", "Comment")", { "taskId": @Model.Id, "blockNumber": blockNumber }, function (data) {
+                blockNumber = blockNumber + 1;
+                noMoreData = data.NoMoreData;
+                $("#scrollContent").append(data.HtmlString);
+                $("#loadingDiv").hide();
+                inProgress = false;
+            });
+        }
+    });
 </script>

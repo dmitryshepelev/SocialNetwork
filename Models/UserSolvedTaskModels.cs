@@ -16,5 +16,7 @@ namespace SocialNetwork.Models
         public virtual ApplicationUser User { get; set; }
         public int UserTaskId { get; set; }
         public virtual UserTaskModel UserTask { get; set; }
+        public int AttemptAmount { get; set; }
+        public bool IsSolved { get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace SocialNetwork.Controllers
         private ITagRepository tagRepository;
         private ITaskSolutionRepository taskSolutionRepository;
         private IUserTaskTagsRepository userTaskTagsRepository;
-        private ICommentRepository commentRepositorty;
+        private IUserSolvedTaskRepository userSolvedTasksRepository;
 
         public UserTaskController()
         {
@@ -29,14 +29,14 @@ namespace SocialNetwork.Controllers
 
         public UserTaskController(IUserTaskRepository userTaskRepository, ICategoryRepository categoryRepository,
             ITagRepository tagRepository, ITaskSolutionRepository taskSolutionRepository, IUserTaskTagsRepository userTaskTagsRepository,
-            ICommentRepository commentRepositorty)
+            ICommentRepository commentRepositorty, IUserSolvedTaskRepository userSolvedTasksRepository)
         {
             this.userTaskRepository = userTaskRepository;
             this.categoryRepository = categoryRepository;
             this.tagRepository = tagRepository;
             this.taskSolutionRepository = taskSolutionRepository;
             this.userTaskTagsRepository = userTaskTagsRepository;
-            this.commentRepositorty = commentRepositorty;
+            this.userSolvedTasksRepository = userSolvedTasksRepository;
         }
 
         public UserTaskController(ApplicationUserManager userManager)
@@ -54,6 +54,37 @@ namespace SocialNetwork.Controllers
             {
                 userManager = value;
             }
+        }
+
+        [HttpPost]
+        public JsonResult CheckSolution(string solutions, int? taskId)
+        {
+            var taskSolutions = from s in taskSolutionRepository.GetAll() where s.UserTaskId == (int) taskId select s.Solution.ToUpper();
+            string[] solution = solutions.Split(',');
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            foreach (var s in solution)
+            {
+                string answer = s;
+                if (s.StartsWith(" "))
+                {
+                    answer = s.Remove(0, 1);                    
+                }
+                if (taskSolutions.Contains(answer.ToUpper())) continue;
+                user.AttemptAmount += 1;
+                UserManager.Update(user);
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+            user.AttemptAmount += 1;
+            TimeSpan timeDifference = DateTime.Now - userTaskRepository.GetById((int) taskId).DateAdded;
+            var addRate = (((1/user.AttemptAmount)*0.8) + ((1/timeDifference.TotalMinutes)*0.2))*100;
+            user.UserRate += addRate;
+            UserManager.Update(user);
+            userSolvedTasksRepository.Add(new UserSolvedTaskModel()
+            {
+                UserId = User.Identity.GetUserId(),
+                UserTaskId = (int)taskId
+            });
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ViewAllTasks(string filterParam, string filterName, string sortParam, bool? sortOrder = false)
@@ -114,6 +145,10 @@ namespace SocialNetwork.Controllers
                             from j in tagRepository.GetAll() where j.Id == i.TagId
                             select j).ToList()
             };
+            taskToView.IsSolved = (from s in userSolvedTasksRepository.GetAll()
+                where s.UserTaskId == id
+                where s.UserId == User.Identity.GetUserId()
+                select s).Any();
             ViewBag.UserPhoto = Helpers.Helpers.TransformImage(UserManager.FindById(User.Identity.GetUserId()).UserPhotoUrl, 34);
             return View(taskToView);
         }
@@ -121,8 +156,8 @@ namespace SocialNetwork.Controllers
         [HttpGet]
         public JsonResult GetTags(string q)
         {
-            var jsonTags = tagRepository.GetAll().Where(x => x.TagName.ToUpper().Contains(q.ToUpper())).Select(res => new { id = res.Id.ToString(), name = "#" + res.TagName }).ToList();
-            jsonTags.Add(new { id = "#" + q, name = String.Format("Add \"#{0}\"", q )});               
+            var jsonTags = tagRepository.GetAll().Where(x => x.TagName.ToUpper().Contains(q.ToUpper())).Select(res => new { id = res.Id.ToString(), name = res.TagName }).ToList();
+            jsonTags.Add(new { id = q, name = String.Format("Add \"{0}\"", q )});               
             return Json(jsonTags, JsonRequestBehavior.AllowGet);
         }
 

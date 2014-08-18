@@ -56,6 +56,7 @@ namespace SocialNetwork.Models
         public List<TagModel> Tags { get; set; }
         public string Category { get; set; }
         public string Content { get; set; }
+        public bool IsSolved { get; set; }
     }
 
     public class CreateTaskViewModel

@@ -33,15 +33,3 @@ function videoAdd(urlAction, urlVideo) {
         });
     });
 }
-
-function loadComments(c, taskId) {
-    var count = c + 5;
-    $.ajax({
-        url: "/Comment/ViewCommentAjax/",
-        dataType: "json",
-        type: "POST",
-        data:  "taskId:" + taskId + ",count:" + count
-    }).done(function() {
-        
-    });
-}
