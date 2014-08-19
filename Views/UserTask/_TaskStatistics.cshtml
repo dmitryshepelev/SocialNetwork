@@ -1,0 +1,25 @@
+﻿@model SocialNetwork.Models.TaskStatisticsViewModel
+
+<div class="row">
+    <div class="col-md-3">
+        @Html.HiddenFor(x => x.TaskId, new { id = "taskId" + Model.TaskId })
+        @Html.CheckBoxFor(x => x.IsLiked, new { id = "isLiked" + Model.TaskId })
+    </div>
+    <div class="col-md-3 task-stat" align="center">
+        <h3>@Html.DisplayFor(x => x.LikesAmount)</h3>
+        <h6>Likes</h6>
+
+    </div>
+    <div class="col-md-3 task-stat" align="center">
+        <h3>@Html.DisplayFor(x => x.SolutionsAmount)</h3>
+        <h6>Solutions</h6>
+    </div>
+    <div class="col-md-3 task-stat" align="center">
+        <h3>@Html.DisplayFor(x => x.CommentsAmount)</h3>
+        <h6>Comments</h6>
+    </div>
+</div>
+
+<script>
+    likes();
+</script>

@@ -507,6 +507,7 @@
     <Content Include="Views\UserTask\_SortFilterPanelPartial.cshtml" />
     <Content Include="Views\Comment\_CommentViewPartial.cshtml" />
     <Content Include="Views\Account\DisplayEmail.cshtml" />
+    <Content Include="Views\UserTask\_TaskStatistics.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Localization\" />

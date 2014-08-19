@@ -89,7 +89,7 @@ namespace SocialNetwork.Controllers
             return comments.ToList();
         }
 
-        public class JsonModel
+        private class JsonModel
         {
             public string HtmlString { get; set; }
             public bool NoMoreData { get; set; }
@@ -100,7 +100,7 @@ namespace SocialNetwork.Controllers
         {
             System.Threading.Thread.Sleep(1000);
             const int blockSize = 5;
-            var comments = GetTasksComments(taskId, blockNumber, blockSize);
+            var comments = GetTasksComments(taskId, blockNumber);
             var jsonModel = new JsonModel
             {
                 NoMoreData = comments.Count < blockSize,
@@ -118,11 +118,9 @@ namespace SocialNetwork.Controllers
             ViewData.Model = comments;
             using (var sw = new StringWriter())
             {
-                ViewEngineResult viewResult = ViewEngines.Engines.FindPartialView(ControllerContext, viewName);
-                var viewContext = new ViewContext
-                (ControllerContext, viewResult.View, ViewData, TempData, sw);
+                var viewResult = ViewEngines.Engines.FindPartialView(ControllerContext, viewName);
+                var viewContext = new ViewContext(ControllerContext, viewResult.View, ViewData, TempData, sw);
                 viewResult.View.Render(viewContext, sw);
-
                 return sw.GetStringBuilder().ToString();
             }
         } 

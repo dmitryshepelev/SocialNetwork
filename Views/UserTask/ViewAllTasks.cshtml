@@ -4,6 +4,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<script src="~/Scripts/jquery-2.1.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/jquery-manage.js"></script>
+
 <style type="text/css">
     .task-stat {
         padding: 0 0 0 0;
@@ -34,23 +38,7 @@
             <div>
                 <div class="row">
                     <div class="col-lg-3">
-                        <div class="row">
-                            <div class="col-md-3">
-
-                            </div>
-                            <div class="col-md-3 task-stat" align="center">
-                                <h3>@Html.DisplayFor(x => x[i].LikesAmount)</h3>
-                                <h6>Likes</h6>
-                            </div>
-                            <div class="col-md-3 task-stat" align="center">
-                                <h3>@Html.DisplayFor(x => x[i].SolutionsAmount)</h3>
-                                <h6>Solutions</h6>
-                            </div>
-                            <div class="col-md-3 task-stat" align="center">
-                                <h3>@Html.DisplayFor(x => x[i].CommentsAmount)</h3>
-                                <h6>Comments</h6>
-                            </div>
-                        </div>
+                        <div id="taskStatistic-@Model[i].Id">@Html.Action("TaskStatistics", "UserTask", new { taskId = Model[i].Id })</div>
                     </div>
                     <div class="col-lg-9" style="padding-left: 5%">
                         <h3>
@@ -90,3 +78,4 @@
         </div>
     }
 </div>
+

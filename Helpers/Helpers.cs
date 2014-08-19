@@ -12,14 +12,14 @@ namespace SocialNetwork.Helpers
 {
     public static class Helpers
     {
-        public static string UploadImage(HttpPostedFileBase imageToUpload)
+        public static ImageUploadResult UploadImage(HttpPostedFileBase imageToUpload)
         {
             ImageUploadParams uploadParams = new ImageUploadParams();
             uploadParams.File = new FileDescription(imageToUpload.FileName, imageToUpload.InputStream);
             CloudinaryDotNet.Cloudinary cloudinary = new CloudinaryDotNet.Cloudinary(new Account("slideshowapp", "738528734478378",
             "Yytgqtd5iklPE9L23nmH0xskUxw"));
             ImageUploadResult uploadResult = cloudinary.Upload(uploadParams);
-            return uploadResult.Uri.ToString();
+            return uploadResult;
         }
 
         public static string TransformImage(string url, int size)
@@ -28,6 +28,19 @@ namespace SocialNetwork.Helpers
             var firstPath = url.Substring(0, index);
             var secondPath = url.Substring(index);
             return String.Format("{0}c_thumb,h_{2},w_{2}/{1}", firstPath, secondPath, size);
+        }
+
+        public static string TransformImage(string url, int size, int width)
+        {
+            string result = "";
+            var index = url.IndexOf("upload/") + 7;
+            var firstPath = url.Substring(0, index);
+            var secondPath = url.Substring(index);
+            if (width < 522)
+            {
+                size = width;
+            }
+            return String.Format("{0}c_scale,w_{2}/{1}", firstPath, secondPath, size);
         }
 
         public static DateTime? ConvertFromString(string str)
@@ -76,6 +89,18 @@ namespace SocialNetwork.Helpers
             {
                 str = str.Replace(videoTagStart, "");
                 str = str.Replace(videoTagEnd, "");
+            }
+            return str;
+        }
+
+        public static string CreateImage(string str)
+        {
+            var imageTagStart = "[IMAGE]";
+            var imageTagEnd = "[/IMAGE]";
+            while (str.Contains(imageTagStart) || str.Contains(imageTagEnd))
+            {
+                str = str.Replace(imageTagStart, "");
+                str = str.Replace(imageTagEnd, "");
             }
             return str;
         }
@@ -196,10 +221,10 @@ namespace SocialNetwork.Helpers
             return sortedTasks;
         }
 
-        public static List<UserTasksViewAllModel> TasksSort(List<UserTasksViewAllModel> tasks,
+        public static List<UserTaskModel> TasksSort(List<UserTaskModel> tasks,
      string sortParam, bool? sortOrder)
         {
-            List<UserTasksViewAllModel> sortedTasks;
+            List<UserTaskModel> sortedTasks;
             switch (sortParam)
             {
                 case "Category":
@@ -209,18 +234,18 @@ namespace SocialNetwork.Helpers
                     break;
                 case "CommentAmount":
                     sortedTasks = (sortOrder == true || sortOrder == null)
-                        ? tasks.OrderBy(x => x.CommentsAmount).ToList()
-                        : tasks.OrderByDescending(x => x.CommentsAmount).ToList();
+                        ? tasks.OrderBy(x => x.Comments.Count).ToList()
+                        : tasks.OrderByDescending(x => x.Comments.Count).ToList();
                     break;
                 case "SolutionAmount":
                     sortedTasks = (sortOrder == true || sortOrder == null)
-                        ? tasks.OrderBy(x => x.SolutionsAmount).ToList()
-                        : tasks.OrderByDescending(x => x.SolutionsAmount).ToList();
+                        ? tasks.OrderBy(x => x.SolvedTasks.Count).ToList()
+                        : tasks.OrderByDescending(x => x.SolvedTasks.Count).ToList();
                     break;
                 case "LikeAmount":
                     sortedTasks = (sortOrder == true || sortOrder == null)
-                        ? tasks.OrderBy(x => x.LikesAmount).ToList()
-                        : tasks.OrderByDescending(x => x.LikesAmount).ToList();
+                        ? tasks.OrderBy(x => x.Likes.Count).ToList()
+                        : tasks.OrderByDescending(x => x.Likes.Count).ToList();
                     break;
                 default:
                     sortedTasks = (sortOrder == true || sortOrder == null)

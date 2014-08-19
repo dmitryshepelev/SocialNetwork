@@ -39,7 +39,8 @@ namespace SocialNetwork.Controllers
             UserManager = userManager;
         }
 
-        public ApplicationUserManager UserManager {
+        public ApplicationUserManager UserManager
+        {
             get
             {
                 return userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
@@ -303,7 +304,7 @@ namespace SocialNetwork.Controllers
                 user.Email = model.Email;
                 if (model.UserPhoto != null)
                 { 
-                    user.UserPhotoUrl = Helpers.Helpers.UploadImage(model.UserPhoto);
+                    user.UserPhotoUrl = Helpers.Helpers.UploadImage(model.UserPhoto).Uri.ToString();
                 }
                 IdentityResult result = await UserManager.UpdateAsync(user);
                 if (result.Succeeded)

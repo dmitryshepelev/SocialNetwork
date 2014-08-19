@@ -1,12 +1,14 @@
 ﻿using System;
 ﻿using System.Collections.Generic;
-﻿using System.Linq;
+using System.IO;
+using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-﻿using SocialNetwork.Filters;
-﻿using SocialNetwork.Helpers;
+using Newtonsoft.Json;
+using SocialNetwork.Filters;
 using SocialNetwork.Models;
 using SocialNetwork.Repository.Interfaces;
 
@@ -22,6 +24,7 @@ namespace SocialNetwork.Controllers
         private ITaskSolutionRepository taskSolutionRepository;
         private IUserTaskTagsRepository userTaskTagsRepository;
         private IUserSolvedTaskRepository userSolvedTasksRepository;
+        private ILikeRepository likeRepository;
 
         public UserTaskController()
         {
@@ -29,7 +32,7 @@ namespace SocialNetwork.Controllers
 
         public UserTaskController(IUserTaskRepository userTaskRepository, ICategoryRepository categoryRepository,
             ITagRepository tagRepository, ITaskSolutionRepository taskSolutionRepository, IUserTaskTagsRepository userTaskTagsRepository,
-            ICommentRepository commentRepositorty, IUserSolvedTaskRepository userSolvedTasksRepository)
+            ILikeRepository likeRepository, IUserSolvedTaskRepository userSolvedTasksRepository)
         {
             this.userTaskRepository = userTaskRepository;
             this.categoryRepository = categoryRepository;
@@ -37,6 +40,7 @@ namespace SocialNetwork.Controllers
             this.taskSolutionRepository = taskSolutionRepository;
             this.userTaskTagsRepository = userTaskTagsRepository;
             this.userSolvedTasksRepository = userSolvedTasksRepository;
+            this.likeRepository = likeRepository;
         }
 
         public UserTaskController(ApplicationUserManager userManager)
@@ -54,6 +58,40 @@ namespace SocialNetwork.Controllers
             {
                 userManager = value;
             }
+        }
+
+        [HttpGet]
+        public ActionResult TaskStatistics(int? taskId)
+        {
+            if (taskId == null)
+            {
+                return null;
+            }
+            return PartialView("_TaskStatistics", GetTaskStatistics((int)taskId));
+        }
+
+        [HttpGet]
+        public PartialViewResult LikeValueChanged(bool likeValue, int taskId)
+        {
+            var userLike = (from like in likeRepository.GetAll()
+                            where like.UserTaskId == taskId
+                            where like.UserId == User.Identity.GetUserId()
+                            select like).FirstOrDefault();
+            if (userLike == null)
+            {
+                userLike = new LikeModel { UserId = User.Identity.GetUserId(), UserTaskId = taskId };
+                likeRepository.Add(userLike);
+            }
+            userLike.LikeValue = likeValue;
+            if (!likeValue)
+            {
+                likeRepository.Delete(userLike);
+            }
+            else
+            {
+                likeRepository.Update(userLike);
+            }
+            return PartialView("_TaskStatistics", GetTaskStatistics((int)taskId));
         }
 
         [HttpPost]
@@ -77,12 +115,8 @@ namespace SocialNetwork.Controllers
             var solution = solutions.Split(',');
             foreach (var s in solution)
             {
-                string answer = s;
-                if (s.StartsWith(" "))
-                {
-                    answer = s.Remove(0, 1);                    
-                }
-                if (taskSolutions.Contains(answer.ToUpper())) continue;
+                s.Trim();
+                if (taskSolutions.Contains(s.ToUpper())) continue;
                 userSolvedTasksRepository.Update(userTasksSolutions);
                 user.AttemptAmount += 1;
                 UserManager.Update(user);
@@ -101,6 +135,7 @@ namespace SocialNetwork.Controllers
         public ActionResult ViewAllTasks(string filterParam, string filterName, string sortParam, bool? sortOrder = false)
         {
             var tasks = userTaskRepository.GetAll();
+            tasks = Helpers.Helpers.TasksSort(tasks.ToList(), sortParam, sortOrder).ToList();
             var allTasks = tasks.Select(t => new UserTasksViewAllModel()
             {
                 Id = t.Id,
@@ -109,14 +144,11 @@ namespace SocialNetwork.Controllers
                 DateAdded = t.DateAdded,
                 UserName = UserManager.FindById(t.User.Id).UserName,
                 UserId = UserManager.FindById(t.User.Id).Id,
-                LikesAmount = t.Likes.Count(),
-                SolutionsAmount = t.SolvedTasks.Count,
                 Tags =
                     (from i in userTaskTagsRepository.GetAll()
                         where i.UserTaskId == t.Id
                         from j in tagRepository.GetAll()
                         where j.Id == i.TagId select j).ToList(),
-                CommentsAmount = t.Comments.Count,
                 Category = categoryRepository.GetById(t.CategoryId).CategoryName,
                 Content = Helpers.Helpers.StringConventor(t.UserTaskContent)
             }).ToList();
@@ -126,7 +158,7 @@ namespace SocialNetwork.Controllers
             ViewBag.Categories = from category in categoryRepository.GetAll()
                 orderby category.CategoryName
                 select category.CategoryName;
-            return View(Helpers.Helpers.TasksSort(TaskFilter(allTasks.ToList(), filterParam, filterName), sortParam, sortOrder));
+            return View(TaskFilter(allTasks.ToList(), filterParam, filterName));
         }
 
         [Authorize]
@@ -142,15 +174,15 @@ namespace SocialNetwork.Controllers
                 Id = task.Id,
                 UserTaskTitle = task.UserTaskTitle,
                 Category = categoryRepository.GetById(task.CategoryId).CategoryName,
-                CommentsAmount = task.Comments.Count,
                 Content = task.UserTaskContent,
                 DateAdded = task.DateAdded,
-                LikesAmount = task.Likes.Count,
-                SolutionsAmount = task.SolvedTasks.Count,
                 UserId = UserManager.FindById(task.UserId).Id,
                 UserName = UserManager.FindById(task.UserId).UserName,
                 UserImage = Helpers.Helpers.TransformImage(UserManager.FindById(task.UserId).UserPhotoUrl, 64),
                 UserTaskStatus = task.UserTaskStatus,
+                CommentsAmount = task.Comments.Count,
+                LikesAmount = task.Likes.Count(),
+                SolutionsAmount = task.SolvedTasks.Count,
                 Tags = (from i in userTaskTagsRepository.GetAll()
                     where i.UserTaskId == task.Id
                     from j in tagRepository.GetAll()
@@ -191,11 +223,11 @@ namespace SocialNetwork.Controllers
         [HttpPost]
         public JsonResult UploadImage(HttpPostedFileBase file)
         {
-            var imageUrl = Helpers.Helpers.UploadImage(file);
+            var image = Helpers.Helpers.UploadImage(file);
             var jsonResult = new JsonStringResult()
             {
-                url = String.Format("![]({0})", imageUrl),
-                param = file.FileName,
+                url = String.Format("[IMAGE]<img src=\"{0}\"/>[/IMAGE]", Helpers.Helpers.TransformImage(image.Uri.ToString(), 522, image.Width)),
+                param = image.PublicId,
             };
             return Json(jsonResult, JsonRequestBehavior.AllowGet);
         }
@@ -212,6 +244,7 @@ namespace SocialNetwork.Controllers
         {
             model.Content = Helpers.Helpers.CreateEquation(model.Content);
             model.Content = Helpers.Helpers.CreateVideo(model.Content);
+            model.Content = Helpers.Helpers.CreateImage(model.Content);
             var newTask = new UserTaskModel()
             {
                 UserTaskTitle = model.UserTaskTitle,
@@ -261,6 +294,24 @@ namespace SocialNetwork.Controllers
                     break;
             }
             return filterResult;
+        }
+
+        private TaskStatisticsViewModel GetTaskStatistics(int taskId)
+        {
+            var task = userTaskRepository.GetById(taskId);
+            var userLike = (from like in likeRepository.GetAll()
+                            where like.UserTaskId == taskId
+                            where like.UserId == User.Identity.GetUserId()
+                            select like).FirstOrDefault();
+            var taskStatistics = new TaskStatisticsViewModel()
+            {
+                CommentsAmount = task.Comments.Count,
+                LikesAmount = task.Likes.Count,
+                SolutionsAmount = task.SolvedTasks.Count,
+                IsLiked = userLike != null && userLike.LikeValue,
+                TaskId = taskId
+            };
+            return taskStatistics;
         }
         #endregion
     }

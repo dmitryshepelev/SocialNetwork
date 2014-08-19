@@ -33,3 +33,18 @@ function videoAdd(urlAction, urlVideo) {
         });
     });
 }
+
+function likes() {
+    $("input:checkbox").change(function () {
+        var likeValue = $(this).is(":checked");
+        var taskId = $(this).prev().val();
+        $.ajax({
+            url: "/UserTask/LikeValueChanged",
+            type: "GET",
+            data: "likeValue=" + likeValue + "&taskId=" + taskId
+        }).done(function(data) {
+            $("#taskStatistic-" + taskId).children().remove();
+            $("#taskStatistic-" + taskId).append(data);
+        });
+    });
+}

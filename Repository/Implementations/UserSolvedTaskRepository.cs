@@ -13,17 +13,10 @@ namespace SocialNetwork.Repository.Implementations
 
         public UserSolvedTaskModel GetUserSolvedTask(int taskId, string userId)
         {
-            try
-            {
-                return (from s in GetAll()
-                    where s.UserTaskId == taskId
-                    where s.UserId == userId
-                    select s).Single();
-            }
-            catch (InvalidOperationException)
-            {
-                return null;
-            }
+            return (from s in GetAll()
+                where s.UserTaskId == taskId
+                where s.UserId == userId
+                select s).FirstOrDefault();
         }
     }
 }

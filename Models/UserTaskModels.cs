@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Mvc;
 
 namespace SocialNetwork.Models
 {
@@ -33,10 +34,7 @@ namespace SocialNetwork.Models
         public DateTime DateAdded { get; set; }
         public string UserId { get; set; }
         public string UserName { get; set; }
-        public int LikesAmount { get; set; }
-        public int SolutionsAmount { get; set; }
         public List<TagModel> Tags { get; set; }
-        public int CommentsAmount { get; set; }
         public string Category { get; set; }
         public string Content { get; set; }
     }
@@ -59,11 +57,21 @@ namespace SocialNetwork.Models
         public bool IsSolved { get; set; }
     }
 
+    public class TaskStatisticsViewModel
+    {
+        public int LikesAmount { get; set; }
+        public int SolutionsAmount { get; set; }
+        public int CommentsAmount { get; set; }
+        public bool IsLiked { get; set; }
+        public int TaskId { get; set; }
+    }
+
     public class CreateTaskViewModel
     {
         public string UserTaskTitle { get; set; }
         public string Tags { get; set; }
         public string Category { get; set; }
+        [AllowHtml]
         public string Content { get; set; }
         public string Answers { get; set; }
     }
