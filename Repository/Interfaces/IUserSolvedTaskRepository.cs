@@ -5,6 +5,6 @@ namespace SocialNetwork.Repository.Interfaces
 {
     public interface IUserSolvedTaskRepository : IRepository<UserSolvedTaskModel>
     {
-        int GetUserSolvedTasksAmount(string id);
+        UserSolvedTaskModel GetUserSolvedTask(int taskId, string userId);
     }
 }

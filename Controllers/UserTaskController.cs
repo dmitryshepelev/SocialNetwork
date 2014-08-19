@@ -60,8 +60,21 @@ namespace SocialNetwork.Controllers
         public JsonResult CheckSolution(string solutions, int? taskId)
         {
             var taskSolutions = from s in taskSolutionRepository.GetAll() where s.UserTaskId == (int) taskId select s.Solution.ToUpper();
-            string[] solution = solutions.Split(',');
             var user = UserManager.FindById(User.Identity.GetUserId());
+            var userTasksSolutions = new UserSolvedTaskModel();
+            if (userSolvedTasksRepository.GetUserSolvedTask((int) taskId, user.Id) == null)
+            {
+                userTasksSolutions.UserId = user.Id;
+                userTasksSolutions.UserTaskId = (int) taskId;
+                userTasksSolutions.IsSolved = false;
+                userSolvedTasksRepository.Add(userTasksSolutions);
+            }
+            else
+            {
+                userTasksSolutions = userSolvedTasksRepository.GetUserSolvedTask((int)taskId, user.Id);
+            }
+            userTasksSolutions.AttemptAmount += 1;
+            var solution = solutions.Split(',');
             foreach (var s in solution)
             {
                 string answer = s;
@@ -70,20 +83,18 @@ namespace SocialNetwork.Controllers
                     answer = s.Remove(0, 1);                    
                 }
                 if (taskSolutions.Contains(answer.ToUpper())) continue;
+                userSolvedTasksRepository.Update(userTasksSolutions);
                 user.AttemptAmount += 1;
                 UserManager.Update(user);
                 return Json(false, JsonRequestBehavior.AllowGet);
             }
+            userTasksSolutions.IsSolved = true;
             user.AttemptAmount += 1;
             TimeSpan timeDifference = DateTime.Now - userTaskRepository.GetById((int) taskId).DateAdded;
-            var addRate = (((1/user.AttemptAmount)*0.8) + ((1/timeDifference.TotalMinutes)*0.2))*100;
+            var addRate = (((1.0 / userTasksSolutions.AttemptAmount) * 0.8) + ((1.0 / timeDifference.TotalHours) * 0.2)) * 100;
             user.UserRate += addRate;
             UserManager.Update(user);
-            userSolvedTasksRepository.Add(new UserSolvedTaskModel()
-            {
-                UserId = User.Identity.GetUserId(),
-                UserTaskId = (int)taskId
-            });
+            userSolvedTasksRepository.Update(userTasksSolutions);
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 
@@ -126,7 +137,7 @@ namespace SocialNetwork.Controllers
                 return HttpNotFound();
             }
             var task = userTaskRepository.GetById(id);
-            var taskToView = new UserTasksViewModel()
+            var taskToView = new UserTasksViewModel
             {
                 Id = task.Id,
                 UserTaskTitle = task.UserTaskTitle,
@@ -141,14 +152,12 @@ namespace SocialNetwork.Controllers
                 UserImage = Helpers.Helpers.TransformImage(UserManager.FindById(task.UserId).UserPhotoUrl, 64),
                 UserTaskStatus = task.UserTaskStatus,
                 Tags = (from i in userTaskTagsRepository.GetAll()
-                            where i.UserTaskId == task.Id
-                            from j in tagRepository.GetAll() where j.Id == i.TagId
-                            select j).ToList()
+                    where i.UserTaskId == task.Id
+                    from j in tagRepository.GetAll()
+                    where j.Id == i.TagId
+                    select j).ToList(),
+                IsSolved = userSolvedTasksRepository.GetUserSolvedTask(task.Id, User.Identity.GetUserId()) != null && userSolvedTasksRepository.GetUserSolvedTask(task.Id, User.Identity.GetUserId()).IsSolved
             };
-            taskToView.IsSolved = (from s in userSolvedTasksRepository.GetAll()
-                where s.UserTaskId == id
-                where s.UserId == User.Identity.GetUserId()
-                select s).Any();
             ViewBag.UserPhoto = Helpers.Helpers.TransformImage(UserManager.FindById(User.Identity.GetUserId()).UserPhotoUrl, 34);
             return View(taskToView);
         }

@@ -22,18 +22,18 @@
     }
 </style>
 
-<div align="center" style="margin: 35px 0 40px 0">
+<div id="header" align="center" style="margin: 35px 0 40px 0">
     <h2>Propose your f...ing solution</h2>
     <br />
     @if (Model.IsSolved)
     {
-        <div class="alert alert-dismissable alert-success" style="width: 264px">
+        <div class="alert alert-dismissable alert-success" style="width: 264px" align="center">
             You have already solved this task
         </div>
     }
     else if (Model.UserId == User.Identity.GetUserId())
     {
-        <div class="alert alert-dismissable alert-warning" style="width: 264px">
+        <div class="alert alert-dismissable alert-warning" style="width: 264px" align="center">
             You cannot solve your own task
         </div>
     }
@@ -42,7 +42,8 @@
         using (Ajax.BeginForm("CheckSolution", "UserTask", new AjaxOptions
         {
             Url = Url.Action("CheckSolution", "UserTask"),
-            HttpMethod = "POST"
+            HttpMethod = "POST",
+            OnSuccess = "checkResult"
         }))
         {
             <div id="checkSolution" class="input-group" style="width: 264px">
@@ -139,8 +140,17 @@
 </div>
 
 <script>
-    function addedCommentSuccess(data) {
+    function addedCommentSuccess() {
         $("#comment").val("");
+    }
+
+    function checkResult(data) {
+        if (!data) {
+            $("#checkSolution").addClass("has-error");
+        } else {
+            $("#checkSolution").remove();
+            $("#header").append('<div class="alert alert-dismissable alert-success" style="width: 264px" align="center">Your solution is right. Congratulations!</div>');
+        }
     }
 </script>
 

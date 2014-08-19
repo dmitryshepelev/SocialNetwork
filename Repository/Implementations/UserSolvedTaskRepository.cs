@@ -1,4 +1,6 @@
-﻿using SocialNetwork.Models;
+﻿using System;
+using System.Linq;
+using SocialNetwork.Models;
 using SocialNetwork.Repository.Interfaces;
 
 namespace SocialNetwork.Repository.Implementations
@@ -9,9 +11,19 @@ namespace SocialNetwork.Repository.Implementations
         {
         }
 
-        public int GetUserSolvedTasksAmount(string id)
+        public UserSolvedTaskModel GetUserSolvedTask(int taskId, string userId)
         {
-            return GetAll(x => x.User.Id == id).Count;
+            try
+            {
+                return (from s in GetAll()
+                    where s.UserTaskId == taskId
+                    where s.UserId == userId
+                    select s).Single();
+            }
+            catch (InvalidOperationException)
+            {
+                return null;
+            }
         }
     }
 }
