@@ -496,7 +496,6 @@
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\ViewAccount.cshtml" />
-    <Content Include="Views\Account\_UserTasksPartial.cshtml" />
     <Content Include="Views\Account\EditAccount.cshtml" />
     <Content Include="Views\Admin\AdminControlPanelUsers.cshtml" />
     <Content Include="Views\Admin\AdminControlPanelTasks.cshtml" />
@@ -511,6 +510,7 @@
     <Content Include="Views\Comment\_CommentViewPartial.cshtml" />
     <Content Include="Views\Account\DisplayEmail.cshtml" />
     <Content Include="Views\UserTask\_TaskStatistics.cshtml" />
+    <Content Include="Views\UserTask\_MyTasksPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Localization\" />

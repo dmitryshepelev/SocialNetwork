@@ -334,6 +334,7 @@ namespace SocialNetwork.Controllers
             var user = id == null ? UserManager.FindById(User.Identity.GetUserId()) : UserManager.FindById(id);
             var userAccount = new ViewAccountViewModel()
             {
+                UserId = user.Id,
                 UserName = user.UserName,
                 Email = user.Email,
                 UserPhotoUrl = Helpers.Helpers.TransformImage(user.UserPhotoUrl, 200),
@@ -343,7 +344,7 @@ namespace SocialNetwork.Controllers
                 UserRate = user.UserRate,
                 LockoutEnabled = user.LockoutEnabled,
                 LockoutDateEndUtc = user.LockoutEndDateUtc,
-                UserTasks = userTaskRepository.GetUserTasks(user.Id).OrderByDescending(x => x.DateAdded).ToList(),
+                //UserTasks = userTaskRepository.GetUserTasks(user.Id).OrderByDescending(x => x.DateAdded).ToList(),
                 UserSolvedTasks = (from i in userSolvedTaskRepository.GetAll() where i.User.Id == user.Id
                                    from j in userTaskRepository.GetAll() where j.Id == i.UserTask.Id select j).OrderBy(x => x.DateAdded).ToList(),
                 IsAdmin = UserManager.IsInRole(user.Id, "admin")

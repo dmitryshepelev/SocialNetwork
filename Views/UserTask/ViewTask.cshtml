@@ -20,13 +20,21 @@
         margin: 0 150px 0 150px;
         padding: 20px;
     }
+
+    .
 </style>
 
 <div id="header" align="center" style="margin: 35px 0 40px 0">
     <h2>Propose your f...ing solution</h2>
     <br />
     
-    @if (Model.IsSolved)
+    @if (Model.UserTaskStatus)
+    {
+        <div class="alert alert-dismissable alert-info" style="width: 264px" align="center">
+            You can't solve blocked task
+        </div>
+    }
+    else if (Model.IsSolved)
     {
         <div class="alert alert-dismissable alert-success" style="width: 264px" align="center">
             You have already solved this task
@@ -113,7 +121,7 @@
                     <input id="taskId" name="taskId" type="hidden" value="@Model.Id" />
                     <input class="form-control" id="comment" name="comment" placeholder="Write a comment..." type="text" />
                     <span class="input-group-btn">
-                        <input id="addComment" class="btn btn-primary" type="submit" value="Comment" />
+                        <input id="addComment" class="btn btn-primary" type="submit" value="Comment" disabled="disabled"/>
                     </span>
                 </div>
             }

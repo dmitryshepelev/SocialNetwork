@@ -1,0 +1,37 @@
+﻿@using System.Globalization
+@using SocialNetwork.Resources
+@model List<SocialNetwork.Models.MyTaskViewModel>
+
+<h4>@Resource.UserMyTasks</h4>
+@if (Model == null)
+{
+    <p class="text-muted">@Resource.UserEmptyTaskList</p>
+}
+else
+{
+    foreach (var task in Model)
+    {
+        <div class="row well well-sm" style="margin: 0 0 10px 0">
+            <div class="col-md-6">
+                @Html.ActionLink(task.TaskTitle, "ViewTask", "UserTask", new { id = task.TaskId }, null)
+            </div>
+            <div class="col-md-2">
+                @if (task.TaskStatus)
+                {
+                    <span class="label label-danger">Blocked task</span>
+                }
+            </div>
+            <div class="col-md-2">
+                @task.DateAdded.ToString("d", CultureInfo.CreateSpecificCulture("en-US"))
+            </div>
+            <div class="col-md-2">
+                <a href="~/UserTask/ChangeTask?id=@task.TaskId"><img src="~/Content/images/edit-icon-16.png" /></a>
+                <img src="~/Content/images/block-icon-16.png" data-taskId=@task.TaskId />
+            </div>
+        </div>
+    }
+}
+
+<script>
+    block();
+</script>

@@ -48,3 +48,18 @@ function likes() {
         });
     });
 }
+
+function block() {
+    $("img").click(function() {
+        var taskId = $(this).attr("data-TaskId");
+        console.log(taskId);
+        $.ajax({
+            url: "/UserTask/BlockTask",
+            type: "GET",
+            data: "taskId=" + taskId
+        }).done(function(data) {
+            $("#myTasks").children().remove();
+            $("#myTasks").append(data);
+        });
+    });
+}

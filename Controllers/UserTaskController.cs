@@ -60,9 +60,31 @@ namespace SocialNetwork.Controllers
             }
         }
 
-        public PartialViewResult MyTasks(string userId)
+        public ActionResult MyTasks(string userId)
         {
-            
+            return PartialView("_MyTasksPartial", GetMyTasks(userId));
+        }
+
+        [HttpGet]
+        public ActionResult BlockTask(int? taskId, string userId)
+        {
+            var task = userTaskRepository.GetById(taskId);
+            task.UserTaskStatus = !task.UserTaskStatus;
+            userTaskRepository.Update(task);
+            return PartialView("_MyTasksPartial", GetMyTasks(task.UserId));
+        }
+
+        public List<MyTaskViewModel> GetMyTasks(string userId)
+        {
+            var tasks = from t in userTaskRepository.GetAll() where t.UserId == userId select t;
+            var myTasks = tasks.Select(t => new MyTaskViewModel
+            {
+                TaskId = t.Id,
+                TaskTitle = t.UserTaskTitle,
+                TaskStatus = t.UserTaskStatus,
+                DateAdded = t.DateAdded
+            }).ToList();
+            return myTasks;
         }
 
         public PartialViewResult ViewTags(int? taskId)

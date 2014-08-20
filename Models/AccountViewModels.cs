@@ -38,9 +38,16 @@ namespace SocialNetwork.Models
         public string UserPhotoUrl { get; set; }
         public bool LockoutEnabled { get; set; }
         public DateTime? LockoutDateEndUtc { get; set; }
-        public List<UserTaskModel> UserTasks { get; set; }
         public List<UserTaskModel> UserSolvedTasks { get; set; }
         public bool IsAdmin { get; set; }
+    }
+
+    public class MyTaskViewModel
+    {
+        public int TaskId { get; set; }
+        public string TaskTitle { get; set; }
+        public DateTime DateAdded { get; set; }
+        public bool TaskStatus { get; set; }
     }
 
     public class ChangePasswordViewModel

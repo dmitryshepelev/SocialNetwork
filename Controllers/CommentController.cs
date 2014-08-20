@@ -84,7 +84,7 @@ namespace SocialNetwork.Controllers
                                 DateAdded = taskComment.DateAdded,
                                 UserId = taskComment.UserId,
                                 UserName = user.UserName,
-                                UserImageUrl = Helpers.Helpers.TransformImage(user.UserPhotoUrl, 38)
+                                UserImageUrl = Helpers.Helpers.TransformImage(user.UserPhotoUrl, 38),
                             }).Skip(startIndex).Take(blockSize);
             return comments.ToList();
         }
