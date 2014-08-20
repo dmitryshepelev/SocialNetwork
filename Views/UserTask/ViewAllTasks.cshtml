@@ -48,12 +48,7 @@
                             </div>
                         </h3>
                         <div class="pull-left">
-                            @foreach (var tag in Model[i].Tags)
-                            {
-                                <span class="label label-info tag-label">
-                                    @Html.ActionLink(tag.TagName, "ViewAllTasks", "UserTask", new { filterParam = "Tag", filterName = tag.TagName }, new { @class = "tag-link" })
-                                </span>
-                            }
+                            @Html.Action("ViewTags", "UserTask", new { taskId = Model[i].Id })
                         </div>
                         <div class="pull-right">
                             by @Html.ActionLink(Model[i].UserName, "ViewAccount", "Account", new { id = Model[i].UserId }, null)
@@ -78,4 +73,3 @@
         </div>
     }
 </div>
-

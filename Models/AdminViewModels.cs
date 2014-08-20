@@ -11,7 +11,7 @@ namespace SocialNetwork.Models
         public int TaskAmount { get; set; }
         public int AttemptAmount { get; set; }
         public int SolutionAmount { get; set; }
-        public double UserRate { get; set; }
+        public string UserRate { get; set; }
         public bool Delete { get; set; }
         public string LockoutEndDateUtc { get; set; }
         public bool IsAdmin { get; set; }

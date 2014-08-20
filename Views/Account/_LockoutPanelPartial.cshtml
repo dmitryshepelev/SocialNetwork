@@ -1,6 +1,4 @@
-﻿@using System.Globalization
-
-@if (Model.LockoutEnabled)
+﻿@if (Model.LockoutEnabled)
 {
     TimeSpan? ts = new TimeSpan();
     ts = Model.LockoutDateEndUtc - DateTime.Now;

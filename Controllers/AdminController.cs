@@ -64,7 +64,7 @@ namespace SocialNetwork.Controllers
                     TaskAmount = applicationUser.UserTasks.Count,
                     AttemptAmount = applicationUser.AttemptAmount,
                     SolutionAmount = applicationUser.UserSolvedTask.Count,
-                    UserRate = applicationUser.UserRate,
+                    UserRate = String.Format("{0:0.0#}", applicationUser.UserRate),
                     Delete = false,
                     IsAdmin = UserManager.IsInRole(applicationUser.Id, "admin"),
                     LockoutEndDateUtc = applicationUser.LockoutEndDateUtc != null ? applicationUser.LockoutEndDateUtc.Value.Date.ToString("d", CultureInfo.CreateSpecificCulture("en-Us")) : ""

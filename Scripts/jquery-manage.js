@@ -35,14 +35,14 @@ function videoAdd(urlAction, urlVideo) {
 }
 
 function likes() {
-    $("input:checkbox").change(function () {
-        var likeValue = $(this).is(":checked");
-        var taskId = $(this).prev().val();
+    $("img").click(function () {
+        var likeValue = !$(this).prev().prev().is(":checked");
+        var taskId = $(this).prev().prev().prev().val();
         $.ajax({
             url: "/UserTask/LikeValueChanged",
             type: "GET",
             data: "likeValue=" + likeValue + "&taskId=" + taskId
-        }).done(function(data) {
+        }).done(function (data) {
             $("#taskStatistic-" + taskId).children().remove();
             $("#taskStatistic-" + taskId).append(data);
         });

@@ -1,9 +1,28 @@
 ﻿@model SocialNetwork.Models.TaskStatisticsViewModel
 
+<style>
+    .checkbox-hidden {
+        display: none;
+    }
+
+    .like-icon {
+        margin-top: 24px;
+        cursor: pointer;
+    }
+</style>
+
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-3 task-stat" align="center">
         @Html.HiddenFor(x => x.TaskId, new { id = "taskId" + Model.TaskId })
-        @Html.CheckBoxFor(x => x.IsLiked, new { id = "isLiked" + Model.TaskId })
+        @Html.CheckBoxFor(x => x.IsLiked, new { id = "isLiked" + Model.TaskId, @class = "checkbox-hidden" })
+        @if (Model.IsLiked)
+        {
+            <img class="task-stat like-icon" src="~/Content/images/like-checked-64.png" width="36" alt="like" />
+        }
+        else
+        {
+            <img class="task-stat like-icon" src="~/Content/images/like-default-64.png" width="36" alt="like" />
+        }
     </div>
     <div class="col-md-3 task-stat" align="center">
         <h3>@Html.DisplayFor(x => x.LikesAmount)</h3>

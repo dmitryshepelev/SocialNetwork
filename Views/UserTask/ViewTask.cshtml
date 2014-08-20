@@ -25,6 +25,7 @@
 <div id="header" align="center" style="margin: 35px 0 40px 0">
     <h2>Propose your f...ing solution</h2>
     <br />
+    
     @if (Model.IsSolved)
     {
         <div class="alert alert-dismissable alert-success" style="width: 264px" align="center">
@@ -62,7 +63,7 @@
             <div>
                 <h3 style="margin: 0 0 20px 0">@Model.UserTaskTitle</h3>
             </div>
-            @Html.Partial("_ViewTags")
+            @Html.Action("ViewTags", "UserTask", new { taskId = Model.Id })
         </div>
         <div class="col-lg-4">
             <div class="pull-right" style="padding-left: 10px">
@@ -87,20 +88,7 @@
         <div class="col-lg-4">
             <div class="" align="center">
                 <h3 style="margin: 10px 0 0 0">@Html.ActionLink(Model.Category, "ViewAllTasks", "UserTask", new { filterParam = "Category", filterName = Model.Category }, null)</h3>
-                <div class="row">
-                    <div class="col-md-4 task-stat" align="center">
-                        <h3>@Html.DisplayFor(x => Model.LikesAmount)</h3>
-                        <h6>Likes</h6>
-                    </div>
-                    <div class="col-md-4 task-stat" align="center">
-                        <h3>@Html.DisplayFor(x => Model.SolutionsAmount)</h3>
-                        <h6>Solutions</h6>
-                    </div>
-                    <div class="col-md-4 task-stat" align="center">
-                        <h3>@Html.DisplayFor(x => Model.CommentsAmount)</h3>
-                        <h6>Comments</h6>
-                    </div>
-                </div>
+                <div id="taskStatistic-@Model.Id">@Html.Action("TaskStatistics", "UserTask", new { taskId = Model.Id })</div>
             </div>
         </div>
     </div>

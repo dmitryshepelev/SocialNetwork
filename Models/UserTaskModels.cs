@@ -34,7 +34,6 @@ namespace SocialNetwork.Models
         public DateTime DateAdded { get; set; }
         public string UserId { get; set; }
         public string UserName { get; set; }
-        public List<TagModel> Tags { get; set; }
         public string Category { get; set; }
         public string Content { get; set; }
     }
@@ -51,10 +50,15 @@ namespace SocialNetwork.Models
         public int LikesAmount { get; set; }
         public int SolutionsAmount { get; set; }
         public int CommentsAmount { get; set; }
-        public List<TagModel> Tags { get; set; }
         public string Category { get; set; }
         public string Content { get; set; }
         public bool IsSolved { get; set; }
+    }
+
+    public class ViewTagViewModel
+    {
+        public bool UserTaskStatus { get; set; }
+        public List<string> Tags { get; set; }
     }
 
     public class TaskStatisticsViewModel

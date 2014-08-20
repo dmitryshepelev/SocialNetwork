@@ -356,6 +356,9 @@
     <Content Include="Content\images\flag-eng-32.png" />
     <Content Include="Content\images\flag-rus-32.png" />
     <Content Include="Content\images\github-logo.png" />
+    <Content Include="Content\images\like-checked-64.png" />
+    <Content Include="Content\images\like-default-64.png" />
+    <Content Include="Content\images\like-mousover-64.png" />
     <Content Include="Content\images\theme-dark-col-thumb.png" />
     <Content Include="Content\images\theme-lignt-col-thumb.png" />
     <Content Include="Content\themes\base\images\animated-overlay.gif" />

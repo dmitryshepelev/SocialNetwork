@@ -1,8 +1,14 @@
-﻿<div>
+﻿@model SocialNetwork.Models.ViewTagViewModel
+
+<div>
+    @if (Model.UserTaskStatus)
+    {
+        <span class="label label-danger">Blocked task</span>
+    }
     @foreach (var tag in Model.Tags)
     {
         <span class="label label-info tag-label">
-            @LinkExtensions.ActionLink(Html, tag.TagName, "ViewAllTasks", "UserTask", new { filterParam = "Tag", filterName = tag.TagName }, new { @class = "tag-link" })
+            @Html.ActionLink(tag, "ViewAllTasks", "UserTask", new { filterParam = "Tag", filterName = tag }, new { @class = "tag-link" })
         </span>
     }
 </div>

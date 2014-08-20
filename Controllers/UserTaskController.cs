@@ -60,6 +60,23 @@ namespace SocialNetwork.Controllers
             }
         }
 
+        public PartialViewResult MyTasks(string userId)
+        {
+            
+        }
+
+        public PartialViewResult ViewTags(int? taskId)
+        {
+            var task = userTaskRepository.GetById(taskId);
+            var tags = new ViewTagViewModel()
+            {
+                UserTaskStatus = task.UserTaskStatus,
+                Tags = (from i in userTaskTagsRepository.GetAll() where i.UserTaskId == task.Id
+                        from j in tagRepository.GetAll() where j.Id == i.TagId select j.TagName).ToList()
+            };
+            return PartialView("_ViewTags", tags);
+        }
+
         [HttpGet]
         public ActionResult TaskStatistics(int? taskId)
         {
@@ -135,7 +152,7 @@ namespace SocialNetwork.Controllers
         public ActionResult ViewAllTasks(string filterParam, string filterName, string sortParam, bool? sortOrder = false)
         {
             var tasks = userTaskRepository.GetAll();
-            tasks = Helpers.Helpers.TasksSort(tasks.ToList(), sortParam, sortOrder).ToList();
+            tasks = Helpers.Helpers.TasksSort((TaskFilter(tasks.ToList(), filterParam, filterName)), sortParam, sortOrder).ToList();
             var allTasks = tasks.Select(t => new UserTasksViewAllModel()
             {
                 Id = t.Id,
@@ -144,11 +161,6 @@ namespace SocialNetwork.Controllers
                 DateAdded = t.DateAdded,
                 UserName = UserManager.FindById(t.User.Id).UserName,
                 UserId = UserManager.FindById(t.User.Id).Id,
-                Tags =
-                    (from i in userTaskTagsRepository.GetAll()
-                        where i.UserTaskId == t.Id
-                        from j in tagRepository.GetAll()
-                        where j.Id == i.TagId select j).ToList(),
                 Category = categoryRepository.GetById(t.CategoryId).CategoryName,
                 Content = Helpers.Helpers.StringConventor(t.UserTaskContent)
             }).ToList();
@@ -158,7 +170,7 @@ namespace SocialNetwork.Controllers
             ViewBag.Categories = from category in categoryRepository.GetAll()
                 orderby category.CategoryName
                 select category.CategoryName;
-            return View(TaskFilter(allTasks.ToList(), filterParam, filterName));
+            return View(allTasks);
         }
 
         [Authorize]
@@ -183,11 +195,6 @@ namespace SocialNetwork.Controllers
                 CommentsAmount = task.Comments.Count,
                 LikesAmount = task.Likes.Count(),
                 SolutionsAmount = task.SolvedTasks.Count,
-                Tags = (from i in userTaskTagsRepository.GetAll()
-                    where i.UserTaskId == task.Id
-                    from j in tagRepository.GetAll()
-                    where j.Id == i.TagId
-                    select j).ToList(),
                 IsSolved = userSolvedTasksRepository.GetUserSolvedTask(task.Id, User.Identity.GetUserId()) != null && userSolvedTasksRepository.GetUserSolvedTask(task.Id, User.Identity.GetUserId()).IsSolved
             };
             ViewBag.UserPhoto = Helpers.Helpers.TransformImage(UserManager.FindById(User.Identity.GetUserId()).UserPhotoUrl, 34);
@@ -278,16 +285,19 @@ namespace SocialNetwork.Controllers
         }
 
         #region Helpers
-        public List<UserTasksViewAllModel> TaskFilter(List<UserTasksViewAllModel> tasks, string filterParam, string filterName)
+        public List<UserTaskModel> TaskFilter(List<UserTaskModel> tasks, string filterParam, string filterName)
         {
-            List<UserTasksViewAllModel> filterResult = null;
+            List<UserTaskModel> filterResult = null;
             switch (filterParam)
             {
                 case "Tag":
-                    filterResult = (from task in tasks from tag in task.Tags where tag.TagName == filterName select task).ToList();
+                    var tag = (from t in tagRepository.GetAll() where t.TagName == filterName select t).SingleOrDefault();
+                    var taskTag = (from t in userTaskTagsRepository.GetAll() where t.TagId == tag.Id select t);
+                    filterResult = (from task in tasks from t in taskTag
+                                    where task.Id == t.UserTaskId select task).ToList();
                     break;
                 case "Category":
-                    filterResult = (from task in tasks where task.Category == filterName select task).ToList();
+                    filterResult = (from task in tasks where task.Category.CategoryName == filterName select task).ToList();
                     break;
                 default:
                     filterResult = tasks;
