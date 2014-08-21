@@ -387,7 +387,6 @@ namespace SocialNetwork.Controllers
                 }
                 userTaskTagsRepository.Add(new UserTaskTagModel() { TagId = tag.Id, UserTaskId = task.Id });
             }
-
             var taskSolutions = from s in taskSolutionRepository.GetAll() where s.UserTaskId == task.Id select s;
             foreach (var solution in taskSolutions)
             {

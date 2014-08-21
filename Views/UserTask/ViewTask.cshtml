@@ -21,8 +21,6 @@
         margin: 0 150px 0 150px;
         padding: 20px;
     }
-
-    .
 </style>
 
 <div id="header" align="center" style="margin: 35px 0 40px 0">
@@ -162,7 +160,6 @@
             $("#addComment").attr("disabled", true);
         }
     });
-
     $("#comment").maxlength({
         alwaysShow: true,
         threshold: 10,
@@ -173,7 +170,6 @@
         postText: ' chars remaining.',
         validate: true
     });
-
     $(window).scroll(function () {
         if ($(window).scrollTop() == $(document).height() - $(window).height() && !noMoreData && !inProgress) {
             inProgress = true;
