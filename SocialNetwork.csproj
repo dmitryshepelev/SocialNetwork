@@ -67,6 +67,10 @@
     <Reference Include="Jurassic">
       <HintPath>..\packages\CoffeeSharp.0.5\lib\Jurassic.dll</HintPath>
     </Reference>
+    <Reference Include="Lucene.Net, Version=3.0.3.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Bin\Lucene.Net.dll</HintPath>
+    </Reference>
     <Reference Include="MarkdownDeep">
       <HintPath>..\packages\MarkdownDeep.NET.1.4\lib\.NetFramework 3.5\MarkdownDeep.dll</HintPath>
     </Reference>
@@ -211,6 +215,7 @@
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocalizationController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\StyleController.cs" />
     <Compile Include="Controllers\UserTaskController.cs" />
     <Compile Include="Filters\CultureAttribute.cs" />
@@ -219,6 +224,7 @@
     </Compile>
     <Compile Include="Helpers\Helpers.cs" />
     <Compile Include="Helpers\MarkdownHelper.cs" />
+    <Compile Include="Lucene\LuceneSearch.cs" />
     <Compile Include="Migrations\201408011409107_InitialCreate.cs" />
     <Compile Include="Migrations\201408011409107_InitialCreate.Designer.cs">
       <DependentUpon>201408011409107_InitialCreate.cs</DependentUpon>
@@ -306,6 +312,7 @@
     <Compile Include="Models\CommentModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LikeModels.cs" />
+    <Compile Include="Models\SearchResultModels.cs" />
     <Compile Include="Models\TaskSolutionModels.cs" />
     <Compile Include="Models\TagModels.cs" />
     <Compile Include="Models\UserSolvedTaskModels.cs" />
@@ -514,6 +521,7 @@
     <Content Include="Views\UserTask\_MySolvedTaskPartial.cshtml" />
     <Content Include="Views\UserTask\EditTask.cshtml" />
     <Content Include="Views\Shared\_SearchPartial.cshtml" />
+    <Content Include="Views\Search\SearchResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Localization\" />
