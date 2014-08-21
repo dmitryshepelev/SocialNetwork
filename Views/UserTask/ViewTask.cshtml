@@ -118,10 +118,10 @@
             }))
             {
                 <div class="input-group">
-                    <input id="taskId" name="taskId" type="hidden" value="@Model.Id" />
+                    <input id="taskId" name="taskId" data-task-status=@Model.UserTaskStatus type="hidden" value="@Model.Id" />
                     <input class="form-control" id="comment" name="comment" placeholder="Write a comment..." type="text" />
                     <span class="input-group-btn">
-                        <input id="addComment" class="btn btn-primary" type="submit" value="Comment" disabled="disabled"/>
+                        <input id="addComment" class="btn btn-primary" type="submit" value="Comment" />
                     </span>
                 </div>
             }
@@ -154,6 +154,13 @@
     var blockNumber = 2;
     var noMoreData = false;
     var inProgress = false;
+
+    $(function() {
+        if ($("#taskId").attr("data-task-status") === "True") {
+            $("#comment").attr("disabled", true);
+            $("#addComment").attr("disabled", true);
+        }
+    });
 
     $(window).scroll(function () {
         if ($(window).scrollTop() == $(document).height() - $(window).height() && !noMoreData && !inProgress) {

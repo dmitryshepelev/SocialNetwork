@@ -70,24 +70,7 @@
         <div id="myTasks">@Html.Action("MyTasks", "UserTask", new { userId = Model.UserId })</div>
     </div>
     <div class="col-md-6">
-        <h4>@Resource.UserMySolutions</h4>
-        @if (!Model.UserSolvedTasks.Any())
-        {
-            <p class="text-muted">@Resource.UserEmplySolutionList</p>
-        }
-        else
-        {
-            <table class="table table-striped table-hover">
-                <tbody>
-                    @foreach (UserTaskModel userTask in Model.UserSolvedTasks)
-                    {
-                        <tr>
-                            <td>@userTask.UserTaskTitle</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        }
+        @Html.Action("MySolvedTasks", "UserTask", new { userId = Model.UserId })
     </div>
 </div>
 @section Scripts {

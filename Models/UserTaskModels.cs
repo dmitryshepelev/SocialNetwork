@@ -79,4 +79,9 @@ namespace SocialNetwork.Models
         public string Content { get; set; }
         public string Answers { get; set; }
     }
+
+    public class EditTaskViewModel : CreateTaskViewModel
+    {
+        public int TaskId { get; set; }
+    }
 }

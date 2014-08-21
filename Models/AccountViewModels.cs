@@ -42,6 +42,13 @@ namespace SocialNetwork.Models
         public bool IsAdmin { get; set; }
     }
 
+    public class MySolvedTaskViewModel
+    {
+        public int TaskId { get; set; }
+        public string TaskTitle { get; set; }
+        public int AttemptAmount { get; set; }
+    }
+
     public class MyTaskViewModel
     {
         public int TaskId { get; set; }

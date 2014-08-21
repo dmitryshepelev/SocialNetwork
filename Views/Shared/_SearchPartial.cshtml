@@ -1,0 +1,8 @@
+﻿@{
+    ViewBag.Title = "_SearchPartial";
+}
+
+@using (Html.BeginForm("SearchResult", "Search", FormMethod.Post, null))
+{
+    <input type="text" class="form-control col-lg-8" placeholder=@SocialNetwork.Resources.Resource.Search name="searchingString">
+}

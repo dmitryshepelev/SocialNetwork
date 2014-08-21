@@ -1,4 +1,5 @@
 ﻿@using System.Globalization
+@using Microsoft.AspNet.Identity
 @using SocialNetwork.Resources
 @model List<SocialNetwork.Models.MyTaskViewModel>
 
@@ -24,10 +25,13 @@ else
             <div class="col-md-2">
                 @task.DateAdded.ToString("d", CultureInfo.CreateSpecificCulture("en-US"))
             </div>
-            <div class="col-md-2">
-                <a href="~/UserTask/ChangeTask?id=@task.TaskId"><img src="~/Content/images/edit-icon-16.png" /></a>
-                <img src="~/Content/images/block-icon-16.png" data-taskId=@task.TaskId />
-            </div>
+            @if (User.Identity.GetUserId() == ViewBag.UserId)
+            {
+                <div class="col-md-2">
+                    <a href="~/UserTask/EditTask?taskId=@task.TaskId"><img src="~/Content/images/edit-icon-16.png" /></a>
+                    <img src="~/Content/images/block-icon-16.png" data-taskid=@task.TaskId />
+                </div>
+            }
         </div>
     }
 }

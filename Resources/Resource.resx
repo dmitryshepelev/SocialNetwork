@@ -117,11 +117,38 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="About" xml:space="preserve">
+    <value>Немного о</value>
+  </data>
+  <data name="AccountIsBlocked" xml:space="preserve">
+    <value>Аккаунт заблокирован</value>
+  </data>
+  <data name="ApplicationName" xml:space="preserve">
+    <value>Курсовой проект</value>
+  </data>
   <data name="CategoryName" xml:space="preserve">
     <value>Категория</value>
   </data>
   <data name="CommentContent" xml:space="preserve">
     <value>Комментарий</value>
+  </data>
+  <data name="ConfirmAccount" xml:space="preserve">
+    <value>Подтвердите вашу учетную запись</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Контакты</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="ErrorHasOccurred" xml:space="preserve">
+    <value>Произошла ошибка</value>
+  </data>
+  <data name="ErrorWhileProcessing" xml:space="preserve">
+    <value>Произошла ошибка при обработке вашего запроса.</value>
+  </data>
+  <data name="ExternalLoginWasRemoved" xml:space="preserve">
+    <value>Внешний логин был удален</value>
   </data>
   <data name="FooterThemeChooser" xml:space="preserve">
     <value>Сменить тему</value>
@@ -132,6 +159,9 @@
   <data name="FooterThemeLight" xml:space="preserve">
     <value>Flatti (светлая)</value>
   </data>
+  <data name="InvalidNameOrPassword" xml:space="preserve">
+    <value>Неправильно введено имя или пароль</value>
+  </data>
   <data name="NavBarLogin" xml:space="preserve">
     <value>Войти</value>
   </data>
@@ -141,11 +171,44 @@
   <data name="NavBarRegister" xml:space="preserve">
     <value>Регистрация</value>
   </data>
+  <data name="NotExistOrNotConfirmed" xml:space="preserve">
+    <value>Пользователь еще не существует или не подтвержден</value>
+  </data>
+  <data name="NotFound" xml:space="preserve">
+    <value>Ваш запрос не дал результатов</value>
+  </data>
+  <data name="NoUserFound" xml:space="preserve">
+    <value>Пользователь не найден</value>
+  </data>
+  <data name="PasswordChanged" xml:space="preserve">
+    <value>Ваш пароль был изменен</value>
+  </data>
+  <data name="PasswordSet" xml:space="preserve">
+    <value>Ваш пароль был установлен</value>
+  </data>
+  <data name="ProfileHasBeenUpdated" xml:space="preserve">
+    <value>Профиль успешно обновлен</value>
+  </data>
+  <data name="ProposeSolution" xml:space="preserve">
+    <value>Предложите ваше решение</value>
+  </data>
+  <data name="ResetPassword" xml:space="preserve">
+    <value>Сброс пароля</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Поиск</value>
+  </data>
+  <data name="SearchResult" xml:space="preserve">
+    <value>Найденные страницы</value>
+  </data>
   <data name="Solution" xml:space="preserve">
     <value>Решение</value>
   </data>
   <data name="TagsName" xml:space="preserve">
     <value>Теги</value>
+  </data>
+  <data name="Tasks" xml:space="preserve">
+    <value>Задачи</value>
   </data>
   <data name="UserAttemptAmount" xml:space="preserve">
     <value>Попытки решений</value>
@@ -179,6 +242,9 @@
   </data>
   <data name="UserRate" xml:space="preserve">
     <value>Рейтинг</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Пользователи</value>
   </data>
   <data name="UserSolutionAmount" xml:space="preserve">
     <value>Решенные задачи</value>

@@ -117,11 +117,38 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="About" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="AccountIsBlocked" xml:space="preserve">
+    <value>Account is blocked.</value>
+  </data>
+  <data name="ApplicationName" xml:space="preserve">
+    <value>Course project</value>
+  </data>
   <data name="CategoryName" xml:space="preserve">
     <value>Category</value>
   </data>
   <data name="CommentContent" xml:space="preserve">
     <value>Comments</value>
+  </data>
+  <data name="ConfirmAccount" xml:space="preserve">
+    <value>Confirm your account</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="ErrorHasOccurred" xml:space="preserve">
+    <value>An error has occurred</value>
+  </data>
+  <data name="ErrorWhileProcessing" xml:space="preserve">
+    <value>An error occurred while processing your request.</value>
+  </data>
+  <data name="ExternalLoginWasRemoved" xml:space="preserve">
+    <value>The external login was removed</value>
   </data>
   <data name="FooterThemeChooser" xml:space="preserve">
     <value>Change theme</value>
@@ -132,6 +159,9 @@
   <data name="FooterThemeLight" xml:space="preserve">
     <value>Flatti (light)</value>
   </data>
+  <data name="InvalidNameOrPassword" xml:space="preserve">
+    <value>Invalid username or password.</value>
+  </data>
   <data name="NavBarLogin" xml:space="preserve">
     <value>Log in</value>
   </data>
@@ -141,11 +171,44 @@
   <data name="NavBarRegister" xml:space="preserve">
     <value>Register</value>
   </data>
+  <data name="NotExistOrNotConfirmed" xml:space="preserve">
+    <value>The user either does not exist or is not confirmed.</value>
+  </data>
+  <data name="NotFound" xml:space="preserve">
+    <value>Your search returned no matches</value>
+  </data>
+  <data name="NoUserFound" xml:space="preserve">
+    <value>No user found</value>
+  </data>
+  <data name="PasswordChanged" xml:space="preserve">
+    <value>Your password has been changed</value>
+  </data>
+  <data name="PasswordSet" xml:space="preserve">
+    <value>Your password has been set</value>
+  </data>
+  <data name="ProfileHasBeenUpdated" xml:space="preserve">
+    <value>Your profile has been updated</value>
+  </data>
+  <data name="ProposeSolution" xml:space="preserve">
+    <value>Propose your solution</value>
+  </data>
+  <data name="ResetPassword" xml:space="preserve">
+    <value>Reset Password</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="SearchResult" xml:space="preserve">
+    <value>Found pages</value>
+  </data>
   <data name="Solution" xml:space="preserve">
     <value>Solution</value>
   </data>
   <data name="TagsName" xml:space="preserve">
     <value>Tags</value>
+  </data>
+  <data name="Tasks" xml:space="preserve">
+    <value>Tasks</value>
   </data>
   <data name="UserAttemptAmount" xml:space="preserve">
     <value>Solutions attempts</value>
@@ -179,6 +242,9 @@
   </data>
   <data name="UserRate" xml:space="preserve">
     <value>Rating</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Users</value>
   </data>
   <data name="UserSolutionAmount" xml:space="preserve">
     <value>Solved tasks</value>
