@@ -313,6 +313,15 @@ namespace SocialNetwork.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Найденные пользователи.
+        /// </summary>
+        public static string SearchResultUsers {
+            get {
+                return ResourceManager.GetString("SearchResultUsers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Решение.
         /// </summary>
         public static string Solution {

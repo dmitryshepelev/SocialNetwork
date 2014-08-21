@@ -261,4 +261,7 @@
   <data name="UserTaskTitle" xml:space="preserve">
     <value>Название</value>
   </data>
+  <data name="SearchResultUsers" xml:space="preserve">
+    <value>Найденные пользователи</value>
+  </data>
 </root>

@@ -26,17 +26,16 @@ namespace SocialNetwork.Controllers
                 return RedirectToAction("ViewAllTasks", "UserTask");
             }
             var searchUsingLucene = new LuceneSearch();
-            searchUsingLucene.BuildIndex();
             var foundIds = searchUsingLucene.SearchResult(searchingString);
             var searchModel = new SearchResultModels();
-            foreach (var IdFoundElement in foundIds["Tasks"])
+            foreach (var IdFoundElement in foundIds)
             {
                 searchModel.Tasks.Add(ac.UserTasks.Find(IdFoundElement));
             }
-            foreach (var IdFoundElement in foundIds["User"])
-            {
-                searchModel.Users.Add(ac.UserTasks.Find(IdFoundElement).User);
-            }
+            //foreach (var IdFoundElement in foundIds["User"])
+            //{
+            //    searchModel.Users.Add(ac.UserTasks.Find(IdFoundElement).User);
+            //}
             return View(searchModel);
         }
     }

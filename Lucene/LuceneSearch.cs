@@ -11,6 +11,8 @@ using Lucene.Net.Index;
 using Lucene.Net.QueryParsers;
 using Lucene.Net.Search;
 using Lucene.Net.Store;
+using Microsoft.AspNet.Identity;
+using SocialNetwork.Controllers;
 using SocialNetwork.Models;
 
 namespace SocialNetwork
@@ -20,6 +22,7 @@ namespace SocialNetwork
         public LuceneSearch()
         {
             BuildIndex();
+            BuildIndex();
         }
 
         public static string path = Path.Combine(System.Web.HttpContext.Current.Request.PhysicalApplicationPath, "LuceneIndex");
@@ -27,7 +30,6 @@ namespace SocialNetwork
         public Document GetDocument(UserTaskModel userTask)
         {
             var document = new Document();
-            document.Add(new Field("User", userTask.User.UserName, Field.Store.NO, Field.Index.ANALYZED));
             document.Add(new Field("Title", userTask.UserTaskTitle, Field.Store.NO, Field.Index.ANALYZED));
             document.Add(new Field("Content", userTask.UserTaskContent, Field.Store.NO, Field.Index.ANALYZED));
             var array = String.Join(" ", userTask.Comments.Select(x => x.CommentContent).ToArray());
@@ -67,9 +69,7 @@ namespace SocialNetwork
             {
                 //Get the document that represents the search result.
                 var document = searcher.Doc(scoreDoc.Doc);
-
                 int elementId = int.Parse(document.Get("Id"));
-
                 //The same document can be returned multiple times within the4 search results.
                 if (!searchResult.Contains(elementId))
                 {
@@ -82,6 +82,7 @@ namespace SocialNetwork
             analyzer.Close();
             return searchResult;
         }
+
 
         //public List<int> SearchResult(string searchString)
         //{
@@ -96,13 +97,13 @@ namespace SocialNetwork
         //    return searchResult;
         //}
 
-        public Dictionary<string, List<int>> SearchResult(string searchString)
+        public List<int> SearchResult(string searchString)
         {
-            var searchResult = new Dictionary<string, List<int>>
-            {
-                {"User", GetSearchByField(searchString, "User")},
-                {"Tasks", GetSearchByField(searchString, "Title").Concat(GetSearchByField(searchString, "Content")).ToList().Concat(GetSearchByField(searchString, "Comments")).ToList()}
-            };
+            var searchResult = GetSearchByField(searchString, "Title")
+                .Concat(GetSearchByField(searchString, "Content"))
+                .ToList()
+                .Concat(GetSearchByField(searchString, "Comments"))
+                .ToList();
             return searchResult;
         }
 
