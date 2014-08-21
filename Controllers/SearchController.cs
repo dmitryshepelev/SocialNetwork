@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Collections.Generic;
 using System.Globalization;
@@ -19,18 +20,24 @@ namespace SocialNetwork.Controllers
         // GET: Search
         public ActionResult SearchResult(string searchingString)
         {
+            var ac = new ApplicationDbContext();
             if (string.IsNullOrEmpty(searchingString))
             {
                 return RedirectToAction("ViewAllTasks", "UserTask");
             }
             var searchUsingLucene = new LuceneSearch();
-          //  searchUsingLucene.BuildIndex();
+            searchUsingLucene.BuildIndex();
             var foundIds = searchUsingLucene.SearchResult(searchingString);
-            var ac = new ApplicationDbContext();
-            
-            //var foundUsers = foundIds["Users"].Select(t=>ac.U)
-            var foundElements = foundIds.Select(t => ac.UserTasks.Find(t)).ToList();
-            return View(foundElements);
+            var searchModel = new SearchResultModels();
+            foreach (var IdFoundElement in foundIds["Tasks"])
+            {
+                searchModel.Tasks.Add(ac.UserTasks.Find(IdFoundElement));
+            }
+            foreach (var IdFoundElement in foundIds["User"])
+            {
+                searchModel.Users.Add(ac.UserTasks.Find(IdFoundElement).User);
+            }
+            return View(searchModel);
         }
     }
 }

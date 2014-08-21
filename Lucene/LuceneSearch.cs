@@ -101,9 +101,7 @@ namespace SocialNetwork
             var searchResult = new Dictionary<string, List<int>>
             {
                 {"User", GetSearchByField(searchString, "User")},
-                {"Title", GetSearchByField(searchString, "Title")},
-                {"Content", GetSearchByField(searchString, "Content")},
-                {"Comments", GetSearchByField(searchString, "Comments")}
+                {"Tasks", GetSearchByField(searchString, "Title").Concat(GetSearchByField(searchString, "Content")).ToList().Concat(GetSearchByField(searchString, "Comments")).ToList()}
             };
             return searchResult;
         }
