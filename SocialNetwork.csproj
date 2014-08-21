@@ -224,7 +224,7 @@
     </Compile>
     <Compile Include="Helpers\Helpers.cs" />
     <Compile Include="Helpers\MarkdownHelper.cs" />
-    <Compile Include="Lucene\LuceneSearch.cs" />
+    <Compile Include="SearchLucene\LuceneSearch.cs" />
     <Compile Include="Migrations\201408011409107_InitialCreate.cs" />
     <Compile Include="Migrations\201408011409107_InitialCreate.Designer.cs">
       <DependentUpon>201408011409107_InitialCreate.cs</DependentUpon>
@@ -342,6 +342,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
+    <Compile Include="SearchLucene\SearchUserLucene.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

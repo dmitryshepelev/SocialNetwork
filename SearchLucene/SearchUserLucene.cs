@@ -15,45 +15,45 @@ using Microsoft.AspNet.Identity;
 using SocialNetwork.Controllers;
 using SocialNetwork.Models;
 
-namespace SocialNetwork
+namespace SocialNetwork.SearchLucene
 {
-    public class LuceneSearch
+    public class SearchUserLucene
     {
-        public LuceneSearch()
+        
+        public SearchUserLucene()
         {
-            BuildIndex();
-            BuildIndex();
+            BuildIndexUser();
         }
 
-        public static string path = Path.Combine(System.Web.HttpContext.Current.Request.PhysicalApplicationPath, "LuceneIndex");
-        //Take data from database and copied in documents
-        public Document GetDocument(UserTaskModel userTask)
+        public static string path = Path.Combine(System.Web.HttpContext.Current.Request.PhysicalApplicationPath,
+            "LuceneUserIndex");
+
+        public Document GetDocumentUser(ApplicationUser applicationUser)
         {
             var document = new Document();
-            document.Add(new Field("Title", userTask.UserTaskTitle, Field.Store.NO, Field.Index.ANALYZED));
-            document.Add(new Field("Content", userTask.UserTaskContent, Field.Store.NO, Field.Index.ANALYZED));
-            var array = String.Join(" ", userTask.Comments.Select(x => x.CommentContent).ToArray());
-            document.Add(new Field("Comments", array, Field.Store.NO, Field.Index.ANALYZED));
-            document.Add(new Field("Id", value: userTask.Id.ToString(CultureInfo.InvariantCulture), store: Field.Store.YES, index: Field.Index.NO));
+            document.Add(new Field("User", applicationUser.UserName, Field.Store.NO, Field.Index.ANALYZED));
+            document.Add(new Field("Id", value: applicationUser.Id.ToString(CultureInfo.InvariantCulture),
+                store: Field.Store.YES, index: Field.Index.NO));
             return document;
         }
 
-        public void BuildIndex()
+
+        public void BuildIndexUser()
         {
             var ac = new ApplicationDbContext();
-            List<UserTaskModel> userTasks = ac.UserTasks.ToList();
+            var users = ac.Users;
             var directory = FSDirectory.Open(new DirectoryInfo(path));
             var analyzer = new StandardAnalyzer(Lucene.Net.Util.Version.LUCENE_30);
             var indexWriter = new IndexWriter(directory, analyzer, true, IndexWriter.MaxFieldLength.UNLIMITED);
-            foreach (var userTask in userTasks)
+            foreach (var user in users)
             {
-                indexWriter.AddDocument(GetDocument(userTask));
+                indexWriter.AddDocument(GetDocumentUser(user));
             }
             indexWriter.Optimize();
             indexWriter.Dispose();
         }
 
-        public List<int> GetSearchByField(string searchString, string field)
+        public List<string> GetSearchUserByField(string searchString, string field)
         {
             var directory = FSDirectory.Open(new DirectoryInfo(path));
             var reader = IndexReader.Open(directory, true);
@@ -64,12 +64,12 @@ namespace SocialNetwork
             var collector = TopScoreDocCollector.Create(100, true);
             searcher.Search(query, collector);
             var hits = collector.TopDocs().ScoreDocs;
-            var searchResult = new List<int>();
+            var searchResult = new List<string>();
             foreach (var scoreDoc in hits)
             {
                 //Get the document that represents the search result.
                 var document = searcher.Doc(scoreDoc.Doc);
-                int elementId = int.Parse(document.Get("Id"));
+                string elementId = document.Get("Id");
                 //The same document can be returned multiple times within the4 search results.
                 if (!searchResult.Contains(elementId))
                 {
@@ -83,30 +83,10 @@ namespace SocialNetwork
             return searchResult;
         }
 
-
-        //public List<int> SearchResult(string searchString)
-        //{
-
-        //    var searchResult = new List<int>();
-        //    var search = new Dictionary<string, List<int>>();
-        //    searchResult = GetSearchByField(searchString, "User", searchResult);
-        //    search.Add("User", searchResult);
-        //    searchResult = GetSearchByField(searchString, "Title", searchResult);
-        //    searchResult = GetSearchByField(searchString, "Content", searchResult);
-        //    searchResult = GetSearchByField(searchString, "Comments", searchResult);
-        //    return searchResult;
-        //}
-
-        public List<int> SearchResult(string searchString)
+        public List<string> SearchResult(string searchString)
         {
-            var searchResult = GetSearchByField(searchString, "Title")
-                .Concat(GetSearchByField(searchString, "Content"))
-                .ToList()
-                .Concat(GetSearchByField(searchString, "Comments"))
-                .ToList();
+            var searchResult = GetSearchUserByField(searchString, "User");
             return searchResult;
         }
-
-
     }
 }

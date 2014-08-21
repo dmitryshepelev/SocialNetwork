@@ -11,6 +11,7 @@ using Lucene.Net.Documents;
 using Lucene.Net.Index;
 using Lucene.Net.Store;
 using SocialNetwork.Models;
+using SocialNetwork.SearchLucene;
 
 namespace SocialNetwork.Controllers
 {
@@ -36,6 +37,12 @@ namespace SocialNetwork.Controllers
             //{
             //    searchModel.Users.Add(ac.UserTasks.Find(IdFoundElement).User);
             //}
+            var searchUsers = new SearchUserLucene();
+            var foundUserIds = searchUsers.SearchResult(searchingString);
+            foreach (var IdFoundElement in foundUserIds)
+            {
+                searchModel.Users.Add(ac.Users.Find(IdFoundElement));
+            }
             return View(searchModel);
         }
     }
