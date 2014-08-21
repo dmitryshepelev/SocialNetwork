@@ -13,15 +13,18 @@
 
 <div class="row">
     <div class="col-md-3 task-stat" align="center">
-        @Html.HiddenFor(x => x.TaskId, new { id = "taskId" + Model.TaskId })
-        @Html.CheckBoxFor(x => x.IsLiked, new { id = "isLiked" + Model.TaskId, @class = "checkbox-hidden" })
-        @if (Model.IsLiked)
+        @if (User.Identity.IsAuthenticated)
         {
-            <img class="task-stat like-icon" src="~/Content/images/like-checked-64.png" width="36" alt="like" />
-        }
-        else
-        {
-            <img class="task-stat like-icon" src="~/Content/images/like-default-64.png" width="36" alt="like" />
+            @Html.HiddenFor(x => x.TaskId, new { id = "taskId" + Model.TaskId })
+            @Html.CheckBoxFor(x => x.IsLiked, new { id = "isLiked" + Model.TaskId, @class = "checkbox-hidden" })
+            if (Model.IsLiked)
+            {
+                <img class="task-stat like-icon" src="~/Content/images/like-checked-64.png" width="36" alt="like" />
+            }
+            else
+            {
+                <img class="task-stat like-icon" src="~/Content/images/like-default-64.png" width="36" alt="like" />
+            }
         }
     </div>
     <div class="col-md-3 task-stat" align="center">

@@ -1,0 +1,14 @@
+﻿@model List<SocialNetwork.Models.TopRateUsersViewModel>
+
+<h3>Top Rate users</h3>
+@foreach (var user in Model)
+{
+    <div class="row div-stat-box">
+        <div class="pull-left">
+            @Html.ActionLink(user.UserName, "ViewAccount", "Account", new { id = user.UserId }, null)
+        </div>
+        <div class="pull-right">
+            <span class="badge span-rate-color"><b>@String.Format("{0:0.0#}", user.Rate)</b></span>
+        </div>
+    </div>
+}

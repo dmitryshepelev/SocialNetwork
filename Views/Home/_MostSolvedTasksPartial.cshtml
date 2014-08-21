@@ -1,0 +1,14 @@
+﻿@model List<SocialNetwork.Models.MostSolvedTaskViewModel>
+
+<h3>Most solved tasks</h3>
+@foreach(var task in Model)
+{
+    <div class="row div-stat-box">
+        <div class="pull-left">
+            @Html.ActionLink(task.TaskTitle, "ViewTask", "UserTask", new { id = task.TaskId }, null)
+        </div>
+        <div class="pull-right">
+            <span class="badge">@task.SolutionsAmount</span>
+        </div>
+    </div>
+}

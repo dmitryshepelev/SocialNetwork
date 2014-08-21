@@ -1,0 +1,14 @@
+﻿@model List<SocialNetwork.Models.RecentTaskViewModel>
+
+<h3>Recent tasks</h3>
+@foreach (var task in Model)
+{
+    <div class="row div-stat-box">
+        <div class="pull-left">
+            @Html.ActionLink(task.TaskTitle, "ViewTask", "UserTask", new { id = task.TaskId }, null)
+        </div>
+        <div class="pull-right">
+            <span>@task.DateAdded</span>
+        </div>
+    </div>
+}

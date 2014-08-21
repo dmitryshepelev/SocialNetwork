@@ -5832,3 +5832,7 @@ button.close {
 .tag-link:visited {
     color: white;
 }
+
+.span-rate-color {
+    background-color: #62c462;
+}

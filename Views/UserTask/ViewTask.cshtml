@@ -10,6 +10,7 @@
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 <script src="~/Scripts/jquery-manage.js"></script>
 <script src="~/Scripts/jquery.jscroll.js"></script>
+<script src="~/Scripts/bootstrap-maxlength.js"></script>
 
 <style>
     .div-margin {
@@ -118,10 +119,10 @@
             }))
             {
                 <div class="input-group">
-                    <input id="taskId" name="taskId" type="hidden" value="@Model.Id" />
-                    <input class="form-control" id="comment" name="comment" placeholder="Write a comment..." type="text" />
+                    <input id="taskId" name="taskId" data-task-status=@Model.UserTaskStatus type="hidden" value="@Model.Id" />
+                    <input class="form-control" id="comment" name="comment" placeholder="Write a comment..." type="text" maxlength="90" />
                     <span class="input-group-btn">
-                        <input id="addComment" class="btn btn-primary" type="submit" value="Comment" disabled="disabled"/>
+                        <input id="addComment" class="btn btn-primary" type="submit" value="Comment" />
                     </span>
                 </div>
             }
@@ -154,6 +155,24 @@
     var blockNumber = 2;
     var noMoreData = false;
     var inProgress = false;
+
+    $(function() {
+        if ($("#taskId").attr("data-task-status") === "True") {
+            $("#comment").attr("disabled", true);
+            $("#addComment").attr("disabled", true);
+        }
+    });
+
+    $("#comment").maxlength({
+        alwaysShow: true,
+        threshold: 10,
+        warningClass: "label label-success",
+        limitReachedClass: "label label-danger",
+        separator: ' of ',
+        preText: 'You have ',
+        postText: ' chars remaining.',
+        validate: true
+    });
 
     $(window).scroll(function () {
         if ($(window).scrollTop() == $(document).height() - $(window).height() && !noMoreData && !inProgress) {

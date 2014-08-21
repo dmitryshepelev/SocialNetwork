@@ -115,7 +115,7 @@ namespace SocialNetwork.Helpers
                 var indexStart = str.IndexOf(funcRegStart);
                 var indexEnd = str.IndexOf(funcRegEnd);
                 var equation = HttpUtility.UrlEncode(str.Substring(indexStart + 6, indexEnd - indexStart - 6));
-                str = str.Replace(str.Substring(indexStart, indexEnd + 6),
+                str = str.Replace(str.Substring(indexStart, (indexEnd + 6 - indexStart)),
                     String.Format("{0}{1})", equationTemplate, equation));
             }
             return str;

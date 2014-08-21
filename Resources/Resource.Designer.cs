@@ -88,7 +88,7 @@ namespace SocialNetwork.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Slate (темная).
+        ///   Looks up a localized string similar to Lumen (темная).
         /// </summary>
         public static string FooterThemeDark {
             get {

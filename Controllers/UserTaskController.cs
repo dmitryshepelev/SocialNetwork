@@ -60,17 +60,34 @@ namespace SocialNetwork.Controllers
             }
         }
 
+        public ActionResult MySolvedTasks(string userId)
+        {
+            var solvedTasks = from solvedTask in userSolvedTasksRepository.GetAll()
+                where solvedTask.UserId == userId
+                where solvedTask.IsSolved
+                select solvedTask;
+            var userSolvedTasks = solvedTasks.Select(solvedTask => new MySolvedTaskViewModel()
+            {
+                TaskId = solvedTask.UserTaskId,
+                TaskTitle = userTaskRepository.GetById(solvedTask.UserTaskId).UserTaskTitle,
+                AttemptAmount = solvedTask.AttemptAmount
+            }).ToList();
+            return PartialView("_MySolvedTaskPartial", userSolvedTasks);
+        }
+
         public ActionResult MyTasks(string userId)
         {
+            ViewBag.UserId = userId;
             return PartialView("_MyTasksPartial", GetMyTasks(userId));
         }
 
         [HttpGet]
-        public ActionResult BlockTask(int? taskId, string userId)
+        public ActionResult BlockTask(int? taskId)
         {
             var task = userTaskRepository.GetById(taskId);
             task.UserTaskStatus = !task.UserTaskStatus;
             userTaskRepository.Update(task);
+            ViewBag.UserId = task.UserId;
             return PartialView("_MyTasksPartial", GetMyTasks(task.UserId));
         }
 
@@ -306,6 +323,84 @@ namespace SocialNetwork.Controllers
             return RedirectToAction("ViewAllTasks");
         }
 
+        [Authorize]
+        [HttpGet]
+        public ActionResult EditTask(int? taskId)
+        {
+            var task = userTaskRepository.GetById(taskId);
+            if (User.Identity.GetUserId() != task.UserId)
+            {
+                return RedirectToAction("ViewAllTasks");
+            }
+            var taskToEdit = new EditTaskViewModel()
+            {
+                TaskId = task.Id,
+                UserTaskTitle = task.UserTaskTitle,
+                Content = task.UserTaskContent,
+            };
+            var solutions =
+                (from answer in taskSolutionRepository.GetAll() where answer.UserTaskId == taskId select answer.Solution);
+            foreach (var solution in solutions)
+            {
+                taskToEdit.Answers += solution + ", ";
+            }
+            var tags = from t in userTaskTagsRepository.GetAll()
+                where t.UserTaskId == taskId
+                from tag in tagRepository.GetAll()
+                where tag.Id == t.TagId
+                select tag;
+            foreach (var tag in tags)
+            {
+                taskToEdit.Tags += tag.TagName + ", ";
+            }
+            ViewBag.Categories = (from c in categoryRepository.GetAll() orderby c.CategoryName select c.CategoryName);
+            return View(taskToEdit);
+        }
+
+        public ActionResult EditTask(EditTaskViewModel model)
+        {
+            var task = userTaskRepository.GetById(model.TaskId);
+            model.Content = Helpers.Helpers.CreateEquation(model.Content);
+            model.Content = Helpers.Helpers.CreateVideo(model.Content);
+            model.Content = Helpers.Helpers.CreateImage(model.Content);
+            task.UserTaskTitle = model.UserTaskTitle;
+            task.CategoryId = categoryRepository.GetId(model.Category);
+            task.UserTaskContent = model.Content;
+            userTaskRepository.Update(task);
+            var userTaskTags = from t in userTaskTagsRepository.GetAll() where t.UserTaskId == task.Id select t;
+            foreach (var userTaskTag in userTaskTags)
+            {
+                userTaskTagsRepository.Delete(userTaskTag);
+            }
+            var tags = model.Tags.Split(',');
+            foreach (var t in tags)
+            {
+                var tag = new TagModel();
+                try
+                {
+                    tag = tagRepository.GetById(Int32.Parse(t));
+                }
+                catch (FormatException)
+                {
+                    tag.TagName = t;
+                    tagRepository.Add(tag);
+                }
+                userTaskTagsRepository.Add(new UserTaskTagModel() { TagId = tag.Id, UserTaskId = task.Id });
+            }
+
+            var taskSolutions = from s in taskSolutionRepository.GetAll() where s.UserTaskId == task.Id select s;
+            foreach (var solution in taskSolutions)
+            {
+                taskSolutionRepository.Delete(solution);
+            }
+            var answers = model.Answers.Split(',');
+            foreach (var answer in answers)
+            {
+                taskSolutionRepository.Add(new TaskSolutionModel() { Solution = answer, UserTaskId = task.Id });
+            }
+            return RedirectToAction("ViewTask", new { id = task.Id });
+        }
+
         #region Helpers
         public List<UserTaskModel> TaskFilter(List<UserTaskModel> tasks, string filterParam, string filterName)
         {
@@ -319,7 +414,7 @@ namespace SocialNetwork.Controllers
                                     where task.Id == t.UserTaskId select task).ToList();
                     break;
                 case "Category":
-                    filterResult = (from task in tasks where task.Category.CategoryName == filterName select task).ToList();
+                    filterResult = (from task in tasks where task.CategoryId == categoryRepository.GetId(filterName) select task).ToList();
                     break;
                 default:
                     filterResult = tasks;

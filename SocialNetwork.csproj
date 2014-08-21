@@ -302,10 +302,12 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModels.cs" />
+    <Compile Include="Models\ApplicationStaticticModels.cs" />
     <Compile Include="Models\CategoryModels.cs" />
     <Compile Include="Models\CommentModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LikeModels.cs" />
+    <Compile Include="Models\TagCloudModel.cs" />
     <Compile Include="Models\TaskSolutionModels.cs" />
     <Compile Include="Models\TagModels.cs" />
     <Compile Include="Models\UserSolvedTaskModels.cs" />
@@ -429,12 +431,16 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap-markdown.js" />
+    <Content Include="Scripts\bootstrap-maxlength.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Scripts\bootstrap.min.js.map">
+      <DependentUpon>bootstrap.min.js</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -449,6 +455,7 @@
     <Content Include="Scripts\jquery.iframe-transport.js" />
     <Content Include="Scripts\jquery.infinitie.scroll.js" />
     <Content Include="Scripts\jquery.jscroll.js" />
+    <Content Include="Scripts\jquery.tagcloud.js" />
     <Content Include="Scripts\jquery.tokeninput.js" />
     <Content Include="Scripts\jquery.ui.widget.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
@@ -511,6 +518,12 @@
     <Content Include="Views\Account\DisplayEmail.cshtml" />
     <Content Include="Views\UserTask\_TaskStatistics.cshtml" />
     <Content Include="Views\UserTask\_MyTasksPartial.cshtml" />
+    <Content Include="Views\UserTask\_MySolvedTaskPartial.cshtml" />
+    <Content Include="Views\UserTask\EditTask.cshtml" />
+    <Content Include="Views\Home\_TagCloudPartial.cshtml" />
+    <Content Include="Views\Home\_MostSolvedTasksPartial.cshtml" />
+    <Content Include="Views\Home\_TopRateUsersPartial.cshtml" />
+    <Content Include="Views\Home\_RecentTasksPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Localization\" />

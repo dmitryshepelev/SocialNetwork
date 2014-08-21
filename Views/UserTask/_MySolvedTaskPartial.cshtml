@@ -1,0 +1,23 @@
+﻿@using SocialNetwork.Models
+@using SocialNetwork.Resources
+@model List<MySolvedTaskViewModel>
+
+<h4>@Resource.UserMySolutions</h4>
+@if (Model == null)
+{
+    <p class="text-muted">@Resource.UserEmplySolutionList</p>
+}
+else
+{
+    foreach (var task in Model)
+    {
+        <div class="row well well-sm" style="margin: 0 0 10px 0">
+            <div class="col-md-9">
+                @Html.ActionLink(task.TaskTitle, "ViewTask", "UserTask", new { id = task.TaskId }, null)
+            </div>
+            <div class="col-md-3">
+                @task.AttemptAmount attemts
+            </div>
+        </div>
+    }
+}

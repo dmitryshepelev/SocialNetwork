@@ -486,10 +486,10 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
   })
 
   $(window).on('load', function () {
-    $('[data-ride="carousel"]').each(function () {
-      var $carousel = $(this)
-      Plugin.call($carousel, $carousel.data())
-    })
+      $('[data-ride="carousel"]').each(function() {
+          var $carousel = $(this)
+          Plugin.call($carousel, $carousel.data())
+      });
   })
 
 }(jQuery);
