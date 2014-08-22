@@ -222,3 +222,5 @@ segments*
 LuceneUserIndex/segments_g
 LuceneIndex/_w.cfs
 LuceneIndex/segments_y
+*.gen
+*.cfx
