@@ -264,4 +264,43 @@
   <data name="SearchResultUsers" xml:space="preserve">
     <value>Users</value>
   </data>
+  <data name="byComments" xml:space="preserve">
+    <value>comments</value>
+  </data>
+  <data name="Filters" xml:space="preserve">
+    <value>Filters</value>
+  </data>
+  <data name="popular" xml:space="preserve">
+    <value>popular</value>
+  </data>
+  <data name="ProposeTask" xml:space="preserve">
+    <value>Propose task</value>
+  </data>
+  <data name="recent" xml:space="preserve">
+    <value>recent</value>
+  </data>
+  <data name="ResetFilters" xml:space="preserve">
+    <value>Reset filters</value>
+  </data>
+  <data name="bySolutions" xml:space="preserve">
+    <value>solutions</value>
+  </data>
+  <data name="viewMore" xml:space="preserve">
+    <value>view more</value>
+  </data>
+  <data name="by" xml:space="preserve">
+    <value>by</value>
+  </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Comments</value>
+  </data>
+  <data name="details" xml:space="preserve">
+    <value>details</value>
+  </data>
+  <data name="Likes" xml:space="preserve">
+    <value>Likes</value>
+  </data>
+  <data name="Solutions" xml:space="preserve">
+    <value>Solutions</value>
+  </data>
 </root>
