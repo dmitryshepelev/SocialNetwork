@@ -52,7 +52,7 @@ namespace SocialNetwork
             indexWriter.Dispose();
         }
 
-        public List<int> GetSearchByField(string searchString, string field)
+        public HashSet<int> GetSearchByField(string searchString, string field)
         {
             var directory = FSDirectory.Open(new DirectoryInfo(path));
             var reader = IndexReader.Open(directory, true);
@@ -63,7 +63,7 @@ namespace SocialNetwork
             var collector = TopScoreDocCollector.Create(100, true);
             searcher.Search(query, collector);
             var hits = collector.TopDocs().ScoreDocs;
-            var searchResult = new List<int>();
+            var searchResult = new HashSet<int>();
             foreach (var scoreDoc in hits)
             {
                 //Get the document that represents the search result.
@@ -82,28 +82,12 @@ namespace SocialNetwork
             return searchResult;
         }
 
-
-        //public List<int> SearchResult(string searchString)
-        //{
-
-        //    var searchResult = new List<int>();
-        //    var search = new Dictionary<string, List<int>>();
-        //    searchResult = GetSearchByField(searchString, "User", searchResult);
-        //    search.Add("User", searchResult);
-        //    searchResult = GetSearchByField(searchString, "Title", searchResult);
-        //    searchResult = GetSearchByField(searchString, "Content", searchResult);
-        //    searchResult = GetSearchByField(searchString, "Comments", searchResult);
-        //    return searchResult;
-        //}
-
         public List<int> SearchResult(string searchString)
         {
-            var searchResult = GetSearchByField(searchString, "Title")
-                .Concat(GetSearchByField(searchString, "Content"))
-                .ToList()
-                .Concat(GetSearchByField(searchString, "Comments"))
-                .ToList();
-            return searchResult;
+            var searchResult = GetSearchByField(searchString, "Title");
+            searchResult.UnionWith(GetSearchByField(searchString, "Content"));
+            searchResult.UnionWith(GetSearchByField(searchString, "Comments"));
+            return searchResult.ToList();   
         }
 
 
