@@ -264,4 +264,43 @@
   <data name="SearchResultUsers" xml:space="preserve">
     <value>Найденные пользователи</value>
   </data>
+  <data name="byComments" xml:space="preserve">
+    <value>по количеству комментариев</value>
+  </data>
+  <data name="Filters" xml:space="preserve">
+    <value>Фильтры</value>
+  </data>
+  <data name="popular" xml:space="preserve">
+    <value>по популярности</value>
+  </data>
+  <data name="ProposeTask" xml:space="preserve">
+    <value>Предложите задачу</value>
+  </data>
+  <data name="recent" xml:space="preserve">
+    <value>по дате</value>
+  </data>
+  <data name="ResetFilters" xml:space="preserve">
+    <value>Сброс</value>
+  </data>
+  <data name="bySolutions" xml:space="preserve">
+    <value>по количеству решений</value>
+  </data>
+  <data name="viewMore" xml:space="preserve">
+    <value>читать далее</value>
+  </data>
+  <data name="by" xml:space="preserve">
+    <value>опубликована</value>
+  </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Комментарии</value>
+  </data>
+  <data name="details" xml:space="preserve">
+    <value>детали</value>
+  </data>
+  <data name="Likes" xml:space="preserve">
+    <value>Мне нравится</value>
+  </data>
+  <data name="Solutions" xml:space="preserve">
+    <value>Решения</value>
+  </data>
 </root>

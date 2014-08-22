@@ -63,7 +63,14 @@ namespace SocialNetwork.Migrations
                 .Index(t => t.UserTaskId);
             
             CreateTable(
-                "dbo.Likes",
+                "dbo.Likes" +
+                "" +
+                "" +
+                "" +
+                "" +
+                "" +
+                "" +
+                "",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),

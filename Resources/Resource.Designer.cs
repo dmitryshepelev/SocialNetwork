@@ -88,6 +88,33 @@ namespace SocialNetwork.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to опубликована.
+        /// </summary>
+        public static string by {
+            get {
+                return ResourceManager.GetString("by", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to по количеству комментариев.
+        /// </summary>
+        public static string byComments {
+            get {
+                return ResourceManager.GetString("byComments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to по количеству решений.
+        /// </summary>
+        public static string bySolutions {
+            get {
+                return ResourceManager.GetString("bySolutions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Категория.
         /// </summary>
         public static string CategoryName {
@@ -106,6 +133,15 @@ namespace SocialNetwork.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Комментарии.
+        /// </summary>
+        public static string Comments {
+            get {
+                return ResourceManager.GetString("Comments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Подтвердите вашу учетную запись.
         /// </summary>
         public static string ConfirmAccount {
@@ -120,6 +156,15 @@ namespace SocialNetwork.Resources {
         public static string Contact {
             get {
                 return ResourceManager.GetString("Contact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to детали.
+        /// </summary>
+        public static string details {
+            get {
+                return ResourceManager.GetString("details", resourceCulture);
             }
         }
         
@@ -160,6 +205,15 @@ namespace SocialNetwork.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Фильтры.
+        /// </summary>
+        public static string Filters {
+            get {
+                return ResourceManager.GetString("Filters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Сменить тему.
         /// </summary>
         public static string FooterThemeChooser {
@@ -192,6 +246,15 @@ namespace SocialNetwork.Resources {
         public static string InvalidNameOrPassword {
             get {
                 return ResourceManager.GetString("InvalidNameOrPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Мне нравится.
+        /// </summary>
+        public static string Likes {
+            get {
+                return ResourceManager.GetString("Likes", resourceCulture);
             }
         }
         
@@ -268,6 +331,15 @@ namespace SocialNetwork.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to по популярности.
+        /// </summary>
+        public static string popular {
+            get {
+                return ResourceManager.GetString("popular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Профиль успешно обновлен.
         /// </summary>
         public static string ProfileHasBeenUpdated {
@@ -282,6 +354,33 @@ namespace SocialNetwork.Resources {
         public static string ProposeSolution {
             get {
                 return ResourceManager.GetString("ProposeSolution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Предложите задачу.
+        /// </summary>
+        public static string ProposeTask {
+            get {
+                return ResourceManager.GetString("ProposeTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to по дате.
+        /// </summary>
+        public static string recent {
+            get {
+                return ResourceManager.GetString("recent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сброс.
+        /// </summary>
+        public static string ResetFilters {
+            get {
+                return ResourceManager.GetString("ResetFilters", resourceCulture);
             }
         }
         
@@ -327,6 +426,15 @@ namespace SocialNetwork.Resources {
         public static string Solution {
             get {
                 return ResourceManager.GetString("Solution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Решения.
+        /// </summary>
+        public static string Solutions {
+            get {
+                return ResourceManager.GetString("Solutions", resourceCulture);
             }
         }
         
@@ -498,6 +606,15 @@ namespace SocialNetwork.Resources {
         public static string UserTaskTitle {
             get {
                 return ResourceManager.GetString("UserTaskTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to читать далее.
+        /// </summary>
+        public static string viewMore {
+            get {
+                return ResourceManager.GetString("viewMore", resourceCulture);
             }
         }
     }

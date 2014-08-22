@@ -1,15 +1,15 @@
 ﻿<div class="btn-group">
-    @Html.ActionLink("recent", "ViewAllTasks", "UserTask", new { filterParam = ViewBag.FilterParam, filterName = ViewBag.FilterName, sortParam = "DateAdded", sortOrder = ViewBag.SortOrder }, new { @class = "btn btn-default" })
-    @Html.ActionLink("popular", "ViewAllTasks", "UserTask", new { filterParam = ViewBag.FilterParam, filterName = ViewBag.FilterName, sortParam = "LikeAmount", sortOrder = ViewBag.SortOrder }, new { @class = "btn btn-default" })
-    @Html.ActionLink("solutions", "ViewAllTasks", "UserTask", new { filterParam = ViewBag.FilterParam, filterName = ViewBag.FilterName, sortParam = "SolutionAmount", sortOrder = ViewBag.SortOrder }, new { @class = "btn btn-default" })
-    @Html.ActionLink("comments", "ViewAllTasks", "UserTask", new { filterParam = ViewBag.FilterParam, filterName = ViewBag.FilterName, sortParam = "CommentAmount", sortOrder = ViewBag.SortOrder }, new { @class = "btn btn-default" })
+    @Html.ActionLink(@SocialNetwork.Resources.Resource.recent, "ViewAllTasks", "UserTask", new { filterParam = ViewBag.FilterParam, filterName = ViewBag.FilterName, sortParam = "DateAdded", sortOrder = ViewBag.SortOrder }, new { @class = "btn btn-default" })
+    @Html.ActionLink(@SocialNetwork.Resources.Resource.popular, "ViewAllTasks", "UserTask", new { filterParam = ViewBag.FilterParam, filterName = ViewBag.FilterName, sortParam = "LikeAmount", sortOrder = ViewBag.SortOrder }, new { @class = "btn btn-default" })
+    @Html.ActionLink(@SocialNetwork.Resources.Resource.bySolutions, "ViewAllTasks", "UserTask", new { filterParam = ViewBag.FilterParam, filterName = ViewBag.FilterName, sortParam = "SolutionAmount", sortOrder = ViewBag.SortOrder }, new { @class = "btn btn-default" })
+    @Html.ActionLink(@SocialNetwork.Resources.Resource.byComments, "ViewAllTasks", "UserTask", new { filterParam = ViewBag.FilterParam, filterName = ViewBag.FilterName, sortParam = "CommentAmount", sortOrder = ViewBag.SortOrder }, new { @class = "btn btn-default" })
     <div class="btn-group">
         <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-            Filters
+            @SocialNetwork.Resources.Resource.Filters
             <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-            <li>@Html.ActionLink("Reset filters", "ViewAllTasks", "UserTask", null, null)</li>
+            <li>@Html.ActionLink(@SocialNetwork.Resources.Resource.ResetFilters, "ViewAllTasks", "UserTask", null, null)</li>
             <li class="divider"></li>
             @foreach (var category in ViewBag.Categories)
             {
