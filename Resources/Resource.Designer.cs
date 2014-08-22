@@ -124,6 +124,24 @@ namespace SocialNetwork.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Проверить решение.
+        /// </summary>
+        public static string Check {
+            get {
+                return ResourceManager.GetString("Check", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Комментировать.
+        /// </summary>
+        public static string Comment {
+            get {
+                return ResourceManager.GetString("Comment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Комментарий.
         /// </summary>
         public static string CommentContent {
@@ -363,6 +381,15 @@ namespace SocialNetwork.Resources {
         public static string ProposeTask {
             get {
                 return ResourceManager.GetString("ProposeTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Предложите вашу задачу.
+        /// </summary>
+        public static string ProposeYourTask {
+            get {
+                return ResourceManager.GetString("ProposeYourTask", resourceCulture);
             }
         }
         
@@ -615,6 +642,51 @@ namespace SocialNetwork.Resources {
         public static string viewMore {
             get {
                 return ResourceManager.GetString("viewMore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to просмотреть профиль.
+        /// </summary>
+        public static string viewProfile {
+            get {
+                return ResourceManager.GetString("viewProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Напишите комментарий.
+        /// </summary>
+        public static string Write {
+            get {
+                return ResourceManager.GetString("Write", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вы не можете решить эту задачу. Она закрыта для решения..
+        /// </summary>
+        public static string YouCantSolveBlockTask {
+            get {
+                return ResourceManager.GetString("YouCantSolveBlockTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Это же ваша задача!.
+        /// </summary>
+        public static string YourOwnTask {
+            get {
+                return ResourceManager.GetString("YourOwnTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вы уже решили эту задачу.
+        /// </summary>
+        public static string YouSolvedSolution {
+            get {
+                return ResourceManager.GetString("YouSolvedSolution", resourceCulture);
             }
         }
     }

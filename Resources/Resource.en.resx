@@ -303,4 +303,28 @@
   <data name="Solutions" xml:space="preserve">
     <value>Solutions</value>
   </data>
+  <data name="Check" xml:space="preserve">
+    <value>Check solution</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="ProposeYourTask" xml:space="preserve">
+    <value>Propose your task</value>
+  </data>
+  <data name="viewProfile" xml:space="preserve">
+    <value>view profile</value>
+  </data>
+  <data name="Write" xml:space="preserve">
+    <value>Write a comment...</value>
+  </data>
+  <data name="YouCantSolveBlockTask" xml:space="preserve">
+    <value>You can't solve blocked task</value>
+  </data>
+  <data name="YourOwnTask" xml:space="preserve">
+    <value>You cannot solve your own task</value>
+  </data>
+  <data name="YouSolvedSolution" xml:space="preserve">
+    <value>You have already solved this task</value>
+  </data>
 </root>

@@ -303,4 +303,28 @@
   <data name="Solutions" xml:space="preserve">
     <value>Решения</value>
   </data>
+  <data name="Check" xml:space="preserve">
+    <value>Проверить решение</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Комментировать</value>
+  </data>
+  <data name="ProposeYourTask" xml:space="preserve">
+    <value>Предложите вашу задачу</value>
+  </data>
+  <data name="viewProfile" xml:space="preserve">
+    <value>просмотреть профиль</value>
+  </data>
+  <data name="Write" xml:space="preserve">
+    <value>Напишите комментарий</value>
+  </data>
+  <data name="YouCantSolveBlockTask" xml:space="preserve">
+    <value>Вы не можете решить эту задачу. Она закрыта для решения.</value>
+  </data>
+  <data name="YourOwnTask" xml:space="preserve">
+    <value>Это же ваша задача!</value>
+  </data>
+  <data name="YouSolvedSolution" xml:space="preserve">
+    <value>Вы уже решили эту задачу</value>
+  </data>
 </root>

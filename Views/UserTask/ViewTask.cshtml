@@ -24,25 +24,25 @@
 </style>
 
 <div id="header" align="center" style="margin: 35px 0 40px 0">
-    <h2>Propose your f...ing solution</h2>
+    <h2>@SocialNetwork.Resources.Resource.ProposeYourTask</h2>
     <br />
     
     @if (Model.UserTaskStatus)
     {
         <div class="alert alert-dismissable alert-info" style="width: 264px" align="center">
-            You can't solve blocked task
+            @SocialNetwork.Resources.Resource.YouCantSolveBlockTask
         </div>
     }
     else if (Model.IsSolved)
     {
         <div class="alert alert-dismissable alert-success" style="width: 264px" align="center">
-            You have already solved this task
+            @SocialNetwork.Resources.Resource.YouSolvedSolution
         </div>
     }
     else if (Model.UserId == User.Identity.GetUserId())
     {
         <div class="alert alert-dismissable alert-warning" style="width: 264px" align="center">
-            You cannot solve your own task
+            @SocialNetwork.Resources.Resource.YourOwnTask
         </div>
     }
     else
@@ -56,9 +56,9 @@
         {
             <div id="checkSolution" class="input-group" style="width: 264px">
                 <input id="taskId" name="taskId" type="hidden" value="@Model.Id" />
-                <input type="text" class="form-control" id="solutions" name="solutions" placeholder="Your solution" style="width: 200px" />
+                <input type="text" class="form-control" id="solutions" name="solutions" placeholder="@SocialNetwork.Resources.Resource.Solution" style="width: 200px" />
                 <span class="input-group-btn">
-                    <input id="check" class="btn btn-primary" type="submit" value="Check" />
+                    <input id="check" class="btn btn-primary" type="submit" value="@SocialNetwork.Resources.Resource.Check" />
                 </span>
             </div>
         }
@@ -74,11 +74,11 @@
         </div>
         <div class="col-lg-4">
             <div class="pull-right" style="padding-left: 10px">
-                by @Html.ActionLink(Model.UserName, "ViewAccount", "Account", new { id = Model.UserId }, null)
+                @SocialNetwork.Resources.Resource.by @Html.ActionLink(Model.UserName, "ViewAccount", "Account", new { id = Model.UserId }, null)
                 <br />
                 @Model.DateAdded
                 <br />
-                @Html.ActionLink("view profile", "ViewAccount", "Account", new { id = Model.UserId }, new { @class = "btn btn-primary btn-xs" })
+                @Html.ActionLink(@SocialNetwork.Resources.Resource.viewProfile, "ViewAccount", "Account", new { id = Model.UserId }, new { @class = "btn btn-primary btn-xs" })
             </div>
             <div class="pull-right">
                 <a href="~/Account/ViewAccount?id=@Model.UserId"><img src="@Model.UserImage" /></a>
@@ -118,9 +118,9 @@
             {
                 <div class="input-group">
                     <input id="taskId" name="taskId" data-task-status=@Model.UserTaskStatus type="hidden" value="@Model.Id" />
-                    <input class="form-control" id="comment" name="comment" placeholder="Write a comment..." type="text" maxlength="90" />
+                    <input class="form-control" id="comment" name="comment" placeholder="@SocialNetwork.Resources.Resource.Write" type="text" maxlength="90" />
                     <span class="input-group-btn">
-                        <input id="addComment" class="btn btn-primary" type="submit" value="Comment"/>
+                        <input id="addComment" class="btn btn-primary" type="submit" value="@SocialNetwork.Resources.Resource.Comment"/>
                     </span>
                 </div>
             }
