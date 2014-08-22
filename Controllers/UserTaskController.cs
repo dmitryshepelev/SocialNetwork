@@ -25,6 +25,7 @@ namespace SocialNetwork.Controllers
         private IUserTaskTagsRepository userTaskTagsRepository;
         private IUserSolvedTaskRepository userSolvedTasksRepository;
         private ILikeRepository likeRepository;
+        private IChartRepository chartRepository;
 
         public UserTaskController()
         {
@@ -32,7 +33,7 @@ namespace SocialNetwork.Controllers
 
         public UserTaskController(IUserTaskRepository userTaskRepository, ICategoryRepository categoryRepository,
             ITagRepository tagRepository, ITaskSolutionRepository taskSolutionRepository, IUserTaskTagsRepository userTaskTagsRepository,
-            ILikeRepository likeRepository, IUserSolvedTaskRepository userSolvedTasksRepository)
+            ILikeRepository likeRepository, IUserSolvedTaskRepository userSolvedTasksRepository, IChartRepository chartRepository)
         {
             this.userTaskRepository = userTaskRepository;
             this.categoryRepository = categoryRepository;
@@ -41,6 +42,7 @@ namespace SocialNetwork.Controllers
             this.userTaskTagsRepository = userTaskTagsRepository;
             this.userSolvedTasksRepository = userSolvedTasksRepository;
             this.likeRepository = likeRepository;
+            this.chartRepository = chartRepository;
         }
 
         public UserTaskController(ApplicationUserManager userManager)
@@ -58,6 +60,11 @@ namespace SocialNetwork.Controllers
             {
                 userManager = value;
             }
+        }
+
+        public ActionResult ViewChart(int? taskId)
+        {
+            return PartialView("_ViewChartPartial", chartRepository.GetAll().FirstOrDefault(x => x.UserTaskId == (int) taskId));
         }
 
         public ActionResult MySolvedTasks(string userId)
@@ -320,6 +327,17 @@ namespace SocialNetwork.Controllers
             {
                 taskSolutionRepository.Add(new TaskSolutionModel() { Solution = answer, UserTaskId = createdTask.Id });
             }
+            chartRepository.Add(new ChartModel()
+            {
+                ChartName = model.ChartName,
+                AxisXName = model.AxisXName,
+                AxisYName = model.AxisYName,
+                Expression = model.Expression,
+                From = model.From,
+                To = model.To,
+                Step = model.Step,
+                UserTaskId = createdTask.Id
+            });
             return RedirectToAction("ViewAllTasks");
         }
 

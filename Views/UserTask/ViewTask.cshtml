@@ -9,8 +9,10 @@
 <script src="~/Scripts/jquery-2.1.1.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 <script src="~/Scripts/jquery-manage.js"></script>
-<script src="~/Scripts/jquery.jscroll.js"></script>
 <script src="~/Scripts/bootstrap-maxlength.js"></script>
+<script src="~/Scripts/chart-manager.js"></script>
+<script src="~/Scripts/highcharts.js"></script>
+<script src="~/Scripts/parser.js"></script>
 
 <style>
     .div-margin {
@@ -90,6 +92,7 @@
         <div class="col-lg-8">
             <div class="pull-left">
                 @Html.Markdown(Model.Content)
+                @Html.Action("ViewChart", new { taskId = Model.Id})
             </div>
         </div>
         <div class="col-lg-4">

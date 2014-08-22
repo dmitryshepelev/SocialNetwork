@@ -40,6 +40,7 @@ namespace SocialNetwork.Models
         public DbSet<LikeModel> Likes { get; set; }
         public DbSet<CommentModel> Comments { get; set; }
         public DbSet<UserSolvedTaskModel> SolvedTasks { get; set; }
+        public DbSet<ChartModel> Charts { get; set; }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

@@ -1,0 +1,17 @@
+﻿@model SocialNetwork.Models.ChartModel
+     
+@if (Model != null)
+{
+    <div id="chart" style="width: 522px" data-chart-name="@Model.ChartName" data-axis-x-name="@Model.AxisXName" data-axis-y-name="@Model.AxisYName" data-expression="@Model.Expression" data-from="@Model.From" data-to="@Model.To" data-step="@Model.Step">
+    </div>
+}      
+
+
+<script>
+    $(function () {
+        var box = $("#chart");
+        console.log(box.attr("data-task-id"));
+        chartBuilder(box.attr("data-chart-name"), box.attr("data-axis-x-name"), box.attr("data-axis-y-name"),
+            box.attr("data-expression"), box.attr("data-from"), box.attr("data-to"), box.attr("data-step"));
+    })
+</script>

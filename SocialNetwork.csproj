@@ -226,6 +226,25 @@
     </Compile>
     <Compile Include="Helpers\Helpers.cs" />
     <Compile Include="Helpers\MarkdownHelper.cs" />
+    <Compile Include="Migrations\201408221302530_ApplicationDb19.cs" />
+    <Compile Include="Migrations\201408221302530_ApplicationDb19.Designer.cs">
+      <DependentUpon>201408221302530_ApplicationDb19.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408221305369_ApplicationDb20.cs" />
+    <Compile Include="Migrations\201408221305369_ApplicationDb20.Designer.cs">
+      <DependentUpon>201408221305369_ApplicationDb20.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408221307005_ApplicationDb21.cs" />
+    <Compile Include="Migrations\201408221307005_ApplicationDb21.Designer.cs">
+      <DependentUpon>201408221307005_ApplicationDb21.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408221308087_ApplicationDb22.cs" />
+    <Compile Include="Migrations\201408221308087_ApplicationDb22.Designer.cs">
+      <DependentUpon>201408221308087_ApplicationDb22.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ChartModels.cs" />
+    <Compile Include="Repository\Implementations\ChartRepository.cs" />
+    <Compile Include="Repository\Interfaces\IChartRepository.cs" />
     <Compile Include="SearchLucene\LuceneSearch.cs" />
     <Compile Include="Migrations\201408011409107_InitialCreate.cs" />
     <Compile Include="Migrations\201408011409107_InitialCreate.Designer.cs">
@@ -373,6 +392,7 @@
     <Content Include="Content\images\like-mousover-64.png" />
     <Content Include="Content\images\theme-dark-col-thumb.png" />
     <Content Include="Content\images\theme-lignt-col-thumb.png" />
+    <Content Include="Content\jquery.jqplot.css" />
     <Content Include="Content\themes\base\images\animated-overlay.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -454,7 +474,10 @@
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\chart-manager.js" />
+    <Content Include="Scripts\highcharts.js" />
     <Content Include="Scripts\jqBootstrapValidation.js" />
+    <Content Include="Scripts\jquery-1.7.2.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
@@ -465,7 +488,6 @@
     <Content Include="Scripts\jquery.fileupload.js" />
     <Content Include="Scripts\jquery.iframe-transport.js" />
     <Content Include="Scripts\jquery.infinitie.scroll.js" />
-    <Content Include="Scripts\jquery.jscroll.js" />
     <Content Include="Scripts\jquery.tagcloud.js" />
     <Content Include="Scripts\jquery.tokeninput.js" />
     <Content Include="Scripts\jquery.ui.widget.js" />
@@ -478,6 +500,7 @@
     <Content Include="Scripts\markdown-add-buttons.js" />
     <Content Include="Scripts\markdown.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\parser.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\to-markdown.js" />
@@ -537,8 +560,11 @@
     <Content Include="Views\Home\_RecentTasksPartial.cshtml" />
     <Content Include="Views\Shared\_SearchPartial.cshtml" />
     <Content Include="Views\Search\SearchResult.cshtml" />
+    <Content Include="Views\UserTask\_ChartPartial.cshtml" />
+    <Content Include="Views\UserTask\_ViewChartPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Views\Chart\" />
     <Folder Include="Views\Localization\" />
     <Folder Include="Views\Style\" />
     <Folder Include="Views\Theme\" />
@@ -607,6 +633,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201408182317369_ApplicationDb18.resx">
       <DependentUpon>201408182317369_ApplicationDb18.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408221302530_ApplicationDb19.resx">
+      <DependentUpon>201408221302530_ApplicationDb19.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408221305369_ApplicationDb20.resx">
+      <DependentUpon>201408221305369_ApplicationDb20.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408221307005_ApplicationDb21.resx">
+      <DependentUpon>201408221307005_ApplicationDb21.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408221308087_ApplicationDb22.resx">
+      <DependentUpon>201408221308087_ApplicationDb22.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Resource.en.resx" />
     <EmbeddedResource Include="Resources\Resource.resx">

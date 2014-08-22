@@ -24,6 +24,7 @@ namespace SocialNetwork.Models
         public virtual ICollection<CommentModel> Comments { get; set; }
         public int CategoryId { get; set; }
         public CategoryModel Category { get; set; }
+        public virtual ICollection<ChartModel> Charts { get; set; }
     }
 
     public class UserTasksViewAllModel
@@ -78,6 +79,13 @@ namespace SocialNetwork.Models
         [AllowHtml]
         public string Content { get; set; }
         public string Answers { get; set; }
+        public string Expression { get; set; }
+        public string From { get; set; }
+        public string To { get; set; }
+        public string Step { get; set; }
+        public string AxisXName { get; set; }
+        public string AxisYName { get; set; }
+        public string ChartName { get; set; }
     }
 
     public class EditTaskViewModel : CreateTaskViewModel

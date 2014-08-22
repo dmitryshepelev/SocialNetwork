@@ -15,8 +15,12 @@
 <script src="~/Scripts/jquery-manage.js"></script>
 <link rel="stylesheet" type="text/css" href="~/Content/token-input-facebook.css" />
 <link rel="stylesheet" type="text/css" href="~/Content/bootstrap-markdown.min.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> <!-- or use local jquery -->
-<script src="/js/jqBootstrapValidation.js"></script>
+<script src="~/Scripts/jqBootstrapValidation.js"></script>
+<script src="~/Scripts/chart-manager.js"></script>
+<script src="~/Scripts/highcharts.js"></script>
+<script src="~/Scripts/parser.js"></script>
+
+<link rel="stylesheet" type="text/css" href="~/Content/jquery.jqplot.css" />
 
 <style>
     .texbox-margin {
@@ -107,7 +111,7 @@
                     </div>
                 </div>
                 <div class="tab-pane fade" id="graph">
-
+                        @Html.Partial("_ChartPartial")
                 </div>
             </div>
             <div style="margin-top: 10px">

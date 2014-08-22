@@ -72,6 +72,7 @@ namespace SocialNetwork.App_Start
             kernel.Bind<IUserSolvedTaskRepository>().To<UserSolvedTaskRepository>().InRequestScope();
             kernel.Bind<IUserTaskRepository>().To<UserTaskRepository>().InRequestScope();
             kernel.Bind<IUserTaskTagsRepository>().To<UserTaskTagRepository>().InRequestScope();
+            kernel.Bind<IChartRepository>().To<ChartRepository>().InRequestScope();
         }        
     }
 }

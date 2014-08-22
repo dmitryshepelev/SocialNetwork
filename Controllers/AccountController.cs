@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -189,7 +190,8 @@ namespace SocialNetwork.Controllers
                 // Send an email with this link
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                SendEmail(user.Email, callbackUrl, "ForgotPassword", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                //await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
@@ -344,8 +346,6 @@ namespace SocialNetwork.Controllers
                 UserRate = user.UserRate,
                 LockoutEnabled = user.LockoutEnabled,
                 LockoutDateEndUtc = user.LockoutEndDateUtc,
-                //UserSolvedTasks = (from i in userSolvedTaskRepository.GetAll() where i.User.Id == user.Id
-                //                   from j in userTaskRepository.GetAll() where j.Id == i.UserTask.Id select j).OrderBy(x => x.DateAdded).ToList(),
                 IsAdmin = UserManager.IsInRole(user.Id, "admin")
             };
 
@@ -592,9 +592,24 @@ namespace SocialNetwork.Controllers
             return false;
         }
 
-        private void SendEmail(string email, string callbackUrl, string subject, string message)
+        private static void SendEmail(string email, string callbackUrl, string subject, string message)
         {
             // For information on sending mail, please visit http://go.microsoft.com/fwlink/?LinkID=320771
+            var mail = new MailMessage();
+            mail.To.Add(email);
+            mail.From = new MailAddress("dmitry.shepelev@yahoo.co.uk");
+            mail.Subject = subject;
+            mail.Body = message;
+            mail.IsBodyHtml = true;
+            using (var smtp = new SmtpClient())
+            {
+                smtp.Host = "smtp.mail.yahoo.co.uk";
+                smtp.Port = 465;
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new System.Net.NetworkCredential("dmitry.shepelev@yahoo.co.uk", "4815162342v");
+                smtp.EnableSsl = true;
+                smtp.Send(mail);
+            }
         }
 
         public enum ManageMessageId

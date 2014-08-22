@@ -1,7 +1,25 @@
 ﻿@model List<SocialNetwork.Models.TagCloudModel>
 
-<script src="~/Scripts/jquery-2.1.1.js"></script>
-<script src="~/Scripts/jquery.tagcloud.js"></script>
+<script>
+    $(document).ready(function () {
+        //$.fn.tagcloud.defaults = {
+        //    size: { start: 14, end: 18, unit: 'pt' },
+        //    color: { start: '#cde', end: '#f52' }
+        //};
+
+        $("#tagcloud a").tagcloud({
+            size: {
+                start: 10,
+                end: 25,
+                unit: 'px'
+            },
+            color: {
+                start: "#CDE",
+                end: "#FS2"
+            }
+        });
+    })
+</script>
 
 <div id="tagcloud">
     @foreach (var tag in Model)
@@ -9,14 +27,3 @@
         @Html.ActionLink(tag.TagName + " ", "ViewAllTasks", "UserTask", new { filterParam = "Tag", filterName = tag.TagName }, new { rel = tag.TagFrequency })
     }
 </div>
-
-<script>
-    $.fn.tagcloud.defaults = {
-        size: { start: 14, end: 18, unit: 'pt' },
-        color: { start: '#cde', end: '#f52' }
-    };
-
-    $(function () {
-        $("#tagcloud a").tagcloud();
-    });
-</script>
