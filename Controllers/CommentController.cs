@@ -50,14 +50,17 @@ namespace SocialNetwork.Controllers
         [HttpPost]
         public PartialViewResult AddComment(string comment, int taskId)
         {
-            var newComment = new CommentModel()
+            if (!string.IsNullOrWhiteSpace(comment))
             {
-                CommentContent = comment,
-                UserTaskId = taskId,
-                UserId = User.Identity.GetUserId(),
-                DateAdded = DateTime.Now
-            };
-            commentRepository.Add(newComment);
+                var newComment = new CommentModel()
+                {
+                    CommentContent = comment,
+                    UserTaskId = taskId,
+                    UserId = User.Identity.GetUserId(),
+                    DateAdded = DateTime.Now
+                };
+                commentRepository.Add(newComment);
+            }
             return PartialView("_CommentViewPartial", GetTasksComments(taskId));
         }
 

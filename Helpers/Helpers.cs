@@ -95,8 +95,8 @@ namespace SocialNetwork.Helpers
 
         public static string CreateImage(string str)
         {
-            var imageTagStart = "[IMAGE]";
-            var imageTagEnd = "[/IMAGE]";
+            const string imageTagStart = "[IMAGE]";
+            const string imageTagEnd = "[/IMAGE]";
             while (str.Contains(imageTagStart) || str.Contains(imageTagEnd))
             {
                 str = str.Replace(imageTagStart, "");
@@ -107,13 +107,13 @@ namespace SocialNetwork.Helpers
 
         public static string CreateEquation(string str)
         {
-            var funcRegStart = "[FUNC]";
-            var funcRegEnd = "[/FUNC]";
-            var equationTemplate = "![ecuatoin](http://latex.codecogs.com/gif.latex?";
+            const string funcRegStart = "[FUNC]";
+            const string funcRegEnd = "[/FUNC]";
+            const string equationTemplate = "![ecuatoin](http://latex.codecogs.com/gif.latex?";
             while (str.Contains(funcRegStart))
             {
-                var indexStart = str.IndexOf(funcRegStart);
-                var indexEnd = str.IndexOf(funcRegEnd);
+                var indexStart = str.IndexOf(funcRegStart, System.StringComparison.Ordinal);
+                var indexEnd = str.IndexOf(funcRegEnd, System.StringComparison.Ordinal);
                 var equation = HttpUtility.UrlEncode(str.Substring(indexStart + 6, indexEnd - indexStart - 6));
                 str = str.Replace(str.Substring(indexStart, (indexEnd + 6 - indexStart)),
                     String.Format("{0}{1})", equationTemplate, equation));
