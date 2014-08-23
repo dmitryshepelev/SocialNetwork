@@ -91,5 +91,6 @@ namespace SocialNetwork.Models
     public class EditTaskViewModel : CreateTaskViewModel
     {
         public int TaskId { get; set; }
+        public int ChartId { get; set; }
     }
 }

@@ -25,11 +25,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink(@SocialNetwork.Resources.Resource.ApplicationName, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink(SocialNetwork.Resources.Resource.ApplicationName, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink(@SocialNetwork.Resources.Resource.Tasks, "ViewAllTasks", "UserTask")</li>
+                    <li>@Html.ActionLink(SocialNetwork.Resources.Resource.Tasks, "ViewAllTasks", "UserTask")</li>
                 </ul>
                 <div class="navbar-form navbar-left">
                         @Html.Partial("_SearchPartial")
@@ -43,21 +43,23 @@
         @RenderBody()
         <hr />
         <footer style="margin-bottom: 20px">
-            &copy; @DateTime.Now.Year
-            <div class="btn-group dropup">
-                <button type="button" class="btn btn-default dropdown-toggle btn-primary btn-xs" data-toggle="dropdown">@SocialNetwork.Resources.Resource.FooterThemeChooser  <span class="caret"></span></button>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="~/Style/ChangeTheme?theme=Dark"><img src="~/Content/images/theme-dark-col-thumb.png" width="12" />&emsp;@SocialNetwork.Resources.Resource.FooterThemeDark</a></li>
-                    <li><a href="~/Style/ChangeTheme?theme=Light"><img src="~/Content/images/theme-lignt-col-thumb.png" width="12" />&emsp;@SocialNetwork.Resources.Resource.FooterThemeLight</a></li>
-                </ul>
-            </div>
-            <div class="btn-toolbar navbar-right">
-                <a href="~/Localization/ChangeCulture?language=en" class="text-muted">
-                    <img src="~/Content/images/flag-eng-32.png" width="14" />&ensp;English
-                </a>&ensp;
-                <a href="~/Localization/ChangeCulture?language=ru" class="text-muted">
-                    <img src="~/Content/images/flag-rus-32.png" width="14" />&ensp;Русский
-                </a>
+            <div class="container navbar-fixed-bottom bottom-bar">
+                &copy; @DateTime.Now.Year &emsp; 
+                <div class="btn-group dropup">
+                    <button type="button" class="btn btn-default dropdown-toggle btn-primary btn-xs" data-toggle="dropdown">@SocialNetwork.Resources.Resource.FooterThemeChooser  <span class="caret"></span></button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="~/Style/ChangeTheme?theme=Dark"><img src="~/Content/images/theme-dark-col-thumb.png" width="12" />&emsp;@SocialNetwork.Resources.Resource.FooterThemeDark</a></li>
+                        <li><a href="~/Style/ChangeTheme?theme=Light"><img src="~/Content/images/theme-lignt-col-thumb.png" width="12" />&emsp;@SocialNetwork.Resources.Resource.FooterThemeLight</a></li>
+                    </ul>
+                </div>
+                <div class="btn-toolbar navbar-right">
+                    <a href="~/Localization/ChangeCulture?language=en" class="text-muted">
+                        <img src="~/Content/images/flag-eng-32.png" width="14" />&ensp;English
+                    </a>&ensp;
+                    <a href="~/Localization/ChangeCulture?language=ru" class="text-muted">
+                        <img src="~/Content/images/flag-rus-32.png" width="14" />&ensp;Русский
+                    </a>
+                </div>
             </div>
         </footer>
     </div>

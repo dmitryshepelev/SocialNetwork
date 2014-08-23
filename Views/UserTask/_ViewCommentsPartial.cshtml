@@ -1,0 +1,35 @@
+﻿@using Microsoft.AspNet.Identity
+<div class="div-main">
+    <div class="row" align="center">
+        <div class="pull-left">
+            <a href="~/Account/ViewAccount?id=@User.Identity.GetUserId()"><img src="@ViewBag.UserPhoto" /></a>
+        </div>
+        <div class="pull-left" style="padding-left: 10px; width: 95%">
+            @using (Ajax.BeginForm("AddComment", "Comment", new AjaxOptions
+            {
+                Url = Url.Action("AddComment", "Comment"),
+                HttpMethod = "POST",
+                InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace,
+                UpdateTargetId = "comments",
+                OnSuccess = "addedCommentSuccess"
+            }))
+            {
+                <div class="input-group">
+                    <input id="taskId" name="taskId" data-task-status=@Model.UserTaskStatus type="hidden" value="@Model.Id" />
+                    <input class="form-control" id="comment" name="comment" placeholder="@SocialNetwork.Resources.Resource.Write" type="text" maxlength="90" />
+                    <span class="input-group-btn">
+                        <input id="addComment" class="btn btn-primary" type="submit" value="@SocialNetwork.Resources.Resource.Comment" />
+                    </span>
+                </div>
+            }
+        </div>
+    </div>
+    <div id="comments" class="row" style="margin: 20px 0 20px 0">
+        <div id="scrollContent" style="margin: 0">
+            @Html.Action("ViewComment", "Comment", new { taskId = Model.Id })
+        </div>
+        <div id="loadingDiv" style="text-align: center; display: none; margin-bottom: 20px">
+            <img alt="Loading" src="@Url.Content("~/Content/images/ajax-loader.gif")" />
+        </div>
+    </div>
+</div>

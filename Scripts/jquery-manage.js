@@ -34,21 +34,6 @@ function videoAdd(urlAction, urlVideo) {
     });
 }
 
-function likes() {
-    $("img").click(function () {
-        var likeValue = !$(this).prev().prev().is(":checked");
-        var taskId = $(this).prev().prev().prev().val();
-        $.ajax({
-            url: "/UserTask/LikeValueChanged",
-            type: "GET",
-            data: "likeValue=" + likeValue + "&taskId=" + taskId
-        }).done(function (data) {
-            $("#taskStatistic-" + taskId).children().remove();
-            $("#taskStatistic-" + taskId).append(data);
-        });
-    });
-}
-
 function block() {
     $("img").click(function() {
         var taskId = $(this).attr("data-TaskId");

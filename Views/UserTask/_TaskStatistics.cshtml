@@ -15,15 +15,14 @@
     <div class="col-md-3 task-stat" align="center">
         @if (User.Identity.IsAuthenticated)
         {
-            @Html.HiddenFor(x => x.TaskId, new { id = "taskId" + Model.TaskId })
             @Html.CheckBoxFor(x => x.IsLiked, new { id = "isLiked" + Model.TaskId, @class = "checkbox-hidden" })
             if (Model.IsLiked)
             {
-                <img class="task-stat like-icon" src="~/Content/images/like-checked-64.png" width="36" alt="like" />
+                <img class="task-stat like-icon" src="~/Content/images/like-checked-64.png" onclick="likes(@Model.TaskId)" width="36" alt="like" />
             }
             else
             {
-                <img class="task-stat like-icon" src="~/Content/images/like-default-64.png" width="36" alt="like" />
+                <img class="task-stat like-icon" src="~/Content/images/like-default-64.png" onclick="likes(@Model.TaskId)" width=" 36" alt="like" />
             }
         }
     </div>
@@ -42,6 +41,6 @@
     </div>
 </div>
 
-<script>
+@*<script>
     likes();
-</script>
+</script>*@

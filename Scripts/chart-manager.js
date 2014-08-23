@@ -1,8 +1,8 @@
 ﻿$(function () {
     $("#Chart").click(function (e) {
         e.preventDefault();
-        chartBuilder($("#chartName").val(), $("#axisXName").val(), $("#axisYName").val(),
-            $("#expression").val(), $("#from").val(), $("#to").val(), $("#step").val());
+        chartBuilder($("#ChartName").val(), $("#AxisXName").val(), $("#AxisYName").val(),
+            $("#Expression").val(), $("#From").val(), $("#To").val(), $("#Step").val());
     });
 });
 

@@ -6578,3 +6578,13 @@ label {
     width: 1170px;
   }
 }
+
+.bottom-bar {
+background-color: #ffffff;
+    border-color: #eeeeee;
+    border-style: solid;
+    border-width: 1px 0 0;
+    padding-bottom: 7px;
+    padding-top: 7px;
+
+}

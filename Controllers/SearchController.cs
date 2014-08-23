@@ -10,11 +10,13 @@ using Lucene.Net.Analysis.Standard;
 using Lucene.Net.Documents;
 using Lucene.Net.Index;
 using Lucene.Net.Store;
+using SocialNetwork.Filters;
 using SocialNetwork.Models;
 using SocialNetwork.SearchLucene;
 
 namespace SocialNetwork.Controllers
 {
+    [Culture]
     public class SearchController : Controller
     {
 

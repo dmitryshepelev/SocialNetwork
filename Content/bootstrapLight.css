@@ -1657,7 +1657,7 @@ input[type="checkbox"] {
   line-height: normal;
 }
 input[type="file"] {
-  display: block;
+  display: inline;
 }
 input[type="range"] {
   display: block;
@@ -5835,4 +5835,14 @@ button.close {
 
 .span-rate-color {
     background-color: #62c462;
+}
+
+.bottom-bar {
+background-color: #ffffff;
+    border-color: #eeeeee;
+    border-style: solid;
+    border-width: 1px 0 0;
+    padding-bottom: 7px;
+    padding-top: 7px;
+
 }

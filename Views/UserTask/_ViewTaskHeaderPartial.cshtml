@@ -1,0 +1,42 @@
+﻿@using Microsoft.AspNet.Identity
+<div id="header" align="center" style="margin: 35px 0 40px 0">
+    <h2>@SocialNetwork.Resources.Resource.ProposeSolution</h2>
+    <br />
+
+    @if (Model.UserTaskStatus)
+    {
+        <div class="alert alert-dismissable alert-info" style="width: 264px" align="center">
+            @SocialNetwork.Resources.Resource.YouCantSolveBlockTask
+        </div>
+    }
+    else if (Model.IsSolved)
+    {
+        <div class="alert alert-dismissable alert-success" style="width: 264px" align="center">
+            @SocialNetwork.Resources.Resource.YouSolvedSolution
+        </div>
+    }
+    else if (Model.UserId == User.Identity.GetUserId())
+    {
+        <div class="alert alert-dismissable alert-warning" style="width: 264px" align="center">
+            @SocialNetwork.Resources.Resource.YourOwnTask
+        </div>
+    }
+    else
+    {
+        using (Ajax.BeginForm("CheckSolution", "UserTask", new AjaxOptions
+        {
+            Url = Url.Action("CheckSolution", "UserTask"),
+            HttpMethod = "POST",
+            OnSuccess = "checkResult"
+        }))
+        {
+            <div id="checkSolution" class="input-group" style="width: 264px">
+                <input id="taskId" name="taskId" type="hidden" value="@Model.Id" />
+                <input type="text" class="form-control" id="solutions" name="solutions" placeholder="@SocialNetwork.Resources.Resource.Solution" style="width: 200px" />
+                <span class="input-group-btn">
+                    <input id="check" class="btn btn-primary" type="submit" value="@SocialNetwork.Resources.Resource.Check" />
+                </span>
+            </div>
+        }
+    }
+</div>

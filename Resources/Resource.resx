@@ -190,7 +190,7 @@
     <value>Профиль успешно обновлен</value>
   </data>
   <data name="ProposeSolution" xml:space="preserve">
-    <value>Предложите ваше решение</value>
+    <value>Предложите решение</value>
   </data>
   <data name="ResetPassword" xml:space="preserve">
     <value>Сброс пароля</value>
@@ -229,10 +229,10 @@
     <value>Вы не опубликовали ни одной задачи</value>
   </data>
   <data name="UserMySolutions" xml:space="preserve">
-    <value>Мои решения</value>
+    <value>Решения</value>
   </data>
   <data name="UserMyTasks" xml:space="preserve">
-    <value>Мои задачи</value>
+    <value>Задачи</value>
   </data>
   <data name="UserNameLabel" xml:space="preserve">
     <value>Имя пользователя</value>
@@ -265,7 +265,7 @@
     <value>Найденные пользователи</value>
   </data>
   <data name="byComments" xml:space="preserve">
-    <value>по количеству комментариев</value>
+    <value>по комментариям</value>
   </data>
   <data name="Filters" xml:space="preserve">
     <value>Фильтры</value>
@@ -274,7 +274,7 @@
     <value>по популярности</value>
   </data>
   <data name="ProposeTask" xml:space="preserve">
-    <value>Предложите задачу</value>
+    <value>Предложить задачу</value>
   </data>
   <data name="recent" xml:space="preserve">
     <value>по дате</value>
@@ -283,16 +283,16 @@
     <value>Сброс</value>
   </data>
   <data name="bySolutions" xml:space="preserve">
-    <value>по количеству решений</value>
+    <value>по решениям</value>
   </data>
   <data name="viewMore" xml:space="preserve">
     <value>читать далее</value>
   </data>
   <data name="by" xml:space="preserve">
-    <value>опубликована</value>
+    <value>от</value>
   </data>
   <data name="Comments" xml:space="preserve">
-    <value>Комментарии</value>
+    <value>Отзывы</value>
   </data>
   <data name="details" xml:space="preserve">
     <value>детали</value>
@@ -313,18 +313,21 @@
     <value>Предложите вашу задачу</value>
   </data>
   <data name="viewProfile" xml:space="preserve">
-    <value>просмотреть профиль</value>
+    <value>профиль</value>
   </data>
   <data name="Write" xml:space="preserve">
     <value>Напишите комментарий</value>
   </data>
   <data name="YouCantSolveBlockTask" xml:space="preserve">
-    <value>Вы не можете решить эту задачу. Она закрыта для решения.</value>
+    <value>Вы не можете решить заблокированную задачу</value>
   </data>
   <data name="YourOwnTask" xml:space="preserve">
     <value>Это же ваша задача!</value>
   </data>
   <data name="YouSolvedSolution" xml:space="preserve">
     <value>Вы уже решили эту задачу</value>
+  </data>
+  <data name="Manage" xml:space="preserve">
+    <value>Управление</value>
   </data>
 </root>

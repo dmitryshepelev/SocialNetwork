@@ -1,13 +1,46 @@
-﻿<div id="chartData">
-    <input id="taskId" name="taskId" type="hidden" value="1" />
-    <input type="text" class="form-control" id="chartName" name="chartName" placeholder="Chart name" style="width: 200px" />
-    <input type="text" class="form-control" id="axisXName" name="axisXName" placeholder="Axis X Name" style="width: 200px" />
-    <input type="text" class="form-control" id="axisYName" name="axisYName" placeholder="Axis Y Name" style="width: 200px" />
-    <input type="text" class="form-control" id="expression" name="expression" placeholder="Expression" style="width: 200px" />
-    <input type="text" class="form-control" id="from" name="from" placeholder="From" style="width: 200px" />
-    <input type="text" class="form-control" id="to" name="to" placeholder="To" style="width: 200px" />
-    <input type="text" class="form-control" id="step" name="step" placeholder="With step" style="width: 200px" />
-    <input id="Chart" class="btn btn-primary" type="submit" value="Preview" />
-    <div id="chart">
+﻿<div id="chartData" class="row">
+    <div class="col-lg-6">
+        <div>
+            <p>Chart name</p>
+            <input type="text" class="form-control texbox-margin" id="ChartName" name="ChartName" placeholder="Chart name" required />
+        </div>
+        <div>
+            <p>Axis X name</p>
+            <input type="text" class="form-control texbox-margin" id="AxisXName" name="AxisXName" placeholder="Axis X name" />
+        </div>
+        <div>
+            <p>Axis Y name</p>
+            <input type="text" class="form-control texbox-margin" id="AxisYName" name="AxisYName" placeholder="Axis Y name" />
+        </div>
     </div>
+    <div class="col-lg-6">
+        <div>
+            <p>Expression</p>
+            <input type="text" class="form-control texbox-margin" id="Expression" name="Expression" placeholder="expample: sin(x)" />
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <p>from</p>
+                <input type="text" class="form-control texbox-margin" id="From" name="From" placeholder="from" />
+            </div>
+            <div class="col-lg-4">
+                <p>to</p>
+                <input type="text" class="form-control texbox-margin" id="To" name="To" placeholder="to" />
+            </div>
+            <div class="col-lg-4">
+                <p>step</p>
+                <input type="text" class="form-control texbox-margin" id="Step" name="Step" placeholder="with step" />
+            </div>
+        </div>
+        <div class="row" style="padding-top: 30px">
+            <div class="col-lg-3">
+                <input id="Chart" class="btn btn-primary" type="button" value="Preview" />
+            </div>
+            <div class="col-lg-9">
+                <abbr class="text-danger" title="Field required">*</abbr> - All fields are required
+            </div>
+        </div>
+    </div>
+</div>
+<div id="chart">
 </div>

@@ -247,44 +247,6 @@ namespace SocialNetwork.Controllers
             return View(taskToView);
         }
 
-        [HttpGet]
-        public JsonResult GetTags(string q)
-        {
-            var jsonTags = tagRepository.GetAll().Where(x => x.TagName.ToUpper().Contains(q.ToUpper())).Select(res => new { id = res.Id.ToString(), name = res.TagName }).ToList();
-            jsonTags.Add(new { id = q, name = String.Format("Add \"{0}\"", q )});               
-            return Json(jsonTags, JsonRequestBehavior.AllowGet);
-        }
-
-        class JsonStringResult
-        {
-            public string url { get; set; }
-            public string param { get; set; }
-        }
-
-        [HttpPost]
-        public JsonResult AddVideo(string urlVideo)
-        {
-            urlVideo = urlVideo.Replace("watch?v=", "embed/");
-            var jsonResult = new JsonStringResult()
-            {
-                param = String.Format("<iframe width=\"382\" height=\"214\" src=\"{0}\" frameborder=\"0\" allowfullscreen></iframe>", urlVideo)
-            };
-            jsonResult.url = String.Format("[VIDEO]{0}[/VIDEO]", jsonResult.param);
-            return Json(jsonResult, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpPost]
-        public JsonResult UploadImage(HttpPostedFileBase file)
-        {
-            var image = Helpers.Helpers.UploadImage(file);
-            var jsonResult = new JsonStringResult()
-            {
-                url = String.Format("[IMAGE]<img src=\"{0}\"/>[/IMAGE]", Helpers.Helpers.TransformImage(image.Uri.ToString(), 522, image.Width)),
-                param = image.PublicId,
-            };
-            return Json(jsonResult, JsonRequestBehavior.AllowGet);
-        }
-
         [Authorize]
         public ActionResult CreateTask()
         {
@@ -307,20 +269,23 @@ namespace SocialNetwork.Controllers
                 UserId = User.Identity.GetUserId()
             };
             var createdTask = userTaskRepository.Add(newTask);
-            var tags = model.Tags.Split(',');
-            foreach (var t in tags)
+            if (model.Tags != "")
             {
-                var tag = new TagModel();
-                try
+                var tags = model.Tags.Split(',');
+                foreach (var t in tags)
                 {
-                    tag = tagRepository.GetById(Int32.Parse(t));
-                }
-                catch (FormatException)
-                {
-                    tag.TagName = t;
-                    tagRepository.Add(tag);
-                }
-                userTaskTagsRepository.Add(new UserTaskTagModel() { TagId = tag.Id, UserTaskId = createdTask.Id });
+                    var tag = new TagModel();
+                    try
+                    {
+                        tag = tagRepository.GetById(Int32.Parse(t));
+                    }
+                    catch (FormatException)
+                    {
+                        tag.TagName = t;
+                        tagRepository.Add(tag);
+                    }
+                    userTaskTagsRepository.Add(new UserTaskTagModel() { TagId = tag.Id, UserTaskId = createdTask.Id });
+                }                
             }
             var answers = model.Answers.Split(',');
             foreach (var answer in answers)
@@ -371,10 +336,22 @@ namespace SocialNetwork.Controllers
             {
                 taskToEdit.Tags += tag.TagName + ", ";
             }
+            var chart = (from c in chartRepository.GetAll() where c.UserTaskId == task.Id select c).SingleOrDefault();
+            if (chart != null)
+            {
+                taskToEdit.ChartName = chart.ChartName;
+                taskToEdit.AxisXName = chart.AxisXName;
+                taskToEdit.AxisYName = chart.AxisYName;
+                taskToEdit.From = chart.From;
+                taskToEdit.To = chart.To;
+                taskToEdit.Step = chart.Step;
+                taskToEdit.ChartId = chart.Id;
+            }
             ViewBag.Categories = (from c in categoryRepository.GetAll() orderby c.CategoryName select c.CategoryName);
             return View(taskToEdit);
         }
 
+        [HttpPost]
         public ActionResult EditTask(EditTaskViewModel model)
         {
             var task = userTaskRepository.GetById(model.TaskId);
@@ -385,25 +362,28 @@ namespace SocialNetwork.Controllers
             task.CategoryId = categoryRepository.GetId(model.Category);
             task.UserTaskContent = model.Content;
             userTaskRepository.Update(task);
-            var userTaskTags = from t in userTaskTagsRepository.GetAll() where t.UserTaskId == task.Id select t;
-            foreach (var userTaskTag in userTaskTags)
+            if (model.Tags != "")
             {
-                userTaskTagsRepository.Delete(userTaskTag);
-            }
-            var tags = model.Tags.Split(',');
-            foreach (var t in tags)
-            {
-                var tag = new TagModel();
-                try
+                var userTaskTags = from t in userTaskTagsRepository.GetAll() where t.UserTaskId == task.Id select t;
+                foreach (var userTaskTag in userTaskTags)
                 {
-                    tag = tagRepository.GetById(Int32.Parse(t));
+                    userTaskTagsRepository.Delete(userTaskTag);
                 }
-                catch (FormatException)
+                var tags = model.Tags.Split(',');
+                foreach (var t in tags)
                 {
-                    tag.TagName = t;
-                    tagRepository.Add(tag);
-                }
-                userTaskTagsRepository.Add(new UserTaskTagModel() { TagId = tag.Id, UserTaskId = task.Id });
+                    var tag = new TagModel();
+                    try
+                    {
+                        tag = tagRepository.GetById(Int32.Parse(t));
+                    }
+                    catch (FormatException)
+                    {
+                        tag.TagName = t;
+                        tagRepository.Add(tag);
+                    }
+                    userTaskTagsRepository.Add(new UserTaskTagModel() { TagId = tag.Id, UserTaskId = task.Id });
+                }                
             }
             var taskSolutions = from s in taskSolutionRepository.GetAll() where s.UserTaskId == task.Id select s;
             foreach (var solution in taskSolutions)
@@ -414,6 +394,18 @@ namespace SocialNetwork.Controllers
             foreach (var answer in answers)
             {
                 taskSolutionRepository.Add(new TaskSolutionModel() { Solution = answer, UserTaskId = task.Id });
+            }
+            var chart = (from c in chartRepository.GetAll() where c.UserTaskId == task.Id select c).SingleOrDefault();
+            if (chart != null)
+            {
+                chart.AxisXName = model.AxisXName;
+                chart.AxisYName = model.AxisYName;
+                chart.ChartName = model.ChartName;
+                chart.Expression = model.Expression;
+                chart.From = model.From;
+                chart.To = model.To;
+                chart.Step = model.Step;
+                chartRepository.Update(chart);
             }
             return RedirectToAction("ViewTask", new { id = task.Id });
         }
@@ -456,6 +448,44 @@ namespace SocialNetwork.Controllers
                 TaskId = taskId
             };
             return taskStatistics;
+        }
+
+        [HttpGet]
+        public JsonResult GetTags(string q)
+        {
+            var jsonTags = tagRepository.GetAll().Where(x => x.TagName.ToUpper().Contains(q.ToUpper())).Select(res => new { id = res.Id.ToString(), name = res.TagName }).ToList();
+            jsonTags.Add(new { id = q, name = String.Format("Add \"{0}\"", q) });
+            return Json(jsonTags, JsonRequestBehavior.AllowGet);
+        }
+
+        class JsonStringResult
+        {
+            public string url { get; set; }
+            public string param { get; set; }
+        }
+
+        [HttpPost]
+        public JsonResult AddVideo(string urlVideo)
+        {
+            urlVideo = urlVideo.Replace("watch?v=", "embed/");
+            var jsonResult = new JsonStringResult()
+            {
+                param = String.Format("<iframe width=\"382\" height=\"214\" src=\"{0}\" frameborder=\"0\" allowfullscreen></iframe>", urlVideo)
+            };
+            jsonResult.url = String.Format("[VIDEO]{0}[/VIDEO]", jsonResult.param);
+            return Json(jsonResult, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult UploadImage(HttpPostedFileBase file)
+        {
+            var image = Helpers.Helpers.UploadImage(file);
+            var jsonResult = new JsonStringResult()
+            {
+                url = String.Format("[IMAGE]<img src=\"{0}\"/>[/IMAGE]", Helpers.Helpers.TransformImage(image.Uri.ToString(), 522, image.Width)),
+                param = image.PublicId,
+            };
+            return Json(jsonResult, JsonRequestBehavior.AllowGet);
         }
         #endregion
     }

@@ -503,7 +503,10 @@
     <Content Include="Scripts\parser.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\taskstat.js" />
     <Content Include="Scripts\to-markdown.js" />
+    <Content Include="Scripts\view-all-tasks.js" />
+    <Content Include="Scripts\viewtask.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -562,6 +565,8 @@
     <Content Include="Views\Search\SearchResult.cshtml" />
     <Content Include="Views\UserTask\_ChartPartial.cshtml" />
     <Content Include="Views\UserTask\_ViewChartPartial.cshtml" />
+    <Content Include="Views\UserTask\_ViewTaskHeaderPartial.cshtml" />
+    <Content Include="Views\UserTask\_ViewCommentsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Chart\" />

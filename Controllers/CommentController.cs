@@ -18,7 +18,7 @@ namespace SocialNetwork.Controllers
     {
         private ApplicationUserManager userManager;
         private ICommentRepository commentRepository;
-        private IUserTaskRepository userTaskRepository;
+        private int size = 5;
 
         public CommentController()
         {
@@ -27,7 +27,6 @@ namespace SocialNetwork.Controllers
         public CommentController(ICommentRepository commentRepository, IUserTaskRepository userTaskRepository)
         {
             this.commentRepository = commentRepository;
-            this.userTaskRepository = userTaskRepository;
         }
 
         public CommentController(ApplicationUserManager userManager)
@@ -73,7 +72,7 @@ namespace SocialNetwork.Controllers
         #region Helpers
         private List<CommentsViewModel> GetTasksComments(int? taskId, int blockNumber = 1, int blockSize = 5)
         {
-            int startIndex = (blockNumber - 1)*blockSize;
+            var startIndex = (blockNumber - 1)*blockSize;
             var taskComments = from comment in commentRepository.GetAll()
                                where comment.UserTaskId == taskId
                                select comment;

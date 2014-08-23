@@ -313,7 +313,7 @@
     <value>Propose your task</value>
   </data>
   <data name="viewProfile" xml:space="preserve">
-    <value>view profile</value>
+    <value>profile</value>
   </data>
   <data name="Write" xml:space="preserve">
     <value>Write a comment...</value>
@@ -326,5 +326,8 @@
   </data>
   <data name="YouSolvedSolution" xml:space="preserve">
     <value>You have already solved this task</value>
+  </data>
+  <data name="Manage" xml:space="preserve">
+    <value>Manage</value>
   </data>
 </root>
