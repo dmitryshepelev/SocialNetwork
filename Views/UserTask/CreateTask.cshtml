@@ -26,6 +26,7 @@
     .texbox-margin {
         margin-bottom: 15px;
     }
+
     .bar {
         height: 18px;
         background: green;
@@ -35,46 +36,46 @@
 @using (Html.BeginForm("CreateTask", "UserTask", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div align="center" style="margin: 35px 0 40px 0">
-        <h2>Propose your f...ing task</h2>
+        <h2>@SocialNetwork.Resources.Resource.ProposeTask</h2>
         <br />
         <div>
-            <input type="submit" value="Create" class="btn btn-primary btn-xs" />
-            <a class="btn btn-default btn-xs" href="~/UserTask/ViewAllTasks">Cancel</a>
+            <input type="submit" value=@SocialNetwork.Resources.Resource.Create class="btn btn-primary btn-xs" />
+            <a class="btn btn-default btn-xs" href="~/UserTask/ViewAllTasks">@SocialNetwork.Resources.Resource.Cancel</a>
         </div>
     </div>
     <div style="margin: 0 150px 0 150px; border: 1px solid #dddddd; border-radius: 5px">
         <div style="padding: 20px 20px 0 20px">
             <ul class="nav nav-tabs" style="margin-bottom: 15px;">
-                <li class="active"><a href="#basic-info" data-toggle="tab">Basic info</a></li>
-                <li class=""><a href="#images-videos" data-toggle="tab">Images and Videos</a></li>
-                <li class=""><a href="#graph" data-toggle="tab">Graph</a></li>
+                <li class="active"><a href="#basic-info" data-toggle="tab">@SocialNetwork.Resources.Resource.BasicInfo</a></li>
+                <li class=""><a href="#images-videos" data-toggle="tab">@SocialNetwork.Resources.Resource.ImagesAndVideos</a></li>
+                <li class=""><a href="#graph" data-toggle="tab">@SocialNetwork.Resources.Resource.Charts</a></li>
             </ul>
             <div id="TabContent" class="tab-content" style="border-bottom: 1px solid #dddddd">
                 <div class="tab-pane fade active in" id="basic-info">
                     <div class="row">
                         <div class="col-lg-4">
                             <div>
-                                <p>Title <abbr class="text-danger" title="Field required">*</abbr></p>
-                                <input type="text" placeholder="Title" name="UserTaskTitle" class="form-control texbox-margin" required />
+                                <p>@SocialNetwork.Resources.Resource.UserTaskTitle <abbr class="text-danger" title=@SocialNetwork.Resources.Resource.Required>*</abbr></p>
+                                <input type="text" placeholder=@SocialNetwork.Resources.Resource.UserTaskTitle name="UserTaskTitle" class="form-control texbox-margin" required />
                             </div>
                             <div>
-                                <p>Category</p>
+                                <p>@SocialNetwork.Resources.Resource.CategoryName</p>
                                 <select class="form-control texbox-margin" name="Category" id="select">
                                     @foreach (var category in ViewBag.Categories)
                                     {
                                         <option>@category</option>
                                     }
-                                </select>                                
+                                </select>
                             </div>
                             <div>
-                                <p>Answers <abbr class="text-danger" title="Field required" required>*</abbr></p>
-                                <input name="Answers" placeholder="Answers" class="form-control texbox-margin" style="max-height: 100px" required />
+                                <p>@SocialNetwork.Resources.Resource.Solutions <abbr class="text-danger" title=@SocialNetwork.Resources.Resource.Required required>*</abbr></p>
+                                <input name="Answers" placeholder=@SocialNetwork.Resources.Resource.Solutions class="form-control texbox-margin" style="max-height: 100px" required />
                             </div>
                         </div>
                         <div class="col-lg-8">
                             <textarea name="content" id="task-content" data-provide="markdown" rows="10" class="form-control" required></textarea>
                             <div class="texbox-margin" style="margin-top: 15px">
-                                <input id="tags" class="form-control" type="text" name="Tags" placeholder="Tags" required />
+                                <input id="tags" class="form-control" type="text" name="Tags" placeholder=@SocialNetwork.Resources.Resource.TagsName required />
                             </div>
                         </div>
                     </div>
@@ -83,44 +84,41 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div>
-                                <p>Upload image</p>
+                                <p>@SocialNetwork.Resources.Resource.UploadImage</p>
                                 <input type="file" id="fileUpload" name="file" class="btn btn-default texbox-margin" accept="image/*" />
                                 <div id="progress" class="progress progress-striped">
                                     <div class="progress-bar progress-bar-danger" style="width: 0%;"></div>
                                 </div>
                                 <hr />
                                 <div class="texbox-margin">
-                                    <p>Copy the link to the task content editor</p>
-                                    <input id="url" class="form-control" />                                    
+                                    <p>@SocialNetwork.Resources.Resource.LinkInfo</p>
+                                    <input id="url" class="form-control" />
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div>
-                                <p>Add video</p>
+                                <p>@SocialNetwork.Resources.Resource.AddVideo</p>
                                 <div class="input-group texbox-margin">
-                                    <input type="text" id="urlVideo" name="urlVideo" class="form-control texbox-margin" placeholder="Link" />
+                                    <input type="text" id="urlVideo" name="urlVideo" class="form-control texbox-margin" placeholder=@SocialNetwork.Resources.Resource.Link />
                                     <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button" id="addVideoButton">Add video</button>
+                                        <button class="btn btn-default" type="button" id="addVideoButton">@SocialNetwork.Resources.Resource.AddVideo</button>
                                     </span>
                                 </div>
                                 <div id="showVideo" class="texbox-margin">
                                 </div>
                             </div>
-                        </div>                        
+                        </div>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="graph">
-                        @Html.Partial("_ChartPartial")
+                    @Html.Partial("_ChartPartial")
                 </div>
             </div>
             <div style="margin-top: 10px">
                 <p style="font-size: 12px">
-                    <b>Important:</b> Please, try to use the search before submiting to be sure that your task is unique.
-                    By sharing, you confirm that your task comply with our <a href="">Terms of Use</a> and don't infringe anyone else's rights.
-                    If in doubt, check our <a href="">Copyright Information</a> pages before uploading.
-                    <br /><br />
-                    Problems uploading? Please send a message with the description of the problem to any Administrator.
+                    <b>@SocialNetwork.Resources.Resource.Important: </b>@SocialNetwork.Resources.Resource.TaskLegalInfo1 <a href="">@SocialNetwork.Resources.Resource.TermsOfUse</a>
+                    @SocialNetwork.Resources.Resource.TaskLegalInfo2 <a href="">@SocialNetwork.Resources.Resource.CopyrightInformation</a> @SocialNetwork.Resources.Resource.TaskLegalInfo3
                 </p>
             </div>
         </div>

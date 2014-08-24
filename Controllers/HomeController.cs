@@ -103,18 +103,34 @@ namespace SocialNetwork.Controllers
             return PartialView("_RecentTasksPartial", recentTasks);
         }
 
-        public ActionResult TagCloud()
+        public ActionResult ViewTagCloud()
+        {
+            return View();
+        }
+
+        public ActionResult TagCloud(int count)
+        {
+            return PartialView("_TagCloudPartial", GetTags(count));
+        }
+
+        #region Helpers
+
+        public List<TagCloudModel> GetTags(int n)
         {
             var tags = tagRepositrory.GetAll();
-            var tagCloud = tags.Select(tag => new TagCloudModel()
+            if (n == 0)
+            {
+                n = tags.Count;
+            }
+            return tags.Select(tag => new TagCloudModel()
             {
                 TagId = tag.Id,
                 TagName = tag.TagName,
                 TagFrequency = (from userTaskTag in userTaskTagsRepositrory.GetAll()
                                 where userTaskTag.TagId == tag.Id
                                 select userTaskTag).Count()
-            }).Take(40).ToList();
-            return PartialView("_TagCloudPartial", tagCloud);
+            }).Take((int)n).ToList();
         }
+        #endregion
     }
 }

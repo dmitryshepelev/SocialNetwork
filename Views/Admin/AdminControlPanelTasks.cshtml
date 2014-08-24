@@ -1,12 +1,12 @@
 ﻿@model IList<SocialNetwork.Models.AdminControlPanelTasksViewModel>
 @{
-    ViewBag.Title = "AdminControlPanelTasks";
+    ViewBag.Title = SocialNetwork.Resources.Resource.AdminControlPanel;
 }
 
 @using (Html.BeginForm("AdminControlPanelTasks", "Admin", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
 {
     <h3>
-        Tasks list
+        @SocialNetwork.Resources.Resource.Tasks
         @if (ViewBag.UserId != null)
         {
             <a href="~/Account/ViewAccount?id=@ViewBag.UserId">@ViewBag.UserName</a>
@@ -19,24 +19,24 @@
             <ul class="list-group" style="margin-bottom: 5px">
                 <li class="list-group-item">
                     <span class="badge">@ViewBag.TotalTasks</span>
-                    Total tasks
+                    @SocialNetwork.Resources.Resource.Tasks
                 </li>
             </ul>
-            <input type="submit" style="margin-top: 4px; height: 35px; width: 164px" class="btn btn-warning" value="Confirm changes" />
+            <input type="submit" style="margin-top: 4px; height: 35px; width: 164px" class="btn btn-warning" value=@SocialNetwork.Resources.Resource.Confirm />
         </div>
         <div class="col-md-10">
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th width="20%">@Html.ActionLink("Title", "AdminControlPanelTasks", "Admin", new { userId = ViewBag.UserId, sortParam = "TaskTitle", sortOrder = ViewBag.SortOrder }, null)</th>
-                        <th width="15%">@Html.ActionLink("Category", "AdminControlPanelTasks", "Admin", new { userId = ViewBag.UserId, sortParam = "Category", sortOrder = ViewBag.SortOrder }, null)</th>
-                        <th width="15%">@Html.ActionLink("Date added", "AdminControlPanelTasks", "Admin", new { userId = ViewBag.UserId, sortParam = "DateAdded", sortOrder = ViewBag.SortOrder }, null)</th>
-                        <th width="15%">@Html.ActionLink("User", "AdminControlPanelTasks", "Admin", new { userId = ViewBag.UserId, sortParam = "UserName", sortOrder = ViewBag.SortOrder }, null)</th>
-                        <th>@Html.ActionLink("Comments", "AdminControlPanelTasks", "Admin", new { userId = ViewBag.UserId, sortParam = "CommentAmount", sortOrder = ViewBag.SortOrder }, null)</th>
-                        <th>@Html.ActionLink("Solutions", "AdminControlPanelTasks", "Admin", new { userId = ViewBag.UserId, sortParam = "SolutionAmount", sortOrder = ViewBag.SortOrder }, null)</th>
-                        <th>@Html.ActionLink("Likes", "AdminControlPanelTasks", "Admin", new { userId = ViewBag.UserId, sortParam = "LikeAmount", sortOrder = ViewBag.SortOrder }, null)</th>
-                        <th>@Html.ActionLink("Block", "AdminControlPanelTasks", "Admin", new { userId = ViewBag.UserId, sortParam = "TaskStatus", sortOrder = ViewBag.SortOrder }, null)</th>
-                        <th>Delete</th>
+                        <th width="20%">@Html.ActionLink(SocialNetwork.Resources.Resource.UserTaskTitle, "AdminControlPanelTasks", "Admin", new { userId = ViewBag.UserId, sortParam = "TaskTitle", sortOrder = ViewBag.SortOrder }, null)</th>
+                        <th width="15%">@Html.ActionLink(SocialNetwork.Resources.Resource.CategoryName, "AdminControlPanelTasks", "Admin", new { userId = ViewBag.UserId, sortParam = "Category", sortOrder = ViewBag.SortOrder }, null)</th>
+                        <th width="15%">@Html.ActionLink(SocialNetwork.Resources.Resource.DateAdded, "AdminControlPanelTasks", "Admin", new { userId = ViewBag.UserId, sortParam = "DateAdded", sortOrder = ViewBag.SortOrder }, null)</th>
+                        <th width="15%">@Html.ActionLink(SocialNetwork.Resources.Resource.UserRole, "AdminControlPanelTasks", "Admin", new { userId = ViewBag.UserId, sortParam = "UserName", sortOrder = ViewBag.SortOrder }, null)</th>
+                        <th>@Html.ActionLink(SocialNetwork.Resources.Resource.Comments, "AdminControlPanelTasks", "Admin", new { userId = ViewBag.UserId, sortParam = "CommentAmount", sortOrder = ViewBag.SortOrder }, null)</th>
+                        <th>@Html.ActionLink(SocialNetwork.Resources.Resource.Solutions, "AdminControlPanelTasks", "Admin", new { userId = ViewBag.UserId, sortParam = "SolutionAmount", sortOrder = ViewBag.SortOrder }, null)</th>
+                        <th>@Html.ActionLink(SocialNetwork.Resources.Resource.Likes, "AdminControlPanelTasks", "Admin", new { userId = ViewBag.UserId, sortParam = "LikeAmount", sortOrder = ViewBag.SortOrder }, null)</th>
+                        <th>@Html.ActionLink(SocialNetwork.Resources.Resource.Block, "AdminControlPanelTasks", "Admin", new { userId = ViewBag.UserId, sortParam = "TaskStatus", sortOrder = ViewBag.SortOrder }, null)</th>
+                        <th>@SocialNetwork.Resources.Resource.Delete</th>
                     </tr>
                 </thead>
                 <tbody>

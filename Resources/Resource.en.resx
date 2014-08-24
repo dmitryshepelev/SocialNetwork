@@ -229,10 +229,10 @@
     <value>You haven't published any tasks</value>
   </data>
   <data name="UserMySolutions" xml:space="preserve">
-    <value>My solutions</value>
+    <value>Solutions</value>
   </data>
   <data name="UserMyTasks" xml:space="preserve">
-    <value>My tasks</value>
+    <value>Tasks</value>
   </data>
   <data name="UserNameLabel" xml:space="preserve">
     <value>User name</value>
@@ -329,5 +329,119 @@
   </data>
   <data name="Manage" xml:space="preserve">
     <value>Manage</value>
+  </data>
+  <data name="AccountView" xml:space="preserve">
+    <value>View account</value>
+  </data>
+  <data name="AddVideo" xml:space="preserve">
+    <value>Add video</value>
+  </data>
+  <data name="AdminControlPanel" xml:space="preserve">
+    <value>Administrator's control panel</value>
+  </data>
+  <data name="AdminRole" xml:space="preserve">
+    <value>Administrator</value>
+  </data>
+  <data name="AllFieldsAreRequired" xml:space="preserve">
+    <value>All fields are required</value>
+  </data>
+  <data name="Attempt" xml:space="preserve">
+    <value>attempts</value>
+  </data>
+  <data name="AxisXName" xml:space="preserve">
+    <value>X axis</value>
+  </data>
+  <data name="AxisYName" xml:space="preserve">
+    <value>Y axis</value>
+  </data>
+  <data name="BasicInfo" xml:space="preserve">
+    <value>BasicInfo</value>
+  </data>
+  <data name="Block" xml:space="preserve">
+    <value>Block</value>
+  </data>
+  <data name="BlockedTask" xml:space="preserve">
+    <value>Blocked task</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ChartName" xml:space="preserve">
+    <value>ChartName</value>
+  </data>
+  <data name="Charts" xml:space="preserve">
+    <value>Charts</value>
+  </data>
+  <data name="Comfirm" xml:space="preserve">
+    <value>Confirm changes</value>
+  </data>
+  <data name="CopyrightInformation" xml:space="preserve">
+    <value>Copyright Information</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="DateAdded" xml:space="preserve">
+    <value>Date added</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Expression" xml:space="preserve">
+    <value>Expression</value>
+  </data>
+  <data name="ExpressionExample" xml:space="preserve">
+    <value>example: sin(x)</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>from</value>
+  </data>
+  <data name="ImagesAndVideos" xml:space="preserve">
+    <value>Images and Videos</value>
+  </data>
+  <data name="Important" xml:space="preserve">
+    <value>Important</value>
+  </data>
+  <data name="Link" xml:space="preserve">
+    <value>Link</value>
+  </data>
+  <data name="LinkInfo" xml:space="preserve">
+    <value>Copy the link to the task content editor</value>
+  </data>
+  <data name="LockoutEndDate" xml:space="preserve">
+    <value>Lockout end date</value>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>Required</value>
+  </data>
+  <data name="Step" xml:space="preserve">
+    <value>step</value>
+  </data>
+  <data name="TagCloud" xml:space="preserve">
+    <value>Tag cloud</value>
+  </data>
+  <data name="TaskLegalInfo1" xml:space="preserve">
+    <value>Please, try to use the search before submiting to be sure that your task is unique. By sharing, you confirm that your task comply with our</value>
+  </data>
+  <data name="TaskLegalInfo2" xml:space="preserve">
+    <value>and don't infringe anyone else's rights. If in doubt, check our</value>
+  </data>
+  <data name="TaskLegalInfo3" xml:space="preserve">
+    <value>pages before publishing.</value>
+  </data>
+  <data name="TermsOfUse" xml:space="preserve">
+    <value>Terms of Use</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>to</value>
+  </data>
+  <data name="UploadImage" xml:space="preserve">
+    <value>Upload image</value>
+  </data>
+  <data name="UserRole" xml:space="preserve">
+    <value>User</value>
   </data>
 </root>

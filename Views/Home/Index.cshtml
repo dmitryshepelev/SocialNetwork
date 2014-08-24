@@ -2,7 +2,7 @@
     ViewBag.Title = "Home Page";
 }
 
-<script src="~/Scripts/jquery-2.1.1.js"></script>
+<script src="~/Scripts/jquery.latest.js"></script>
 <script src="~/Scripts/jquery.tagcloud.js"></script>
 
 <style>
@@ -28,5 +28,5 @@
         @Html.Action("TopRateUsers")
     </div>
 </div>
-
-@Html.Action("TagCloud")
+<hr />
+@Html.Action("TagCloud", new { count = 30 })

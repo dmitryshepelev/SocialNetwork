@@ -3,7 +3,7 @@
 <div>
     @if (Model.UserTaskStatus)
     {
-        <span class="label label-danger">Blocked task</span>
+        <span class="label label-danger">@SocialNetwork.Resources.Resource.BlockedTask</span>
     }
     @foreach (var tag in Model.Tags)
     {

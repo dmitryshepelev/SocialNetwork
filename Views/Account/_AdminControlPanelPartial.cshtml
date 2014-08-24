@@ -2,15 +2,15 @@
 {
     <ul class="list-group panel-warning">
         <li class="list-group-item panel-heading">
-            Administrator's control panel
+            @SocialNetwork.Resources.Resource.AdminControlPanel
         </li>
         <li class="list-group-item">
             <span class="badge">@ViewBag.TotalUsers</span>
-            @Html.ActionLink("Users", "AdminControlPanelUsers", "Admin")
+            @Html.ActionLink(SocialNetwork.Resources.Resource.Users, "AdminControlPanelUsers", "Admin")
         </li>
         <li class="list-group-item">
             <span class="badge">@ViewBag.TotalTasks</span>
-            @Html.ActionLink("Tasks", "AdminControlPanelTasks", "Admin")
+            @Html.ActionLink(SocialNetwork.Resources.Resource.Tasks, "AdminControlPanelTasks", "Admin")
         </li>
     </ul>
 }

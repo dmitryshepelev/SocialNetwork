@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = SocialNetwork.Resources.Resource.TagCloud;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/jquery.latest.js"></script>
+<script src="~/Scripts/jquery.tagcloud.js"></script>
+
+<h2>@SocialNetwork.Resources.Resource.TagCloud</h2>
+
+@Html.Action("TagCloud", "Home", routeValues: new { count = 0 })

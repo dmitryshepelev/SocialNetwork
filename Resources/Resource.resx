@@ -330,4 +330,118 @@
   <data name="Manage" xml:space="preserve">
     <value>Управление</value>
   </data>
+  <data name="AccountView" xml:space="preserve">
+    <value>Просмотр профиля</value>
+  </data>
+  <data name="AddVideo" xml:space="preserve">
+    <value>Вставить видео</value>
+  </data>
+  <data name="AdminControlPanel" xml:space="preserve">
+    <value>Панель управления администратора</value>
+  </data>
+  <data name="AdminRole" xml:space="preserve">
+    <value>Администратор</value>
+  </data>
+  <data name="AllFieldsAreRequired" xml:space="preserve">
+    <value>Все поля обязательны к заполнению</value>
+  </data>
+  <data name="Attempt" xml:space="preserve">
+    <value>Попытк.</value>
+  </data>
+  <data name="AxisXName" xml:space="preserve">
+    <value>Ось Х</value>
+  </data>
+  <data name="AxisYName" xml:space="preserve">
+    <value>Оcь Y</value>
+  </data>
+  <data name="BasicInfo" xml:space="preserve">
+    <value>Основная информация</value>
+  </data>
+  <data name="Block" xml:space="preserve">
+    <value>Заблокировать</value>
+  </data>
+  <data name="BlockedTask" xml:space="preserve">
+    <value>Блокировано</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="ChartName" xml:space="preserve">
+    <value>Название графика</value>
+  </data>
+  <data name="Charts" xml:space="preserve">
+    <value>График</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Подтвердить изменения</value>
+  </data>
+  <data name="CopyrightInformation" xml:space="preserve">
+    <value>Правовая информация</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Создать</value>
+  </data>
+  <data name="DateAdded" xml:space="preserve">
+    <value>Дата добавления</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="Expression" xml:space="preserve">
+    <value>Выражение</value>
+  </data>
+  <data name="ExpressionExample" xml:space="preserve">
+    <value>например: sin(x)</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>от</value>
+  </data>
+  <data name="ImagesAndVideos" xml:space="preserve">
+    <value>Изображения и видео</value>
+  </data>
+  <data name="Important" xml:space="preserve">
+    <value>Важно</value>
+  </data>
+  <data name="Link" xml:space="preserve">
+    <value>Ссылка</value>
+  </data>
+  <data name="LinkInfo" xml:space="preserve">
+    <value>Скопируйте ссылку в поле содержимого задачи</value>
+  </data>
+  <data name="LockoutEndDate" xml:space="preserve">
+    <value>Конец блокировки</value>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>Просмотр</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>Обязательно к заполнению</value>
+  </data>
+  <data name="Step" xml:space="preserve">
+    <value>шаг</value>
+  </data>
+  <data name="TagCloud" xml:space="preserve">
+    <value>Облако тегов</value>
+  </data>
+  <data name="TaskLegalInfo1" xml:space="preserve">
+    <value>Пожалуйста, используйте поиск перед отправкой задачи, чтобы убедиться что ваша здача не повторяется. Оставляя публикацию, вы подтверждаете, что содержимое соблюдает</value>
+  </data>
+  <data name="TaskLegalInfo2" xml:space="preserve">
+    <value>и не нарушает права других пользователей. Если вы сомневаетесь, посетите сраницу</value>
+  </data>
+  <data name="TaskLegalInfo3" xml:space="preserve">
+    <value>перед публикацией.</value>
+  </data>
+  <data name="TermsOfUse" xml:space="preserve">
+    <value>Условия использования</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>до</value>
+  </data>
+  <data name="UploadImage" xml:space="preserve">
+    <value>Загрузить изображение</value>
+  </data>
+  <data name="UserRole" xml:space="preserve">
+    <value>Пользователь</value>
+  </data>
 </root>

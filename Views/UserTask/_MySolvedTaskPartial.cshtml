@@ -16,7 +16,7 @@ else
                 @Html.ActionLink(task.TaskTitle, "ViewTask", "UserTask", new { id = task.TaskId }, null)
             </div>
             <div class="col-md-3">
-                @task.AttemptAmount attemts
+                @task.AttemptAmount @SocialNetwork.Resources.Resource.Attempt
             </div>
         </div>
     }

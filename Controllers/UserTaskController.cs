@@ -188,7 +188,7 @@ namespace SocialNetwork.Controllers
             userTasksSolutions.IsSolved = true;
             user.AttemptAmount += 1;
             TimeSpan timeDifference = DateTime.Now - userTaskRepository.GetById((int) taskId).DateAdded;
-            var addRate = (((1.0 / userTasksSolutions.AttemptAmount) * 0.8) + ((1.0 / timeDifference.TotalHours) * 0.2)) * 100;
+            var addRate = (((1.0 / userTasksSolutions.AttemptAmount) * 0.8) + ((1.0 / timeDifference.TotalDays) * 0.2)) * 10;
             user.UserRate += addRate;
             UserManager.Update(user);
             userSolvedTasksRepository.Update(userTasksSolutions);

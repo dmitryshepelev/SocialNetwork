@@ -2,7 +2,7 @@
 @using SocialNetwork.Resources
 @model ViewAccountViewModel
 @{
-    ViewBag.Title = "View account";
+    ViewBag.Title = SocialNetwork.Resources.Resource.AccountView;
 }
 
 <script src="~/Scripts/jquery-2.1.1.min.js"></script>
@@ -22,11 +22,11 @@
                     <br /><br />
                     @if (Model.IsAdmin)
                     {
-                        <span class="label label-warning">Administrator</span>
+                        <span class="label label-warning">@SocialNetwork.Resources.Resource.AdminRole</span>
                     }
                     else
                     {
-                        <span class="label label-default">User</span>
+                        <span class="label label-default">@SocialNetwork.Resources.Resource.UserRole</span>
                     }
                     <br /><br />
                     @if (User.Identity.Name == Model.UserName)
