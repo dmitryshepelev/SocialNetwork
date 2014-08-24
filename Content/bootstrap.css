@@ -4519,6 +4519,19 @@ a.label:focus {
   background-color: #777;
   border-radius: 10px;
 }
+
+.badge-img {
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+}
+
 .badge:empty {
   display: none;
 }
@@ -4816,6 +4829,12 @@ a.thumbnail.active {
 .media-list {
   padding-left: 0;
   list-style: none;
+}
+.list-group-item-searched {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  margin-bottom: -1px;
 }
 .list-group {
   padding-left: 0;

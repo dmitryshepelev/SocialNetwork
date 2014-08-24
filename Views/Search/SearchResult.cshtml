@@ -1,58 +1,68 @@
 ﻿@model SocialNetwork.Models.SearchResultModels
-@{
-}
-<br>
-@*@if (Model.Count() != 0)
-{
-    <h4>@SocialNetwork.Resources.Resource.SearchResult</h4>
+
+<div align="center" style="margin: 35px 0 40px 0">
+    <h3>@SocialNetwork.Resources.Resource.SearchResult</h3>
     <br />
-    foreach (var userTask in Model)
-    {
-        @Html.ActionLink(userTask.UserTaskTitle, "ViewTask", "UserTask", new { id = userTask.Id }, new { @style = "color:dodgerblue;" })
-        <br />
-    }
-}
-else
-{
-    <h4>@SocialNetwork.Resources.Resource.NotFound</h4>
-    <br />
-}*@
+        @using (Html.BeginForm("SearchResult", "Search", FormMethod.Post, null))
+        {
+            <input type="text" class="form-control" style="width: 60%" maxlength="40" placeholder=@SocialNetwork.Resources.Resource.Search name="searchingString">
+        }
+</div>
+
 <div class="row">
-    <h3>Search results</h3>
-    <div class="col-md-4">
-        <h2>Users</h2>
-        @if (Model.Users.Count() != 0)
-    {
-                <h4>@SocialNetwork.Resources.Resource.SearchResultUsers</h4>
-                <br />
-                foreach (var userTask in Model.Users)
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <li class="panel-heading list-group-item">
+                <span class="badge">@Model.Users.Count</span>
+                <h3 class="panel-title">@SocialNetwork.Resources.Resource.SearchResultUsers</h3>
+            </li>
+            <div class="panel-body">
+                @if (Model.Users.Count() != 0)
                 {
-                    @Html.ActionLink(userTask.UserName, "ViewAccount", "Account", new { id = userTask.Id }, new { @style = "color:dodgerblue;" })
-                    <br />
+                    foreach (var user in Model.Users.OrderBy(x => x.UserName))
+                    {
+                        <div class="list-group-item-searched">
+                            <span class="badge-img pull-right">
+                                <a href="~/Account/ViewAccount?id=@user.Id"><img src="@user.UserPhotoUrl" width="20" height="20" /></a>
+                            </span>
+                            @Html.ActionLink(user.UserName, "ViewAccount", "Account", new { id = user.Id }, null)
+                        </div>
+                    }
                 }
-        }
-        else
-        {
-                    <h4>@SocialNetwork.Resources.Resource.NotFound</h4>
-                    <br />
-        }
+                else
+                {
+                    @SocialNetwork.Resources.Resource.NotFound
+                }
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Tasks</h2>
-        @if (Model.Tasks.Count() != 0)
-        {
-            <h4>@SocialNetwork.Resources.Resource.SearchResult</h4>
-            <br />
-            foreach (var userTask in Model.Tasks)
-            {
-                @Html.ActionLink(userTask.UserTaskTitle, "ViewTask", "UserTask", new { id = userTask.Id }, new { @style = "color:dodgerblue;" })
-                <br />
-            }
-        }
-        else
-        {
-            <h4>@SocialNetwork.Resources.Resource.NotFound</h4>
-            <br />
-        }
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <li class="panel-heading list-group-item">
+                <span class="badge">@Model.Tasks.Count</span>
+                <h3 class="panel-title">@SocialNetwork.Resources.Resource.SearchResultPages</h3>
+            </li>
+            <div class="panel-body">
+                @if (Model.Tasks.Count() != 0)
+                {
+                    foreach (var userTask in Model.Tasks.OrderBy(x => x.UserTaskTitle))
+                    {
+                        <div class="list-group-item-searched">
+                            @if (userTask.UserTaskStatus)
+                            {
+                                <span class="badge-img pull-right">
+                                    <span class="label label-danger">@SocialNetwork.Resources.Resource.BlockedTask</span>
+                                </span>
+                            }
+                            @Html.ActionLink(userTask.UserTaskTitle, "ViewTask", "UserTask", new { id = userTask.Id }, null)
+                        </div>
+                    }
+                }
+                else
+                {
+                    @SocialNetwork.Resources.Resource.NotFound
+                }
+            </div>
+        </div>
     </div>
 </div>

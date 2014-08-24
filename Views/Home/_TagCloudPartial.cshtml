@@ -1,6 +1,6 @@
 ﻿@model List<SocialNetwork.Models.TagCloudModel>
 
-<div id="tagcloud">
+<div id="tagcloud" align="center">
     @foreach (var tag in Model)
     {
         @Html.ActionLink(tag.TagName, "ViewAllTasks", "UserTask", new { filterParam = "Tag", filterName = tag.TagName }, new { rel = tag.TagFrequency })

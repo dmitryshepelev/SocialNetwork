@@ -3,7 +3,7 @@
 @model List<MySolvedTaskViewModel>
 
 <h4>@Resource.UserMySolutions</h4>
-@if (Model == null)
+@if (Model.Count== 0)
 {
     <p class="text-muted">@Resource.UserEmplySolutionList</p>
 }

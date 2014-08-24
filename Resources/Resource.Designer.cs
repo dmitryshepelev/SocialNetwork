@@ -556,6 +556,15 @@ namespace SocialNetwork.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Новый поиск.
+        /// </summary>
+        public static string NewSearch {
+            get {
+                return ResourceManager.GetString("NewSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Пользователь еще не существует или не подтвержден.
         /// </summary>
         public static string NotExistOrNotConfirmed {
@@ -565,7 +574,7 @@ namespace SocialNetwork.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ваш запрос не дал результатов.
+        ///   Looks up a localized string similar to Ничего не найдено.
         /// </summary>
         public static string NotFound {
             get {
@@ -700,7 +709,7 @@ namespace SocialNetwork.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Найденные страницы.
+        ///   Looks up a localized string similar to Результат поиска.
         /// </summary>
         public static string SearchResult {
             get {
@@ -709,7 +718,16 @@ namespace SocialNetwork.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Найденные пользователи.
+        ///   Looks up a localized string similar to Страницы.
+        /// </summary>
+        public static string SearchResultPages {
+            get {
+                return ResourceManager.GetString("SearchResultPages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пользователи.
         /// </summary>
         public static string SearchResultUsers {
             get {

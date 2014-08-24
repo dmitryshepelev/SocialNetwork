@@ -175,7 +175,7 @@
     <value>Пользователь еще не существует или не подтвержден</value>
   </data>
   <data name="NotFound" xml:space="preserve">
-    <value>Ваш запрос не дал результатов</value>
+    <value>Ничего не найдено</value>
   </data>
   <data name="NoUserFound" xml:space="preserve">
     <value>Пользователь не найден</value>
@@ -198,8 +198,8 @@
   <data name="Search" xml:space="preserve">
     <value>Поиск</value>
   </data>
-  <data name="SearchResult" xml:space="preserve">
-    <value>Найденные страницы</value>
+  <data name="SearchResultPages" xml:space="preserve">
+    <value>Страницы</value>
   </data>
   <data name="Solution" xml:space="preserve">
     <value>Решение</value>
@@ -262,7 +262,7 @@
     <value>Название</value>
   </data>
   <data name="SearchResultUsers" xml:space="preserve">
-    <value>Найденные пользователи</value>
+    <value>Пользователи</value>
   </data>
   <data name="byComments" xml:space="preserve">
     <value>по комментариям</value>
@@ -443,5 +443,11 @@
   </data>
   <data name="UserRole" xml:space="preserve">
     <value>Пользователь</value>
+  </data>
+  <data name="NewSearch" xml:space="preserve">
+    <value>Новый поиск</value>
+  </data>
+  <data name="SearchResult" xml:space="preserve">
+    <value>Результат поиска</value>
   </data>
 </root>

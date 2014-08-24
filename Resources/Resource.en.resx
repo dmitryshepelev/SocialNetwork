@@ -175,7 +175,7 @@
     <value>The user either does not exist or is not confirmed.</value>
   </data>
   <data name="NotFound" xml:space="preserve">
-    <value>Your search returned no matches</value>
+    <value>No results</value>
   </data>
   <data name="NoUserFound" xml:space="preserve">
     <value>No user found</value>
@@ -198,8 +198,8 @@
   <data name="Search" xml:space="preserve">
     <value>Search</value>
   </data>
-  <data name="SearchResult" xml:space="preserve">
-    <value>Found pages</value>
+  <data name="SearchResultPages" xml:space="preserve">
+    <value>Pages</value>
   </data>
   <data name="Solution" xml:space="preserve">
     <value>Solution</value>
@@ -411,11 +411,17 @@
   <data name="LockoutEndDate" xml:space="preserve">
     <value>Lockout end date</value>
   </data>
+  <data name="NewSearch" xml:space="preserve">
+    <value>New search</value>
+  </data>
   <data name="Preview" xml:space="preserve">
     <value>Preview</value>
   </data>
   <data name="Required" xml:space="preserve">
     <value>Required</value>
+  </data>
+  <data name="SearchResult" xml:space="preserve">
+    <value>Search result</value>
   </data>
   <data name="Step" xml:space="preserve">
     <value>step</value>
