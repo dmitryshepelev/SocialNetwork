@@ -17,13 +17,13 @@ using SocialNetwork.Repository.Interfaces;
 
 namespace SocialNetwork.Controllers
 {
-    [Authorize][Culture]
+    [Authorize]
+    [Culture]
     public class AccountController : Controller
     {
         private ApplicationUserManager userManager;
         private const string defaultUserImage = "http://res.cloudinary.com/slideshowapp/image/upload/v1408274660/default-user-image_nbfyrg.png";
         private IUserTaskRepository userTaskRepository;
-        private IUserSolvedTaskRepository userSolvedTaskRepository;
 
         public AccountController()
         {
@@ -32,7 +32,6 @@ namespace SocialNetwork.Controllers
         public AccountController(IUserTaskRepository userTaskRepository, IUserSolvedTaskRepository userSolvedTaskRepository)
         {
             this.userTaskRepository = userTaskRepository;
-            this.userSolvedTaskRepository = userSolvedTaskRepository;
         }
 
         public AccountController(ApplicationUserManager userManager)
@@ -74,7 +73,7 @@ namespace SocialNetwork.Controllers
                 {
                     ModelState.AddModelError("", "Invalid username or password.");
                 }
-                else if (user.LockoutEnabled)
+                else if (user.LockoutEnabled || user.EmailConfirmed == false)
                 {
                     return View("BlockAccountError");
                 }
@@ -91,14 +90,14 @@ namespace SocialNetwork.Controllers
 
         //
         // Add "user" role to the new user by default
-        private async Task AddUserToRoleAsync(ApplicationUser user, string role)
-        {
-            using (ApplicationDbContext dbContext = new ApplicationDbContext())
-            {
-                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(dbContext));
-                await userManager.AddToRoleAsync(user.Id, role);
-            }
-        }
+        //private async Task AddUserToRoleAsync(ApplicationUser user, string role)
+        //{
+        //    using (ApplicationDbContext dbContext = new ApplicationDbContext())
+        //    {
+        //        var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(dbContext));
+        //        await userManager.AddToRoleAsync(user.Id, role);
+        //    }
+        //}
 
         //
         // GET: /Account/Register
@@ -121,7 +120,7 @@ namespace SocialNetwork.Controllers
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInAsync(user, isPersistent: false);
+                   // await SignInAsync(user, isPersistent: false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -145,7 +144,7 @@ namespace SocialNetwork.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
-            if (userId == null || code == null) 
+            if (userId == null || code == null)
             {
                 return View("Error");
             }
@@ -206,13 +205,13 @@ namespace SocialNetwork.Controllers
         {
             return View();
         }
-	
+
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
-            if (code == null) 
+            if (code == null)
             {
                 return View("Error");
             }
@@ -285,7 +284,7 @@ namespace SocialNetwork.Controllers
         public ActionResult EditAccount()
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
-            EditAccountViewModel userAccount = new EditAccountViewModel()
+            var userAccount = new EditAccountViewModel()
             {
                 UserName = user.UserName,
                 Email = user.Email
@@ -305,7 +304,7 @@ namespace SocialNetwork.Controllers
                 user.UserName = model.UserName;
                 user.Email = model.Email;
                 if (model.UserPhoto != null)
-                { 
+                {
                     user.UserPhotoUrl = Helpers.Helpers.UploadImage(model.UserPhoto).Uri.ToString();
                 }
                 IdentityResult result = await UserManager.UpdateAsync(user);
@@ -383,10 +382,7 @@ namespace SocialNetwork.Controllers
                         await SignInAsync(user, isPersistent: false);
                         return RedirectToAction("ViewAccount", new { Message = ManageMessageId.ChangePasswordSuccess });
                     }
-                    else
-                    {
                         AddErrors(result);
-                    }
                 }
             }
             else
@@ -503,13 +499,13 @@ namespace SocialNetwork.Controllers
                     if (result.Succeeded)
                     {
                         await SignInAsync(user, isPersistent: false);
-                        
+
                         // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                         // Send an email with this link
                         string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                         var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                         SendEmail(user.Email, callbackUrl, "Confirm your account", "Please confirm your account by clicking this link");
-                        
+
                         return RedirectToLocal(returnUrl);
                     }
                 }
@@ -636,7 +632,8 @@ namespace SocialNetwork.Controllers
 
         private class ChallengeResult : HttpUnauthorizedResult
         {
-            public ChallengeResult(string provider, string redirectUri) : this(provider, redirectUri, null)
+            public ChallengeResult(string provider, string redirectUri)
+                : this(provider, redirectUri, null)
             {
             }
 

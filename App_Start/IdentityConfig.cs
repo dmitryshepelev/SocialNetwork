@@ -62,19 +62,25 @@ namespace SocialNetwork
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Create the mail message
-            var mailMessage = new MailMessage(
-                "SocialNetwork@gmail.com",
-                message.Destination,
-                message.Subject,
-                message.Body
-                );
+            // настройка логина, пароля отправителя
+            var from = "polli.simple@gmail.com";
+            var pass = "pollisimple";
 
-            // Send the message
-            SmtpClient client = new SmtpClient();
-            client.SendAsync(mailMessage, null);
+            // адрес и порт smtp-сервера, с которого мы и будем отправлять письмо
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 25);
 
-            return Task.FromResult(true);
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+            client.Credentials = new System.Net.NetworkCredential(from, pass);
+            client.EnableSsl = true;
+
+            // создаем письмо: message.Destination - адрес получателя
+            var mail = new MailMessage(from, message.Destination);
+            mail.Subject = message.Subject;
+            mail.Body = message.Body;
+            mail.IsBodyHtml = true;
+
+            return client.SendMailAsync(mail);
         }
     }
 
