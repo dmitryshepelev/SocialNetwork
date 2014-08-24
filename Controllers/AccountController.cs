@@ -88,18 +88,6 @@ namespace SocialNetwork.Controllers
             return View(model);
         }
 
-        //
-        // Add "user" role to the new user by default
-        //private async Task AddUserToRoleAsync(ApplicationUser user, string role)
-        //{
-        //    using (ApplicationDbContext dbContext = new ApplicationDbContext())
-        //    {
-        //        var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(dbContext));
-        //        await userManager.AddToRoleAsync(user.Id, role);
-        //    }
-        //}
-
-        //
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
@@ -189,8 +177,9 @@ namespace SocialNetwork.Controllers
                 // Send an email with this link
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                SendEmail(user.Email, callbackUrl, "ForgotPassword", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                //SendEmail(user.Email, callbackUrl, "ForgotPassword", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
                 //await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                await UserManager.SendEmailAsync(user.Id, "Reset password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
@@ -593,14 +582,14 @@ namespace SocialNetwork.Controllers
             // For information on sending mail, please visit http://go.microsoft.com/fwlink/?LinkID=320771
             var mail = new MailMessage();
             mail.To.Add(email);
-            mail.From = new MailAddress("dmitry.shepelev@yahoo.co.uk");
+            mail.From = new MailAddress("polli.simple@gmail.com");
             mail.Subject = subject;
             mail.Body = message;
             mail.IsBodyHtml = true;
             using (var smtp = new SmtpClient())
             {
-                smtp.Host = "smtp.mail.yahoo.co.uk";
-                smtp.Port = 465;
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 25;
                 smtp.UseDefaultCredentials = false;
                 smtp.Credentials = new System.Net.NetworkCredential("dmitry.shepelev@yahoo.co.uk", "4815162342v");
                 smtp.EnableSsl = true;
