@@ -15,8 +15,14 @@ namespace SocialNetwork.Controllers
     public class MessageMistakeController : Controller
     {
         private ApplicationUserManager userManager;
+        private IUserTaskRepository userTaskRepositrory;
         public MessageMistakeController()
         {
+        }
+
+        public MessageMistakeController(IUserTaskRepository userTaskRepositrory)
+        {
+            this.userTaskRepositrory = userTaskRepositrory;
         }
 
         public MessageMistakeController(ApplicationUserManager userManager)
@@ -42,39 +48,28 @@ namespace SocialNetwork.Controllers
         {
             if (ModelState.IsValid)
             {
-                var ac = new ApplicationDbContext();
-                var userTask = ac.UserTasks.Find(taskId);
+                var userTask = userTaskRepositrory.GetById(taskId);
                 var user = new ApplicationUser() { UserName = userTask.User.UserName, Email = userTask.User.Email};
                 
                 var from = "polli.simple@gmail.com";
                 var pass = "pollisimple";
-
-                // адрес и порт smtp-сервера, с которого мы и будем отправлять письмо
-                SmtpClient client = new SmtpClient("smtp.gmail.com", 25);
-
-                client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                client.UseDefaultCredentials = false;
-                client.Credentials = new System.Net.NetworkCredential(from, pass);
-                client.EnableSsl = true;
-
-                // создаем письмо: message.Destination - адрес получателя
-                var mail = new MailMessage(from, user.Email);
-                mail.Subject = "You have a mistake";
-                mail.Body = "Please correct this task: " + userTask.UserTaskTitle;
-                mail.IsBodyHtml = true;
+                var client = new SmtpClient("smtp.gmail.com", 25)
+                {
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new System.Net.NetworkCredential(@from, pass),
+                    EnableSsl = true
+                };
+                var mail = new MailMessage(from, user.Email)
+                {
+                    Subject = "You have a mistake",
+                    Body = "Please correct this task: " + userTask.UserTaskTitle,
+                    IsBodyHtml = true
+                };
 
                 client.Send(mail);
                 mail.Dispose();
             }
         }
-        private void AddErrors(IdentityResult result)
-        {
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError("", error);
-            }
-        }
-
-
     }
 }

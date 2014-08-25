@@ -29,7 +29,7 @@ namespace SocialNetwork.Controllers
         {
         }
 
-        public AccountController(IUserTaskRepository userTaskRepository, IUserSolvedTaskRepository userSolvedTaskRepository)
+        public AccountController(IUserTaskRepository userTaskRepository)
         {
             this.userTaskRepository = userTaskRepository;
         }
