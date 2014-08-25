@@ -5,12 +5,30 @@
     <div class="col-lg-3" style="padding-top: 10px; padding-bottom: 10px; font-size: 12px;">
         <div class="row">
             <div class="col-lg-9" align="right" style="padding: 4px 0 0 10px">
+                @if (User.IsInRole("admin"))
+                {
+                    using (Ajax.BeginForm("DeleteComment", "Comment", new AjaxOptions
+                    {
+                        Url = Url.Action("DeleteComment", "Comment"),
+                        HttpMethod = "POST",
+                        InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace,
+                        UpdateTargetId = "comments",
+                    }))
+                    {
+                        <input type="hidden" name="id" value="@comment.Id" />
+                        <div class="pull-left">
+                            <button type="submit" value="delete" class="btn btn-default btn-xs" style="border-radius: 15px">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                        </div>
+                    }
+                }
                 @SocialNetwork.Resources.Resource.by <br />
-                @Html.ActionLink(comment.UserName, "ViewAccount", "Account", new { id = comment.UserId }, null)                
+                @Html.ActionLink(comment.UserName, "ViewAccount", "Account", new { id = comment.UserId }, null)
             </div>
             <div class="col-lg-3" align="right" style="padding-right: 0; padding-left: 0;">
                 <a href="~/Account/ViewAccount?id=@comment.UserId"><img src="@comment.UserImageUrl" /></a>
-            </div>            
+            </div>
         </div>
     </div>
     <div class="col-lg-9">

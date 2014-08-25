@@ -11,9 +11,7 @@ $().ready(function () {
     var multiplier = (maxPercent - minPercent) / (max - min);
     categories.each(function (i) {
         count = parseInt($(this).attr('rel'));
-        console.log(count);
         var size = minPercent + ((max - (max - (count - min))) * multiplier) + '%';
-        console.log(size);
         $(this).css("font-size", size);
     });
 });

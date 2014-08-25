@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
+using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using SocialNetwork.Filters;
@@ -18,13 +19,12 @@ namespace SocialNetwork.Controllers
     {
         private ApplicationUserManager userManager;
         private ICommentRepository commentRepository;
-        private int size = 5;
 
         public CommentController()
         {
         }
 
-        public CommentController(ICommentRepository commentRepository, IUserTaskRepository userTaskRepository)
+        public CommentController(ICommentRepository commentRepository)
         {
             this.commentRepository = commentRepository;
         }
@@ -44,6 +44,16 @@ namespace SocialNetwork.Controllers
             {
                 userManager = value;
             }
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        public PartialViewResult DeleteComment(int? id)
+        {
+            var comment = commentRepository.GetById(id);
+            var taskId = comment.UserTaskId;
+            commentRepository.Delete(comment);
+            return PartialView("_CommentViewPartial", GetTasksComments(taskId));
         }
 
         [HttpPost]
