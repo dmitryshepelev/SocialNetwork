@@ -66,7 +66,6 @@ namespace SocialNetwork.Controllers
                     Body = "Please correct this task: " + userTask.UserTaskTitle,
                     IsBodyHtml = true
                 };
-
                 client.Send(mail);
                 mail.Dispose();
             }

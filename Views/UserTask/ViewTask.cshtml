@@ -14,6 +14,7 @@
 <script src="~/Scripts/parser.js"></script>
 <script src="~/Scripts/taskstat.js"></script>
 <script src="~/Scripts/viewtask.js"></script>
+<script src="~/Scripts/jquery.toastmessage.js"></script>
 
 <style>
     .div-margin {
@@ -62,19 +63,21 @@
             <div class="" align="center">
                 <h3 style="margin: 15px 0 0 0">@Html.ActionLink(Model.Category, "ViewAllTasks", "UserTask", new { filterParam = "Category", filterName = Model.Category }, null)</h3>
                 <div id="taskStatistic-@Model.Id">@Html.Action("TaskStatistics", "UserTask", new { taskId = Model.Id })</div>
-                @using (Ajax.BeginForm("SendMessage", "MessageMistake", new AjaxOptions
+                @if (Model.UserId != User.Identity.GetUserId())
                 {
-                    Url = Url.Action("SendMessage", "MessageMistake"),
-                    HttpMethod = "POST",
-                    OnSuccess = "message_was_sent()"
-                }))
-                {
-                    <div class="input-group">
-                        <span class="btn-group-xs">
-                            <input class="btn btn-primary" type="submit" value="@SocialNetwork.Resources.Resource.MessageMistake" />
-                            <input name="taskId" hidden="hidden" value="@Model.Id"/>
-                        </span>
-                    </div>
+                    using (Ajax.BeginForm("SendMessage", "MessageMistake", new AjaxOptions
+                     {
+                         Url = Url.Action("SendMessage", "MessageMistake"),
+                         HttpMethod = "POST",
+                     }))
+                     {
+                         <div class="input-group">
+                             <span class="btn-group-xs">
+                                 <input class="btn btn-primary" type="submit" value="@SocialNetwork.Resources.Resource.MessageMistake" />
+                                 <input name="taskId" hidden="hidden" value="@Model.Id" />
+                             </span>
+                         </div>
+                     }
                 }
             </div>
         </div>
@@ -110,7 +113,6 @@
     });
 
     function message_was_sent() {
-        alert("Message was sent");
     }
 </script>
 
