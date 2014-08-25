@@ -453,4 +453,103 @@
   <data name="MessageMistake" xml:space="preserve">
     <value>Сообщить об ошибке</value>
   </data>
+  <data name="AddLocalAccountMsg" xml:space="preserve">
+    <value>У вас нет страницы на этом сайте. Создайте, а.</value>
+  </data>
+  <data name="CheckEmail" xml:space="preserve">
+    <value>Пожалуйста, проверьте и подтвердите адрес.</value>
+  </data>
+  <data name="ClickToLog" xml:space="preserve">
+    <value>Нажмите для входа</value>
+  </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>Подтверждение сброса пароля</value>
+  </data>
+  <data name="ConfirmingAccount" xml:space="preserve">
+    <value>Спасибо за подтверждение вашего аккаунта</value>
+  </data>
+  <data name="CreateLocalLogin" xml:space="preserve">
+    <value>Создать пользователя</value>
+  </data>
+  <data name="CreateNewAccount" xml:space="preserve">
+    <value>Создать новую учетную запись</value>
+  </data>
+  <data name="EditAccount" xml:space="preserve">
+    <value>Изменение данных</value>
+  </data>
+  <data name="EnterEmail" xml:space="preserve">
+    <value>Введите Ваш почтовый ящик</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Забыли пароль?</value>
+  </data>
+  <data name="LogIn" xml:space="preserve">
+    <value>Вход</value>
+  </data>
+  <data name="LoginFail" xml:space="preserve">
+    <value>Упс. Нельзя этого сделать</value>
+  </data>
+  <data name="PasswordHasBeenReset" xml:space="preserve">
+    <value>Пароль был сброшен</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Регистрация</value>
+  </data>
+  <data name="RegisterAsNew" xml:space="preserve">
+    <value>Зарегестрироваться под другим именем</value>
+  </data>
+  <data name="ResetMsg" xml:space="preserve">
+    <value>Пожалуйста, проверьте почту для подтверждения пароля.</value>
+  </data>
+  <data name="Unsuccessful" xml:space="preserve">
+    <value>Неудача</value>
+  </data>
+  <data name="UseToLog" xml:space="preserve">
+    <value>Используйте локальную учетную запись, чтобы войти</value>
+  </data>
+  <data name="User_Name" xml:space="preserve">
+    <value>Имя пользователя</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Почта</value>
+  </data>
+  <data name="Current_password" xml:space="preserve">
+    <value>Текущий пароль</value>
+  </data>
+  <data name="New_password" xml:space="preserve">
+    <value>Новый пароль</value>
+  </data>
+  <data name="ChangePasswordViewModel_NewPassword_The__0__must_be_at_least__2__characters_long_" xml:space="preserve">
+    <value>{0} должно быть не менее {2} знаков.</value>
+  </data>
+  <data name="ChooseImage" xml:space="preserve">
+    <value>Выбрать фото</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Подтверждение пароля</value>
+  </data>
+  <data name="Confirm_new_password" xml:space="preserve">
+    <value>Подтвердите пароль</value>
+  </data>
+  <data name="MostSolvedTasks" xml:space="preserve">
+    <value>Самые популярные задачи</value>
+  </data>
+  <data name="NotMatch" xml:space="preserve">
+    <value>Пароль и подтверждение не совпадают.</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="Remember" xml:space="preserve">
+    <value>Помнишь?</value>
+  </data>
+  <data name="ResentTask" xml:space="preserve">
+    <value>Последние</value>
+  </data>
+  <data name="Top" xml:space="preserve">
+    <value>Лучшие решатели</value>
+  </data>
+  <data name="UserPhoto" xml:space="preserve">
+    <value>Фото пользователя</value>
+  </data>
 </root>

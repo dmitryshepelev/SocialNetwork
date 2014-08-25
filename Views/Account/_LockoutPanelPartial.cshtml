@@ -3,7 +3,7 @@
     TimeSpan? ts = new TimeSpan();
     ts = Model.LockoutDateEndUtc - DateTime.Now;
     <div id="locked" class="alert alert-dismissable alert-danger">
-        <strong id="update">Account is blocked.</strong>
+        <strong id="update">@SocialNetwork.Resources.Resource.AccountIsBlocked</strong>
         @ts.Value.Days d
         @ts.Value.Hours h
         @ts.Value.Minutes m

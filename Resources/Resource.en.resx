@@ -372,7 +372,7 @@
   <data name="Charts" xml:space="preserve">
     <value>Charts</value>
   </data>
-  <data name="Comfirm" xml:space="preserve">
+  <data name="Confirm" xml:space="preserve">
     <value>Confirm changes</value>
   </data>
   <data name="CopyrightInformation" xml:space="preserve">
@@ -452,5 +452,105 @@
   </data>
   <data name="MessageMistake" xml:space="preserve">
     <value>Report an error</value>
+  </data>
+  <data name="AddLocalAccountMsg" xml:space="preserve">
+    <value>You do not have a local username/password for this site. Add a local
+    account so you can log in without an external login.</value>
+  </data>
+  <data name="ChangePasswordViewModel_NewPassword_The__0__must_be_at_least__2__characters_long_" xml:space="preserve">
+    <value>The {0} must be at least {2} characters long</value>
+  </data>
+  <data name="CheckEmail" xml:space="preserve">
+    <value>Please check your email and confirm your email address.</value>
+  </data>
+  <data name="ChooseImage" xml:space="preserve">
+    <value>Choose Image</value>
+  </data>
+  <data name="ClickToLog" xml:space="preserve">
+    <value>click here to log in</value>
+  </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>Reset password confirmation</value>
+  </data>
+  <data name="ConfirmingAccount" xml:space="preserve">
+    <value>Thank you for confirming your account.</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="Confirm_new_password" xml:space="preserve">
+    <value>Confirm new password</value>
+  </data>
+  <data name="CreateLocalLogin" xml:space="preserve">
+    <value>Create Local Login</value>
+  </data>
+  <data name="CreateNewAccount" xml:space="preserve">
+    <value>Create a new account.</value>
+  </data>
+  <data name="Current_password" xml:space="preserve">
+    <value>Current password</value>
+  </data>
+  <data name="EditAccount" xml:space="preserve">
+    <value>Edit your account</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="EnterEmail" xml:space="preserve">
+    <value>Enter your email.</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Forgot your password?</value>
+  </data>
+  <data name="LogIn" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="LoginFail" xml:space="preserve">
+    <value>Login failure</value>
+  </data>
+  <data name="MostSolvedTasks" xml:space="preserve">
+    <value>Most solved tasks</value>
+  </data>
+  <data name="New_password" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="NotMatch" xml:space="preserve">
+    <value>The new password and confirmation password do not match.</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PasswordHasBeenReset" xml:space="preserve">
+    <value>Your password has been reset. Please</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="RegisterAsNew" xml:space="preserve">
+    <value>Register as a new user</value>
+  </data>
+  <data name="Remember" xml:space="preserve">
+    <value>Remember me?</value>
+  </data>
+  <data name="ResetMsg" xml:space="preserve">
+    <value>Please check your email to reset your password.</value>
+  </data>
+  <data name="Unsuccessful" xml:space="preserve">
+    <value>Unsuccessful login with service.</value>
+  </data>
+  <data name="UserPhoto" xml:space="preserve">
+    <value>User photo</value>
+  </data>
+  <data name="User_Name" xml:space="preserve">
+    <value>User Name</value>
+  </data>
+  <data name="UseToLog" xml:space="preserve">
+    <value>Use a local account to log in.</value>
+  </data>
+  <data name="ResentTask" xml:space="preserve">
+    <value>Recent tasks</value>
+  </data>
+  <data name="Top" xml:space="preserve">
+    <value>Top Rate users</value>
   </data>
 </root>

@@ -88,6 +88,15 @@ namespace SocialNetwork.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to У вас нет страницы на этом сайте. Создайте, а..
+        /// </summary>
+        public static string AddLocalAccountMsg {
+            get {
+                return ResourceManager.GetString("AddLocalAccountMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Вставить видео.
         /// </summary>
         public static string AddVideo {
@@ -232,6 +241,16 @@ namespace SocialNetwork.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} должно быть не менее {2} знаков..
+        /// </summary>
+        public static string ChangePasswordViewModel_NewPassword_The__0__must_be_at_least__2__characters_long_ {
+            get {
+                return ResourceManager.GetString("ChangePasswordViewModel_NewPassword_The__0__must_be_at_least__2__characters_long_" +
+                        "", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Название графика.
         /// </summary>
         public static string ChartName {
@@ -255,6 +274,33 @@ namespace SocialNetwork.Resources {
         public static string Check {
             get {
                 return ResourceManager.GetString("Check", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пожалуйста, проверьте и подтвердите адрес..
+        /// </summary>
+        public static string CheckEmail {
+            get {
+                return ResourceManager.GetString("CheckEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выбрать фото.
+        /// </summary>
+        public static string ChooseImage {
+            get {
+                return ResourceManager.GetString("ChooseImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Нажмите для входа.
+        /// </summary>
+        public static string ClickToLog {
+            get {
+                return ResourceManager.GetString("ClickToLog", resourceCulture);
             }
         }
         
@@ -295,11 +341,47 @@ namespace SocialNetwork.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Подтвердите пароль.
+        /// </summary>
+        public static string Confirm_new_password {
+            get {
+                return ResourceManager.GetString("Confirm_new_password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Подтвердите вашу учетную запись.
         /// </summary>
         public static string ConfirmAccount {
             get {
                 return ResourceManager.GetString("ConfirmAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Подтверждение сброса пароля.
+        /// </summary>
+        public static string Confirmation {
+            get {
+                return ResourceManager.GetString("Confirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Спасибо за подтверждение вашего аккаунта.
+        /// </summary>
+        public static string ConfirmingAccount {
+            get {
+                return ResourceManager.GetString("ConfirmingAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Подтверждение пароля.
+        /// </summary>
+        public static string ConfirmPassword {
+            get {
+                return ResourceManager.GetString("ConfirmPassword", resourceCulture);
             }
         }
         
@@ -331,6 +413,33 @@ namespace SocialNetwork.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Создать пользователя.
+        /// </summary>
+        public static string CreateLocalLogin {
+            get {
+                return ResourceManager.GetString("CreateLocalLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Создать новую учетную запись.
+        /// </summary>
+        public static string CreateNewAccount {
+            get {
+                return ResourceManager.GetString("CreateNewAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Текущий пароль.
+        /// </summary>
+        public static string Current_password {
+            get {
+                return ResourceManager.GetString("Current_password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Дата добавления.
         /// </summary>
         public static string DateAdded {
@@ -354,6 +463,33 @@ namespace SocialNetwork.Resources {
         public static string details {
             get {
                 return ResourceManager.GetString("details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Изменение данных.
+        /// </summary>
+        public static string EditAccount {
+            get {
+                return ResourceManager.GetString("EditAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Почта.
+        /// </summary>
+        public static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Введите Ваш почтовый ящик.
+        /// </summary>
+        public static string EnterEmail {
+            get {
+                return ResourceManager.GetString("EnterEmail", resourceCulture);
             }
         }
         
@@ -448,6 +584,15 @@ namespace SocialNetwork.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Забыли пароль?.
+        /// </summary>
+        public static string ForgotPassword {
+            get {
+                return ResourceManager.GetString("ForgotPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to от.
         /// </summary>
         public static string From {
@@ -520,6 +665,24 @@ namespace SocialNetwork.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Вход.
+        /// </summary>
+        public static string LogIn {
+            get {
+                return ResourceManager.GetString("LogIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Упс. Нельзя этого сделать.
+        /// </summary>
+        public static string LoginFail {
+            get {
+                return ResourceManager.GetString("LoginFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Управление.
         /// </summary>
         public static string Manage {
@@ -534,6 +697,15 @@ namespace SocialNetwork.Resources {
         public static string MessageMistake {
             get {
                 return ResourceManager.GetString("MessageMistake", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Самые популярные задачи.
+        /// </summary>
+        public static string MostSolvedTasks {
+            get {
+                return ResourceManager.GetString("MostSolvedTasks", resourceCulture);
             }
         }
         
@@ -565,6 +737,15 @@ namespace SocialNetwork.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Новый пароль.
+        /// </summary>
+        public static string New_password {
+            get {
+                return ResourceManager.GetString("New_password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Новый поиск.
         /// </summary>
         public static string NewSearch {
@@ -592,6 +773,15 @@ namespace SocialNetwork.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Пароль и подтверждение не совпадают..
+        /// </summary>
+        public static string NotMatch {
+            get {
+                return ResourceManager.GetString("NotMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Пользователь не найден.
         /// </summary>
         public static string NoUserFound {
@@ -601,11 +791,29 @@ namespace SocialNetwork.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Пароль.
+        /// </summary>
+        public static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ваш пароль был изменен.
         /// </summary>
         public static string PasswordChanged {
             get {
                 return ResourceManager.GetString("PasswordChanged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пароль был сброшен.
+        /// </summary>
+        public static string PasswordHasBeenReset {
+            get {
+                return ResourceManager.GetString("PasswordHasBeenReset", resourceCulture);
             }
         }
         
@@ -682,6 +890,33 @@ namespace SocialNetwork.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Регистрация.
+        /// </summary>
+        public static string Register {
+            get {
+                return ResourceManager.GetString("Register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Зарегестрироваться под другим именем.
+        /// </summary>
+        public static string RegisterAsNew {
+            get {
+                return ResourceManager.GetString("RegisterAsNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Помнишь?.
+        /// </summary>
+        public static string Remember {
+            get {
+                return ResourceManager.GetString("Remember", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Обязательно к заполнению.
         /// </summary>
         public static string Required {
@@ -691,11 +926,29 @@ namespace SocialNetwork.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Последние.
+        /// </summary>
+        public static string ResentTask {
+            get {
+                return ResourceManager.GetString("ResentTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Сброс.
         /// </summary>
         public static string ResetFilters {
             get {
                 return ResourceManager.GetString("ResetFilters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пожалуйста, проверьте почту для подтверждения пароля..
+        /// </summary>
+        public static string ResetMsg {
+            get {
+                return ResourceManager.GetString("ResetMsg", resourceCulture);
             }
         }
         
@@ -844,11 +1097,38 @@ namespace SocialNetwork.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Лучшие решатели.
+        /// </summary>
+        public static string Top {
+            get {
+                return ResourceManager.GetString("Top", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Неудача.
+        /// </summary>
+        public static string Unsuccessful {
+            get {
+                return ResourceManager.GetString("Unsuccessful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Загрузить изображение.
         /// </summary>
         public static string UploadImage {
             get {
                 return ResourceManager.GetString("UploadImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Имя пользователя.
+        /// </summary>
+        public static string User_Name {
+            get {
+                return ResourceManager.GetString("User_Name", resourceCulture);
             }
         }
         
@@ -943,6 +1223,15 @@ namespace SocialNetwork.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Фото пользователя.
+        /// </summary>
+        public static string UserPhoto {
+            get {
+                return ResourceManager.GetString("UserPhoto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Рейтинг.
         /// </summary>
         public static string UserRate {
@@ -1011,6 +1300,15 @@ namespace SocialNetwork.Resources {
         public static string UserTaskTitle {
             get {
                 return ResourceManager.GetString("UserTaskTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Используйте локальную учетную запись, чтобы войти.
+        /// </summary>
+        public static string UseToLog {
+            get {
+                return ResourceManager.GetString("UseToLog", resourceCulture);
             }
         }
         
