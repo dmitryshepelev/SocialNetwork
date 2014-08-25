@@ -303,11 +303,11 @@ namespace SocialNetwork.Controllers
         public ActionResult ViewAccount(ManageMessageId? message, string id)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed"
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set"
-                : message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed"
-                : message == ManageMessageId.Error ? "An error has occurred"
-                : message == ManageMessageId.UpdateDataSuccess ? "Your profile has been updated"
+                message == ManageMessageId.ChangePasswordSuccess ? SocialNetwork.Resources.Resource.PasswordChanged
+                : message == ManageMessageId.SetPasswordSuccess ? SocialNetwork.Resources.Resource.PasswordSet
+                : message == ManageMessageId.RemoveLoginSuccess ? SocialNetwork.Resources.Resource.ExternalLoginWasRemoved
+                : message == ManageMessageId.Error ? SocialNetwork.Resources.Resource.ErrorHasOccurred
+                : message == ManageMessageId.UpdateDataSuccess ? SocialNetwork.Resources.Resource.ProfileHasBeenUpdated 
                 : "";
             var user = id == null ? UserManager.FindById(User.Identity.GetUserId()) : UserManager.FindById(id);
             var userAccount = new ViewAccountViewModel()
@@ -476,9 +476,6 @@ namespace SocialNetwork.Controllers
                     if (result.Succeeded)
                     {
                         await SignInAsync(user, isPersistent: false);
-
-                        // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                        // Send an email with this link
                         string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                         var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                         SendEmail(user.Email, callbackUrl, "Confirm your account", "Please confirm your account by clicking this link");
