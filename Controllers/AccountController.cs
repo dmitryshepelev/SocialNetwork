@@ -413,11 +413,21 @@ namespace SocialNetwork.Controllers
 
             // Sign in the user with this external login provider if the user already has a login
             var user = await UserManager.FindAsync(loginInfo.Login);
-            if ( user.LockoutEnabled )
+            if (user != null)
             {
-                return View("BlockAccountError");
+                if (user.LockoutEnabled)
+                {
+                    return View("BlockAccountError");
+                }
+                await SignInAsync(user, isPersistent: false);
             }
-            await SignInAsync(user, isPersistent: false);
+            else
+            {
+                // If the user does not have an account, then prompt the user to create an account
+                ViewBag.ReturnUrl = returnUrl;
+                ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
+                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+            }
             return RedirectToLocal(returnUrl);
         }
 
@@ -475,14 +485,13 @@ namespace SocialNetwork.Controllers
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
-                        await SignInAsync(user, isPersistent: false);
+                        //await SignInAsync(user, isPersistent: false);
 
                         // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                         // Send an email with this link
                         string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                         var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                        SendEmail(user.Email, callbackUrl, "Confirm your account", "Please confirm your account by clicking this link");
-
+                        await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
                         return RedirectToLocal(returnUrl);
                     }
                 }
