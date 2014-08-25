@@ -15,6 +15,7 @@
 <script src="~/Scripts/taskstat.js"></script>
 <script src="~/Scripts/viewtask.js"></script>
 <script src="~/Scripts/jquery.toastmessage.js"></script>
+<link rel="stylesheet" href="~/Content/jquery.toastmessage.css"/>
 
 <style>
     .div-margin {
@@ -69,11 +70,12 @@
                      {
                          Url = Url.Action("SendMessage", "MessageMistake"),
                          HttpMethod = "POST",
+                         OnSuccess = "mailSentNotification"
                      }))
                      {
                          <div class="input-group">
                              <span class="btn-group-xs">
-                                 <input class="btn btn-primary" type="submit" value="@SocialNetwork.Resources.Resource.MessageMistake" />
+                                 <input onclick="mailSentNotification()" class="btn btn-primary" type="submit" value="@SocialNetwork.Resources.Resource.MessageMistake" />
                                  <input name="taskId" hidden="hidden" value="@Model.Id" />
                              </span>
                          </div>
@@ -111,9 +113,6 @@
         separator: ' / ',
         validate: true
     });
-
-    function message_was_sent() {
-    }
 </script>
 
 

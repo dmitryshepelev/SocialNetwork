@@ -4,17 +4,10 @@
 
 <script src="~/Scripts/jquery.latest.js"></script>
 <script src="~/Scripts/jquery.tagcloud.js"></script>
-@*<link rel="stylesheet" href="~/Content/owl.carousel.css"> 
-<link rel="stylesheet" href="~/Content/owl.theme.css">
-<script src="~/Scripts/owl.carousel.js"></script>*@
 <link href="~/Content/fotorama.css" rel="stylesheet">
 <script src="~/Scripts/fotorama.js"></script>
+<script src="~/Scripts/carousel.js"></script>
 
-<script>
-    $(document).ready(function () {
-        $("#carousel").owlCarousel();
-    });
-</script>
 
 <style>
     .div-stat-box {
@@ -22,17 +15,47 @@
     }
 </style>
 
+<div align="center" style="margin: 35px 0 40px 0">
+    <h1>Welcome to the taskCloud!</h1>
+    <br />
+</div>
+
 <div align="center">
-    <div style="z-index: 1; position: absolute; height: auto; color: white">
-        <h2 style="background-color: #cfcfcf">1. Propose and solve tasks</h2>
-        <h2 style="background-color: #cfcfcf">2. Build your own charts</h2>
-        <h2 style="background-color: #cfcfcf">3. </h2>
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="item active">
+                <img src="~/Content/images/carousel-1.png" alt="1" />
+                <div class="carousel-caption">
+                    <h2>1. Propose and solve tasks</h2>
+                </div>
+            </div>
+            <div class="item">
+                <img src="~/Content/images/carousel-2.png" alt="2" />
+                <div class="carousel-caption">
+                    <h2>2. Build your own charts</h2>
+                </div>
+            </div>
+            <div class="item">
+                <img src="~/Content/images/carousel-3.png" alt="3" />
+                <div class="carousel-caption">
+                    <h2>3. Found yourself at the top</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
     </div>
-    <div class="fotorama" style="z-index: 0" data-autoplay="4500" data-allowfullscreen="false" data-loop="true" data-transition="crossfade">
-        <img src="~/Content/images/carousel-1.png" alt="1" />
-        <img src="~/Content/images/carousel-2.png" alt="2" />
-        <img src="~/Content/images/carousel-3.png" alt="3" />
-    </div>    
 </div>
 
 

@@ -1,4 +1,4 @@
-﻿$(function () {
+﻿$(function() {
     var blockNumber = 2;
     //var noMoreData = false;
     var inProgress = false;
@@ -16,4 +16,14 @@
             });
         }
     }
-})
+});
+
+function mailSentNotification() {
+    $().toastmessage({
+        text: "Message was sent",
+        sticky: false,
+        stayTime: 5000,
+        position: "top-right",
+        type: "success"
+    });
+}

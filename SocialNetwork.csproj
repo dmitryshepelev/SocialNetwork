@@ -397,7 +397,7 @@
     <Content Include="Content\images\like-mousover-64.png" />
     <Content Include="Content\images\theme-dark-col-thumb.png" />
     <Content Include="Content\images\theme-lignt-col-thumb.png" />
-    <Content Include="Content\jquery.jqplot.css" />
+    <Content Include="Content\jquery.toastmessage.css" />
     <Content Include="Content\owl.carousel.css" />
     <Content Include="Content\owl.theme.css" />
     <Content Include="Content\themes\base\images\animated-overlay.gif" />
@@ -481,11 +481,13 @@
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\carousel.js" />
     <Content Include="Scripts\chart-manager.js" />
     <Content Include="Scripts\comment-manage.js" />
     <Content Include="Scripts\fotorama.js" />
     <Content Include="Scripts\highcharts.js" />
     <Content Include="Scripts\jqBootstrapValidation.js" />
+    <Content Include="Scripts\jquery-1.5.min.js" />
     <Content Include="Scripts\jquery-1.7.2.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
