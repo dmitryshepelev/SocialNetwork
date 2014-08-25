@@ -217,6 +217,7 @@
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocalizationController.cs" />
+    <Compile Include="Controllers\MessageMistakeController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\StyleController.cs" />
     <Compile Include="Controllers\UserTaskController.cs" />
@@ -569,6 +570,7 @@
     <Content Include="Views\UserTask\_ViewTaskHeaderPartial.cshtml" />
     <Content Include="Views\UserTask\_ViewCommentsPartial.cshtml" />
     <Content Include="Views\Home\ViewTagCloud.cshtml" />
+    <Content Include="Views\MessageMistake\SendMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Chart\" />

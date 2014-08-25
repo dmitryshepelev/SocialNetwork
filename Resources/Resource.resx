@@ -450,4 +450,7 @@
   <data name="SearchResult" xml:space="preserve">
     <value>Результат поиска</value>
   </data>
+  <data name="MessageMistake" xml:space="preserve">
+    <value>Сообщить об ошибке</value>
+  </data>
 </root>

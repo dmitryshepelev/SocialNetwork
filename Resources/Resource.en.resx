@@ -450,4 +450,7 @@
   <data name="UserRole" xml:space="preserve">
     <value>User</value>
   </data>
+  <data name="MessageMistake" xml:space="preserve">
+    <value>Report an error</value>
+  </data>
 </root>

@@ -24,7 +24,7 @@ namespace SocialNetwork.Controllers
         public ActionResult SearchResult(string searchingString)
         {
             var ac = new ApplicationDbContext();
-            if (string.IsNullOrEmpty(searchingString))
+            if (string.IsNullOrWhiteSpace(searchingString))
             {
                 return RedirectToAction("ViewAllTasks", "UserTask");
             }
@@ -35,10 +35,6 @@ namespace SocialNetwork.Controllers
             {
                 searchModel.Tasks.Add(ac.UserTasks.Find(IdFoundElement));
             }
-            //foreach (var IdFoundElement in foundIds["User"])
-            //{
-            //    searchModel.Users.Add(ac.UserTasks.Find(IdFoundElement).User);
-            //}
             var searchUsers = new SearchUserLucene();
             var foundUserIds = searchUsers.SearchResult(searchingString);
             foreach (var IdFoundElement in foundUserIds)
