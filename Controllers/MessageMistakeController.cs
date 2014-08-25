@@ -51,12 +51,10 @@ namespace SocialNetwork.Controllers
 
                 // адрес и порт smtp-сервера, с которого мы и будем отправлять письмо
                 SmtpClient client = new SmtpClient("smtp.gmail.com", 25);
-
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client.UseDefaultCredentials = false;
                 client.Credentials = new System.Net.NetworkCredential(from, pass);
                 client.EnableSsl = true;
-
                 // создаем письмо: message.Destination - адрес получателя
                 var mail = new MailMessage(from, user.Email);
                 mail.Subject = "You have a mistake";

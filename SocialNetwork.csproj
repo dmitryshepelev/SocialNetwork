@@ -499,6 +499,7 @@
     <Content Include="Scripts\jquery.infinitie.scroll.js" />
     <Content Include="Scripts\jquery.latest.js" />
     <Content Include="Scripts\jquery.tagcloud.js" />
+    <Content Include="Scripts\jquery.toastmessage.js" />
     <Content Include="Scripts\jquery.tokeninput.js" />
     <Content Include="Scripts\jquery.ui.widget.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
@@ -579,7 +580,6 @@
     <Content Include="Views\UserTask\_ViewTaskHeaderPartial.cshtml" />
     <Content Include="Views\UserTask\_ViewCommentsPartial.cshtml" />
     <Content Include="Views\Home\ViewTagCloud.cshtml" />
-    <Content Include="Views\MessageMistake\SendMessage.cshtml" />
     <Content Include="Views\MessageMistake\MessageWasSent.cshtml" />
   </ItemGroup>
   <ItemGroup>
