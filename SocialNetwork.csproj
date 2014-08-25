@@ -571,6 +571,7 @@
     <Content Include="Views\UserTask\_ViewCommentsPartial.cshtml" />
     <Content Include="Views\Home\ViewTagCloud.cshtml" />
     <Content Include="Views\MessageMistake\SendMessage.cshtml" />
+    <Content Include="Views\MessageMistake\MessageWasSent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Chart\" />

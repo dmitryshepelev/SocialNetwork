@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -37,29 +38,34 @@ namespace SocialNetwork.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<ActionResult> SendMessage(int messageMistake)
+        public void SendMessage(int taskId)
         {
             if (ModelState.IsValid)
             {
-                ApplicationDbContext ac = new ApplicationDbContext();
-                var userTask = ac.UserTasks.Find(messageMistake);
+                var ac = new ApplicationDbContext();
+                var userTask = ac.UserTasks.Find(taskId);
                 var user = new ApplicationUser() { UserName = userTask.User.UserName, Email = userTask.User.Email};
-                IdentityResult result = await UserManager.CreateAsync(user);
-                if (result.Succeeded)
-                {
-                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ViewTask", "UserTask", new {userId = user.Id, code = code},
-                        protocol: Request.Url.Scheme);
-                    await
-                        UserManager.SendEmailAsync(user.Id, "Confirm your account",
-                            "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                    return View("SendMessage");
-                }
-                AddErrors(result);
-            }
+                
+                var from = "polli.simple@gmail.com";
+                var pass = "pollisimple";
 
-            // If we got this far, something failed, redisplay form
-            return View();
+                // адрес и порт smtp-сервера, с которого мы и будем отправлять письмо
+                SmtpClient client = new SmtpClient("smtp.gmail.com", 25);
+
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+                client.Credentials = new System.Net.NetworkCredential(from, pass);
+                client.EnableSsl = true;
+
+                // создаем письмо: message.Destination - адрес получателя
+                var mail = new MailMessage(from, user.Email);
+                mail.Subject = "You have a mistake";
+                mail.Body = "Please correct this task: " + userTask.UserTaskTitle;
+                mail.IsBodyHtml = true;
+
+                client.Send(mail);
+                mail.Dispose();
+            }
         }
         private void AddErrors(IdentityResult result)
         {

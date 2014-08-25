@@ -70,8 +70,8 @@
                 {
                     <div class="input-group">
                         <span class="btn-group-xs">
-                            <input  class="btn btn-psrimary" type="submit" value="@SocialNetwork.Resources.Resource.MessageMistake" />
-                            <input id="messageMistake" hidden="hidden" value="@Model.Id"/>
+                            <input onclick="message_was_sent()" class="btn btn-psrimary" type="submit" value="@SocialNetwork.Resources.Resource.MessageMistake" />
+                            <input name="taskId" hidden="hidden" value="@Model.Id"/>
                         </span>
                     </div>
                 }
@@ -108,7 +108,9 @@
         validate: true
     });
 
-
+    function message_was_sent() {
+        alert("Message was sent");
+    }
     //$(function () {
     //    $('a.linktip').wrap('<span class="tip" />'); //оборачиваем соответствующие элементы в контейнер
     //    $('span.tip').each(function () {

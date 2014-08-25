@@ -301,10 +301,7 @@ namespace SocialNetwork.Controllers
                 {
                     return RedirectToAction("ViewAccount", new { Message = ManageMessageId.UpdateDataSuccess });
                 }
-                else
-                {
-                    AddErrors(result);
-                }
+                AddErrors(result);
             }
             return View(model);
         }
